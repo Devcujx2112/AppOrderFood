@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "371211977144",
+    "project_id": "app-order-food-c0831",
+    "storage_bucket": "app-order-food-c0831.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:371211977144:android:6cdc348b40fe6c5f004f4d",
+        "android_client_info": {
+          "package_name": "com.tungduong.orderfood"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApNjrdX1VmGkn5Ygg06u_5JKcrnvQh5y8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
