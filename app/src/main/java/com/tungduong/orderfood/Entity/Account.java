@@ -2,18 +2,19 @@ package com.tungduong.orderfood.Entity;
 
 public class Account {
     private String id;
-    private String userName;
-    private String passWord;
     private String fullName;
     private String role;
     private String email;
+    private String phone;
 
-    public Account(String userName, String passWord, String fullName, String role, String email) {
-        this.userName = userName;
-        this.passWord = passWord;
+    public Account() {
+    }
+
+    public Account( String fullName, String role, String email, String phone) {
         this.fullName = fullName;
         this.role = role;
         this.email = email;
+        this.phone = phone;
     }
 
     public String getId() {
@@ -22,22 +23,6 @@ public class Account {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getPassWord() {
-        return passWord;
-    }
-
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
     }
 
     public String getFullName() {
@@ -64,15 +49,22 @@ public class Account {
         this.email = email;
     }
 
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     @Override
     public String toString() {
         return "Account{" +
                 "id='" + id + '\'' +
-                ", userName='" + userName + '\'' +
-                ", passWord='" + passWord + '\'' +
                 ", fullName='" + fullName + '\'' +
                 ", role='" + role + '\'' +
                 ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
                 '}';
     }
 }

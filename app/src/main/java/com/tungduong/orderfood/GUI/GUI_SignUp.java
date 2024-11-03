@@ -18,7 +18,7 @@ import com.tungduong.orderfood.R;
 
 public class GUI_SignUp extends AppCompatActivity {
 
-    EditText txt_userName,txt_password,txt_fullName,txt_email;
+    EditText txt_phone,txt_password,txt_fullName,txt_email;
     Button btn_signUp;
     TextView tv_login;
     DAO_Account daoAccount;
@@ -46,23 +46,23 @@ public class GUI_SignUp extends AppCompatActivity {
         });
     }
     public void InsertAccount(){
-        String userName = txt_userName.getText().toString().trim();
-        String passWord = txt_password.getText().toString().trim();
+        String phone = txt_phone.getText().toString().trim();
         String fullName = txt_fullName.getText().toString().trim();
+        String passWord = txt_password.getText().toString().trim();
         String role = "user";
         String email = txt_email.getText().toString().trim();
 
-        if (userName.isEmpty() || passWord.isEmpty() || fullName.isEmpty() || email.isEmpty()){
+        if (phone.isEmpty() || passWord.isEmpty() || fullName.isEmpty() || email.isEmpty()){
             Toast.makeText(GUI_SignUp.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             return;
         }
+        Account account = new Account(fullName,role,email,phone);
 
-        Account account = new Account(userName,passWord,fullName,role,email);
-        daoAccount.InsertAccount(account,GUI_SignUp.this);
+        daoAccount.InsertAccount(account,passWord,GUI_SignUp.this);
 
     }
     public void AnhXa(){
-        txt_userName = findViewById(R.id.txt_userName);
+        txt_phone = findViewById(R.id.txt_phone);
         txt_password = findViewById(R.id.txt_passWord);
         txt_fullName = findViewById(R.id.txt_fullName);
         txt_email = findViewById(R.id.txt_email);

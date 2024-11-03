@@ -37,12 +37,12 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/txt_userNameLogin"
+                android:id="@+id/txt_emailLogin"
                 android:background="@drawable/custom_edittext"
                 android:layout_marginTop="40dp"
                 android:padding="8dp"
-                android:hint="Username"
-                android:drawableLeft="@drawable/username"
+                android:hint="Email"
+                android:drawableLeft="@drawable/email"
                 android:drawablePadding="8dp"
                 android:textColor="@color/black"/>
 
