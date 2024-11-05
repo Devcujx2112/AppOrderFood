@@ -69,14 +69,9 @@ public class GUI_Login extends AppCompatActivity {
         });
 
         tv_forgotPassWord.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                ShowForgotPassword();
-//            }
             FirebaseAuth auth = FirebaseAuth.getInstance();
             @Override
             public void onClick(View view) {
-                // Tạo AlertDialog
                 AlertDialog.Builder builder = new AlertDialog.Builder(GUI_Login.this);
                 View dialogView = getLayoutInflater().inflate(R.layout.dialog_forgotpassword, null);
                 EditText emailBox = dialogView.findViewById(R.id.emailBox);
@@ -84,7 +79,6 @@ public class GUI_Login extends AppCompatActivity {
                 builder.setView(dialogView);
                 AlertDialog dialog = builder.create();
 
-                // Xử lý sự kiện khi bấm nút "Lấy lại mật khẩu"
                 dialogView.findViewById(R.id.btn_takePassword).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -138,47 +132,6 @@ public class GUI_Login extends AppCompatActivity {
 
     }
 
-//    public void ShowForgotPassword(){
-//        Dialog dialog = new Dialog(this);
-//
-//        View dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_forgotpassword,null);
-//        dialog.setContentView(dialogView);
-//
-//        EditText txt_fgEmail,txt_fgUserName;
-//        Button btn_passWord,btn_cancel;
-//
-//        txt_fgEmail = dialogView.findViewById(R.id.emailBox);
-//        txt_fgUserName = dialogView.findViewById(R.id.userNameBox);
-//        btn_cancel = dialogView.findViewById(R.id.btn_cancel);
-//        btn_passWord = dialogView.findViewById(R.id.btn_takePassword);
-//
-//        btn_passWord.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String userName = txt_fgUserName.getText().toString().trim();
-//                String email = txt_fgEmail.getText().toString().trim();
-//
-//                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(userName)) {
-//                    Toast.makeText(GUI_Login.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                daoAccount.ForgotPassword(userName,email,GUI_Login.this);
-//                dialog.dismiss();
-//            }
-//        });
-//
-//        btn_cancel.setOnClickListener(v -> {
-//            dialog.dismiss();
-//        });
-//
-//        dialog.show();
-//        //đặt kích thước dialog tùy biến với màn hình
-//        WindowManager.LayoutParams layoutParams = dialog.getWindow().getAttributes();
-//        layoutParams.width = (int) (getResources().getDisplayMetrics().widthPixels * 0.9); // Chiều rộng 90% màn hình
-//        layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT; // Chiều cao tự động
-//        dialog.getWindow().setAttributes(layoutParams);
-//
-//    }
     public void AnhXa(){
         txt_email = findViewById(R.id.txt_emailLogin);
         txt_passWord = findViewById(R.id.txt_passWordLogin);
