@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn = "navigation_view">
+
+    <group
+        android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_Account"
+            android:title="Account"
+            android:icon="@drawable/account_admin"/>
+
+        <item
+            android:id="@+id/nav_Product"
+            android:title="Product"
+            android:icon="@drawable/product"/>
+
+        <item
+            android:id="@+id/nav_DonHang"
+            android:title="Invoice"
+            android:icon="@drawable/donhang"/>
+
+        <item
+            android:id="@+id/nav_ThongKe"
+            android:title="Statistical"
+            android:icon="@drawable/thongke"/>
+
+    </group>
+
+    <item
+        android:title="">
+        <menu>
+            <item
+                android:id="@+id/nav_Profile"
+                android:icon="@drawable/profile"
+                android:title="Profile"/>
+            <item
+                android:id="@+id/nav_Logout"
+                android:icon="@drawable/logout"
+                android:title="Logout"/>
+        </menu>
+    </item>
+</menu>

@@ -3,9 +3,15 @@ package com.tungduong.orderfood.DAO;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.util.Patterns;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -22,6 +28,7 @@ import com.tungduong.orderfood.R;
 public class DAO_Account {
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = firebaseDatabase.getReference("Account");
+    FirebaseAuth auth = FirebaseAuth.getInstance();
 
     public void CheckLogin(String email, String passWord, Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -115,6 +122,23 @@ public class DAO_Account {
             }
         });
 
+    }
+
+    public void ForgotPassword(String email, Context context,AlertDialog dialog){
+        auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    Toast.makeText(context,"Vui lòng kiểm tra Email của bạn",Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+                else {
+                    String errorMessage = task.getException() != null ? task.getException().getMessage() : "Không tìm thấy địa chỉ Email";
+                    Toast.makeText(context,errorMessage,Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+            }
+        });
     }
 
 }

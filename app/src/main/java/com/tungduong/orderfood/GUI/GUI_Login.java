@@ -11,12 +11,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.FirebaseAuth;
 import com.tungduong.orderfood.DAO.DAO_Account;
 import com.tungduong.orderfood.Entity.Account;
 import com.tungduong.orderfood.R;
@@ -69,7 +65,6 @@ public class GUI_Login extends AppCompatActivity {
         });
 
         tv_forgotPassWord.setOnClickListener(new View.OnClickListener() {
-            FirebaseAuth auth = FirebaseAuth.getInstance();
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(GUI_Login.this);
@@ -92,33 +87,14 @@ public class GUI_Login extends AppCompatActivity {
                         if (!Patterns.EMAIL_ADDRESS.matcher(userEmail).matches()) {
                             Toast.makeText(GUI_Login.this, "Email không hợp lệ", Toast.LENGTH_SHORT).show();
                             return;
+                        } else {
+                            daoAccount.ForgotPassword(userEmail,GUI_Login.this,dialog);
                         }
-
-                        // Gửi email đặt lại mật khẩu qua Firebase
-                        auth.sendPasswordResetEmail(userEmail)
-                                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        if (task.isSuccessful()) {
-                                            Toast.makeText(GUI_Login.this, "Vui lòng kiểm tra Email để đặt lại mật khẩu", Toast.LENGTH_SHORT).show();
-                                            dialog.dismiss();
-                                        } else {
-                                            // Kiểm tra lỗi và thông báo chi tiết hơn
-                                            String errorMessage = task.getException() != null ? task.getException().getMessage() : "Không thể gửi Email";
-                                            Toast.makeText(GUI_Login.this, errorMessage, Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
                     }
                 });
 
                 // Xử lý sự kiện khi bấm nút "Hủy"
-                dialogView.findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        dialog.dismiss();
-                    }
-                });
+                dialogView.findViewById(R.id.btn_cancel).setOnClickListener(v -> dialog.dismiss());
 
                 // Xóa nền của dialog (làm nền trong suốt)
                 if (dialog.getWindow() != null) {
@@ -129,7 +105,6 @@ public class GUI_Login extends AppCompatActivity {
                 dialog.show();
             }
         });
-
     }
 
     public void AnhXa(){
