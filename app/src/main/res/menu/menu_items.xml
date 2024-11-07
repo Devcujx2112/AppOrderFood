@@ -13,6 +13,11 @@
             android:icon="@drawable/account_admin"/>
 
         <item
+            android:id="@+id/nav_TypeFood"
+            android:title="Type Food"
+            android:icon="@drawable/typefood"/>
+
+        <item
             android:id="@+id/nav_Product"
             android:title="Product"
             android:icon="@drawable/product"/>

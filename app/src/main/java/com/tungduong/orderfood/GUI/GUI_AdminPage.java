@@ -46,6 +46,8 @@ public class GUI_AdminPage extends AppCompatActivity implements NavigationView.O
             case R.id.nav_Account:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Admin_Account()).commit();
                 break;
+            case R.id.nav_TypeFood:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Admin_TypeFood()).commit();
             case R.id.nav_Product:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Admin_Product()).commit();
                 break;

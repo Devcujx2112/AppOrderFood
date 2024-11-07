@@ -60,6 +60,8 @@ public class GUI_Login extends AppCompatActivity {
                     return;
                 }
                 daoAccount.CheckLogin(email,passWord,GUI_Login.this);
+                txt_email.setText("");
+                txt_passWord.setText("");
 
             }
         });
