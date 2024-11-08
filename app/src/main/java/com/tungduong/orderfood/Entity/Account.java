@@ -1,6 +1,11 @@
 package com.tungduong.orderfood.Entity;
 
-public class Account {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class Account implements Parcelable {
     private String id;
     private String fullName;
     private String role;
@@ -16,6 +21,18 @@ public class Account {
         this.email = email;
         this.phone = phone;
     }
+
+    public static final Creator<Account> CREATOR = new Creator<Account>() {
+        @Override
+        public Account createFromParcel(Parcel in) {
+            return new Account(in);
+        }
+
+        @Override
+        public Account[] newArray(int size) {
+            return new Account[size];
+        }
+    };
 
     public String getId() {
         return id;
@@ -66,5 +83,28 @@ public class Account {
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 '}';
+    }
+    //return 0 nếu không có đối tượng nào được ghi
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+    //Ghi thuộc tính của đối tượng vào 1 phương thức
+    @Override
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        parcel.writeString(id);
+        parcel.writeString(fullName);
+        parcel.writeString(role);
+        parcel.writeString(email);
+        parcel.writeString(phone);
+    }
+
+    //Đọc và khôi phục lại đối tượng ban đầu
+    protected Account(Parcel in){
+        id = in.readString();
+        fullName = in.readString();
+        role = in.readString();
+        email = in.readString();
+        phone = in.readString();
     }
 }

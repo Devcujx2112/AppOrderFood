@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.tungduong.orderfood.Entity.Account;
 import com.tungduong.orderfood.GUI.Admin_Account;
+import com.tungduong.orderfood.GUI.ChiTiet_AccountAdmin;
 import com.tungduong.orderfood.R;
 
 import java.util.List;
@@ -41,11 +42,10 @@ public class AccountAdaptor_Admin extends RecyclerView.Adapter<MyViewHolder> {
             holder.email.setText(account.getEmail());
             holder.phone.setText(account.getPhone());
 
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-//                    Intent intent = new Intent(context,)
-                }
+            holder.itemView.setOnClickListener(v -> {
+                Intent intent = new Intent(v.getContext(), ChiTiet_AccountAdmin.class);
+                intent.putExtra("Accounts",account);
+                v.getContext().startActivity(intent);
             });
     }
 

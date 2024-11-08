@@ -61,7 +61,7 @@
                 android:fontFamily="sans-serif"
                 android:maxLines="1"
                 android:text="Phone Number"
-                android:textColor="@color/gray"
+                android:textColor="@color/lavender"
                 android:textSize="14sp" />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

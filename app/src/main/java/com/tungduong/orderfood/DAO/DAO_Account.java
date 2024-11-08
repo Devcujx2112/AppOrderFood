@@ -2,14 +2,17 @@ package com.tungduong.orderfood.DAO;
 
 import android.content.Context;
 import android.content.Intent;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.DELETE;
+import retrofit2.http.Query;
 import android.util.Log;
-import android.util.Patterns;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,7 +26,6 @@ import com.tungduong.orderfood.Entity.Account;
 import com.tungduong.orderfood.GUI.GUI_AdminPage;
 import com.tungduong.orderfood.GUI.GUI_HomePage;
 import com.tungduong.orderfood.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +34,7 @@ public class DAO_Account {
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = firebaseDatabase.getReference("Account");
     FirebaseAuth auth = FirebaseAuth.getInstance();
+
 
     public void CheckLogin(String email, String passWord, Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -169,6 +172,7 @@ public class DAO_Account {
         });
     }
 
+    
 
 }
 

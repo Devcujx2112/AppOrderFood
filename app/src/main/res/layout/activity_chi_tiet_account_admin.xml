@@ -6,7 +6,7 @@
     android:padding="16dp">
 
     <ImageView
-        android:id="@+id/imgAvatar"
+        android:id="@+id/ct_avatar"
         android:layout_width="180dp"
         android:layout_height="180dp"
         android:layout_marginTop="24dp"
@@ -30,7 +30,7 @@
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgAvatar">
+        app:layout_constraintTop_toBottomOf="@id/ct_avatar">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,7 +57,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/tvFullName"
+                    android:id="@+id/ct_fullName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif"
@@ -91,7 +91,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/tvEmail"
+                    android:id="@+id/ct_email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif"
@@ -125,7 +125,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/tvPhoneNumber"
+                    android:id="@+id/ct_phone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif"
@@ -159,7 +159,7 @@
                     android:textSize="16sp" />
 
                 <TextView
-                    android:id="@+id/tvRole"
+                    android:id="@+id/ct_role"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif"
