@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.tungduong.orderfood">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -16,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.OrderFood"
         tools:targetApi="31">
+        <activity
+            android:name=".GUI.ChiTiet_AccountAdmin"
+            android:exported="false" />
         <activity
             android:name=".GUI.GUI_AdminPage"
             android:exported="false" />
@@ -30,8 +32,8 @@
             android:exported="false" />
         <activity
             android:name=".GUI.GUI_Intro"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

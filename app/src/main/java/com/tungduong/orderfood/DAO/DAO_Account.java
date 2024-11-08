@@ -24,6 +24,9 @@ import com.tungduong.orderfood.GUI.GUI_AdminPage;
 import com.tungduong.orderfood.GUI.GUI_HomePage;
 import com.tungduong.orderfood.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class DAO_Account {
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -140,6 +143,32 @@ public class DAO_Account {
             }
         });
     }
+
+    public interface ListAccountCallBack{
+        void CallBack(List<Account> accounts);
+    }
+
+    public void GetAllAccounts(ListAccountCallBack callBack){
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Account> accountList = new ArrayList<>();
+                for (DataSnapshot data : snapshot.getChildren()) {
+                    Account account = data.getValue(Account.class);
+                    if (account != null) {
+                        accountList.add(account);
+                    }
+                }
+                callBack.CallBack(accountList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("Show Account_admin",error.getMessage().trim());
+            }
+        });
+    }
+
 
 }
 
