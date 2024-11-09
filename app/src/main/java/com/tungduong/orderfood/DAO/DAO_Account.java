@@ -49,26 +49,33 @@ public class DAO_Account {
                     if (task.isSuccessful()) {
                         // Lấy UID của người dùng đã đăng nhập
                         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
                         if (user != null) {
                             String uid = user.getUid();
 
-                            // Truy vấn thông tin role từ Realtime Database theo UID
+                            // Truy vấn thông tin từ Realtime Database theo UID
                             databaseReference.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
                                 @Override
                                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                                     if (snapshot.exists()) {
                                         String db_role = snapshot.child("role").getValue(String.class);
+                                        String db_warning = snapshot.child("warning").getValue(String.class);
 
-                                        // Kiểm tra role và chuyển tới giao diện tương ứng
-                                        if ("admin".equals(db_role)) {
-                                            Intent intent = new Intent(context, GUI_AdminPage.class);
-                                            context.startActivity(intent);
-                                        } else if ("user".equals(db_role)) {
-                                            Intent intent = new Intent(context, GUI_HomePage.class);
-                                            context.startActivity(intent);
+                                        // Kiểm tra trạng thái warning
+                                        if ("ban".equals(db_warning)) {
+                                            Toast.makeText(context, "Tài khoản của bạn đã bị khóa. Vui lòng liên hệ với admin", Toast.LENGTH_SHORT).show();
+                                        } else if ("active".equals(db_warning)) {
+                                            if ("admin".equals(db_role)) {
+                                                Intent intent = new Intent(context, GUI_AdminPage.class);
+                                                context.startActivity(intent);
+                                            } else if ("user".equals(db_role)) {
+                                                Intent intent = new Intent(context, GUI_HomePage.class);
+                                                context.startActivity(intent);
+                                            }
+                                            Toast.makeText(context, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(context, "Tài khoản của bạn đang ở trạng thái không xác định.", Toast.LENGTH_SHORT).show();
                                         }
-
-                                        Toast.makeText(context, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                                     } else {
                                         Toast.makeText(context, "Không tìm thấy thông tin người dùng", Toast.LENGTH_SHORT).show();
                                     }
@@ -89,6 +96,7 @@ public class DAO_Account {
                     }
                 });
     }
+
 
 
     public void InsertAccount(Account account,String passWord, Context context) {

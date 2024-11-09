@@ -9,10 +9,12 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.tungduong.orderfood.DAO.DAO_Account;
 import com.tungduong.orderfood.Entity.Account;
@@ -20,8 +22,8 @@ import com.tungduong.orderfood.R;
 
 public class ChiTiet_AccountAdmin extends AppCompatActivity {
     ImageView img_avatar;
-    TextView txt_fullName, txt_email,txt_phone,txt_role;
-    FloatingActionButton btn_delete;
+    TextView txt_fullName, txt_email, txt_phone, txt_role, txt_warning;
+    FloatingActionButton btn_warning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +33,7 @@ public class ChiTiet_AccountAdmin extends AppCompatActivity {
         AnhXa();
 
         Intent intent = getIntent();
-        if (intent != null && intent.hasExtra("Accounts")){
+        if (intent != null && intent.hasExtra("Accounts")) {
             Account account = intent.getParcelableExtra("Accounts");
 
             if (account != null) {
@@ -40,35 +42,53 @@ public class ChiTiet_AccountAdmin extends AppCompatActivity {
                 String role = account.getRole().toString().trim();
                 String phone = account.getPhone().toString().trim();
                 String uid = account.getId().toString().trim();
+                String warning = account.getWarning().toString().trim();
+                String image = account.getImage();
 
                 txt_fullName.setText(fullName);
                 txt_email.setText(email);
                 txt_role.setText(role);
                 txt_phone.setText(phone);
-                img_avatar.setImageResource(R.drawable.bgr);
 
-                btn_delete.setOnClickListener(new View.OnClickListener() {
+                if ("ban".equals(warning)){
+                    txt_warning.setText("Tài khoản đã bị vô hiệu hóa");
+                    txt_warning.setBackgroundColor(ContextCompat.getColor(ChiTiet_AccountAdmin.this,R.color.red));
+                }
+                else if ("active".equals(warning)){
+                    txt_warning.setText("Hoạt động");
+                    txt_warning.setBackgroundColor(ContextCompat.getColor(ChiTiet_AccountAdmin.this,R.color.green));
+                }
+
+                Glide.with(this)
+                        .load(image)
+                        .placeholder(R.drawable.logo_admin)  // Ảnh mặc định
+                        .error(R.drawable.error_avatar)  // Ảnh khi có lỗi
+                        .into(img_avatar);
+
+
+                btn_warning.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         DAO_Account daoAccount = new DAO_Account();
-                        daoAccount.DeleteAccount(ChiTiet_AccountAdmin.this,uid);
+
                     }
                 });
-            }
-            else {
-                Toast.makeText(ChiTiet_AccountAdmin.this,"Không thể Intent data",Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(ChiTiet_AccountAdmin.this, "Không thể Intent data", Toast.LENGTH_SHORT).show();
             }
 
         }
     }
 
-    public void AnhXa(){
+    public void AnhXa() {
         img_avatar = findViewById(R.id.ct_avatar);
+
         txt_email = findViewById(R.id.ct_email);
         txt_fullName = findViewById(R.id.ct_fullName);
         txt_role = findViewById(R.id.ct_role);
         txt_phone = findViewById(R.id.ct_phone);
+        txt_warning = findViewById(R.id.ct_warning);
 
-        btn_delete = findViewById(R.id.fab_delete);
+        btn_warning = findViewById(R.id.fab_warning);
     }
 }

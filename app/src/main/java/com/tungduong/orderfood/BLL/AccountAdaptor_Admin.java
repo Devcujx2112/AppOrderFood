@@ -9,8 +9,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.tungduong.orderfood.Entity.Account;
 import com.tungduong.orderfood.GUI.Admin_Account;
 import com.tungduong.orderfood.GUI.ChiTiet_AccountAdmin;
@@ -31,22 +33,37 @@ public class AccountAdaptor_Admin extends RecyclerView.Adapter<MyViewHolder> {
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_account_admin,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_account_admin, parent, false);
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-            Account account = accountList.get(position);
-            holder.img_avatar.setImageResource(R.drawable.bgr);
-            holder.email.setText(account.getEmail());
-            holder.phone.setText(account.getPhone());
+        Account account = accountList.get(position);
+        String imageUrl = account.getImage();
 
-            holder.itemView.setOnClickListener(v -> {
-                Intent intent = new Intent(v.getContext(), ChiTiet_AccountAdmin.class);
-                intent.putExtra("Accounts",account);
-                v.getContext().startActivity(intent);
-            });
+        if (holder.img_avatar != null && context != null) {
+            Glide.with(holder.itemView.getContext()).load(imageUrl).placeholder(R.drawable.logo_admin).error(R.drawable.error_avatar).into(holder.img_avatar);
+        }
+
+        holder.email.setText(account.getEmail());
+        holder.phone.setText(account.getPhone());
+
+        String db_warning = account.getWarning();
+        if ("ban".equals(db_warning)) {
+            holder.warning.setText("Tài khoản đã bị vô hiệu hóa");
+            holder.warning.setBackgroundColor(ContextCompat.getColor(context,R.color.red));
+        }
+        else if ("active".equals(db_warning)) {
+            holder.warning.setText("Hoạt động");
+            holder.warning.setBackgroundColor(ContextCompat.getColor(context,R.color.green));
+        }
+
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), ChiTiet_AccountAdmin.class);
+            intent.putExtra("Accounts", account);
+            v.getContext().startActivity(intent);
+        });
     }
 
     @Override
@@ -57,7 +74,7 @@ public class AccountAdaptor_Admin extends RecyclerView.Adapter<MyViewHolder> {
 
 class MyViewHolder extends RecyclerView.ViewHolder {
     ImageView img_avatar;
-    TextView email, phone;
+    TextView email, phone,warning;
 
 
     public MyViewHolder(@NonNull View itemView) {
@@ -65,5 +82,6 @@ class MyViewHolder extends RecyclerView.ViewHolder {
         img_avatar = itemView.findViewById(R.id.img_Avatar);
         email = itemView.findViewById(R.id.account_email);
         phone = itemView.findViewById(R.id.account_phone);
+        warning = itemView.findViewById(R.id.account_warning);
     }
 }

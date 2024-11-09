@@ -11,15 +11,19 @@ public class Account implements Parcelable {
     private String role;
     private String email;
     private String phone;
+    private String image;
+    private String warning;
 
     public Account() {
     }
 
-    public Account( String fullName, String role, String email, String phone) {
+    public Account( String fullName, String role, String email, String phone, String image, String warning) {
         this.fullName = fullName;
         this.role = role;
         this.email = email;
         this.phone = phone;
+        this.image = (image == null) ? "default_image_url" : image;
+        this.warning = warning;
     }
 
     public static final Creator<Account> CREATOR = new Creator<Account>() {
@@ -74,6 +78,23 @@ public class Account implements Parcelable {
         this.phone = phone;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getWarning() {
+        return warning;
+    }
+
+    public void setWarning(String warning) {
+        this.warning = warning;
+    }
+
+
     @Override
     public String toString() {
         return "Account{" +
@@ -82,8 +103,11 @@ public class Account implements Parcelable {
                 ", role='" + role + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
+                ", image='" + image + '\'' +
+                ", warning='" + warning + '\'' +
                 '}';
     }
+
     //return 0 nếu không có đối tượng nào được ghi
     @Override
     public int describeContents() {
@@ -97,6 +121,8 @@ public class Account implements Parcelable {
         parcel.writeString(role);
         parcel.writeString(email);
         parcel.writeString(phone);
+        parcel.writeString(image);
+        parcel.writeString(warning);
     }
 
     //Đọc và khôi phục lại đối tượng ban đầu
@@ -106,5 +132,7 @@ public class Account implements Parcelable {
         role = in.readString();
         email = in.readString();
         phone = in.readString();
+        image = in.readString();
+        warning = in.readString();
     }
 }
