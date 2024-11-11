@@ -11,6 +11,9 @@
       <SelectionState runConfigName="GUI_Intro">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
+      <SelectionState runConfigName="ChiTiet_AccountAdmin">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
     </selectionStates>
   </component>
 </project>

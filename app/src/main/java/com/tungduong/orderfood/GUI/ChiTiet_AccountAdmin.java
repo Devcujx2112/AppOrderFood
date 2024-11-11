@@ -10,9 +10,7 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -76,8 +74,8 @@ public class ChiTiet_AccountAdmin extends AppCompatActivity {
             } else {
                 Toast.makeText(ChiTiet_AccountAdmin.this, "Không thể Intent data", Toast.LENGTH_SHORT).show();
             }
-
         }
+
     }
 
     public void AnhXa() {

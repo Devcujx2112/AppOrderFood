@@ -61,7 +61,7 @@ public class GUI_SignUp extends AppCompatActivity {
             Toast.makeText(GUI_SignUp.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             return;
         }
-        
+
         Log.d("AccountInfo", "image: " + image + ", warning: " + warning);
         Account account = new Account(fullName, role, email, phone, image, warning);
         daoAccount.InsertAccount(account, passWord, GUI_SignUp.this);
