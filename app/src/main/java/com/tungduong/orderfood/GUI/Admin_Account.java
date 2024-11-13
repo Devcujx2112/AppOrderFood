@@ -1,5 +1,6 @@
 package com.tungduong.orderfood.GUI;
 
+import android.content.Context;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -45,7 +46,7 @@ public class Admin_Account extends Fragment {
             @Override
             public void CallBack(List<Account> accounts) {
                 accountList = accounts;
-                adaptor_accounts = new AccountAdaptor_Admin(accountList);
+                adaptor_accounts = new AccountAdaptor_Admin(accountList, getContext());
                 recyclerView.setAdapter(adaptor_accounts);
             }
         });

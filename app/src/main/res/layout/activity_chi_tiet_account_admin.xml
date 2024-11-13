@@ -197,7 +197,7 @@
                     android:fontFamily="sans-serif"
                     android:text="Hoạt động"
                     android:textColor="@color/white"
-                    android:textSize="16sp" />
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>

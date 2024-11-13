@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.GlideExperiments;
 import com.tungduong.orderfood.Entity.Account;
 import com.tungduong.orderfood.GUI.Admin_Account;
 import com.tungduong.orderfood.GUI.ChiTiet_AccountAdmin;
@@ -25,8 +26,9 @@ public class AccountAdaptor_Admin extends RecyclerView.Adapter<MyViewHolder> {
     private Context context;
     private List<Account> accountList;
 
-    public AccountAdaptor_Admin(List<Account> accountList) {
+    public AccountAdaptor_Admin(List<Account> accountList,Context context) {
         this.accountList = accountList;
+        this.context = context;
     }
 
 
