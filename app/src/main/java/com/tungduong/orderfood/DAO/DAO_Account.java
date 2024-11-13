@@ -25,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.tungduong.orderfood.Entity.Account;
 import com.tungduong.orderfood.GUI.GUI_AdminPage;
 import com.tungduong.orderfood.GUI.GUI_HomePage;
+import com.tungduong.orderfood.GUI.GUI_LockAccount;
 import com.tungduong.orderfood.R;
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +65,8 @@ public class DAO_Account {
                                         // Kiểm tra trạng thái warning
                                         if ("ban".equals(db_warning)) {
                                             Toast.makeText(context, "Tài khoản của bạn đã bị khóa. Vui lòng liên hệ với admin", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(context, GUI_LockAccount.class);
+                                            context.startActivity(intent);
                                         } else if ("active".equals(db_warning)) {
                                             if ("admin".equals(db_role)) {
                                                 Intent intent = new Intent(context, GUI_AdminPage.class);

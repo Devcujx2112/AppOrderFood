@@ -21,7 +21,7 @@ Button btn_back;
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_gui_lock_account);
-
+        AnhXa();
         btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
