@@ -28,6 +28,7 @@ import com.tungduong.orderfood.GUI.GUI_HomePage;
 import com.tungduong.orderfood.GUI.GUI_LockAccount;
 import com.tungduong.orderfood.R;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -184,7 +185,9 @@ public class DAO_Account {
     }
 
     
-
+    public void BanAccount(String uid){
+        databaseReference.child(uid);
+    }
 }
 
 
