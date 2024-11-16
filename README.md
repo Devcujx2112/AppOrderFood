@@ -8,7 +8,7 @@ App này giúp người dùng có thể chọn lựa đa dạng các loại đ�
    -  Xem chi tiết sản phẩm
    -  Đặt hàng, thanh toán
 2. Hệ thống được xây dựng trên mô hình 3 lớp
-3. Nếu có ý kiến đóng góp xin hãy liên hệ : Vutungduongnight@gmail.com
+3. Nếu có ý kiến đóng góp xin hãy liên hệ : Dev.duongvu2112@gmail.com
 
 
 ---
