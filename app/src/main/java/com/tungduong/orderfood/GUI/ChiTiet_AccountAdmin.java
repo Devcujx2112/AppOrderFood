@@ -1,12 +1,13 @@
 package com.tungduong.orderfood.GUI;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import androidx.fragment.app.Fragment;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
@@ -67,10 +68,22 @@ public class ChiTiet_AccountAdmin extends AppCompatActivity {
                 btn_warning.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        DAO_Account daoAccount = new DAO_Account();
+                        new AlertDialog.Builder(ChiTiet_AccountAdmin.this)
+                                .setTitle("Xác nhận")
+                                .setMessage("Bạn có muốn thay đổi trạng thái tài khoản không ?")
+                                .setPositiveButton("Có", (dialog, which) -> {
+                                    DAO_Account daoAccount = new DAO_Account();
+                                    daoAccount.BanAccount(uid);
 
+                                    
+                                })
+                                .setNegativeButton("Không", (dialog, which) -> dialog.dismiss())
+                                .show();
                     }
                 });
+
+
+
             } else {
                 Toast.makeText(ChiTiet_AccountAdmin.this, "Không thể Intent data", Toast.LENGTH_SHORT).show();
             }

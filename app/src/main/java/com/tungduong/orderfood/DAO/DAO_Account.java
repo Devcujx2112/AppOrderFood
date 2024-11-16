@@ -2,6 +2,7 @@ package com.tungduong.orderfood.DAO;
 
 import android.content.Context;
 import android.content.Intent;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -9,10 +10,13 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.DELETE;
 import retrofit2.http.Query;
+
 import android.util.Log;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,6 +31,7 @@ import com.tungduong.orderfood.GUI.GUI_AdminPage;
 import com.tungduong.orderfood.GUI.GUI_HomePage;
 import com.tungduong.orderfood.GUI.GUI_LockAccount;
 import com.tungduong.orderfood.R;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -102,8 +107,7 @@ public class DAO_Account {
     }
 
 
-
-    public void InsertAccount(Account account,String passWord, Context context) {
+    public void InsertAccount(Account account, String passWord, Context context) {
         String email = account.getEmail().trim();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -112,28 +116,26 @@ public class DAO_Account {
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,passWord).addOnCompleteListener(task -> {
-            if (task.isSuccessful()){
+        FirebaseAuth.getInstance().createUserWithEmailAndPassword(email, passWord).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
                 //Lấy thông tin ng dùng
                 FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                 //lấy id
-                if (firebaseUser != null){
+                if (firebaseUser != null) {
                     String userId = firebaseUser.getUid();
 
                     account.setId(userId);
                     //Gán uid vào id của realtime db
                     databaseReference.child(userId).setValue(account).addOnCompleteListener(dbTask -> {
-                        if (dbTask.isSuccessful()){
-                            Toast.makeText(context,"Đăng ký tài khoản thành công",Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            Toast.makeText(context,"Tạo tài khoản thất bại, vui lòng thử lại",Toast.LENGTH_SHORT).show();
+                        if (dbTask.isSuccessful()) {
+                            Toast.makeText(context, "Đăng ký tài khoản thành công", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(context, "Tạo tài khoản thất bại, vui lòng thử lại", Toast.LENGTH_SHORT).show();
                         }
                         dialog.dismiss();
                     });
                 }
-            }
-            else {
+            } else {
                 String error = task.getException() != null ? task.getException().getMessage() : "Lỗi không xác định";
                 Toast.makeText(context, "Đăng ký thất bại: " + error, Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
@@ -142,28 +144,27 @@ public class DAO_Account {
 
     }
 
-    public void ForgotPassword(String email, Context context,AlertDialog dialog){
+    public void ForgotPassword(String email, Context context, AlertDialog dialog) {
         auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()){
-                    Toast.makeText(context,"Vui lòng kiểm tra Email của bạn",Toast.LENGTH_SHORT).show();
+                if (task.isSuccessful()) {
+                    Toast.makeText(context, "Vui lòng kiểm tra Email của bạn", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
-                }
-                else {
+                } else {
                     String errorMessage = task.getException() != null ? task.getException().getMessage() : "Không tìm thấy địa chỉ Email";
-                    Toast.makeText(context,errorMessage,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 }
             }
         });
     }
 
-    public interface ListAccountCallBack{
+    public interface ListAccountCallBack {
         void CallBack(List<Account> accounts);
     }
 
-    public void GetAllAccounts(ListAccountCallBack callBack){
+    public void GetAllAccounts(ListAccountCallBack callBack) {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -179,14 +180,40 @@ public class DAO_Account {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("Show Account_admin",error.getMessage().trim());
+                Log.e("Show Account_admin", error.getMessage().trim());
             }
         });
     }
 
-    
-    public void BanAccount(String uid){
-        databaseReference.child(uid);
+
+    public void BanAccount(String uid) {
+        DatabaseReference warningRef = databaseReference.child(uid).child("warning");
+        warningRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    String warningValue = snapshot.getValue(String.class);
+                    String updateWarning = warningValue.equals("ban") ? "active" : "ban";
+
+                    warningRef.setValue(updateWarning).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Log.d("Warning Update", "Value warning thay đổi thành công");
+                            } else {
+                                Log.e("Warning Update", "Thay đổi value thất bai" + task.getException());
+                            }
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("FirebaseUpdate", "Lỗi khi đọc dữ liệu: " + error.getMessage());
+
+            }
+        });
     }
 }
 

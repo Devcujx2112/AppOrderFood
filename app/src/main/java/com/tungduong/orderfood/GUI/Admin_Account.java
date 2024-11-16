@@ -1,7 +1,10 @@
 package com.tungduong.orderfood.GUI;
 
+import static android.app.Activity.RESULT_OK;
+
 import android.content.Context;
 import android.os.Bundle;
+
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,23 +27,23 @@ public class Admin_Account extends Fragment {
     AccountAdaptor_Admin adaptor_accounts;
     List<Account> accountList;
     DAO_Account daoAccount;
-    Account account;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_admin__account,container,false);
+        View view = inflater.inflate(R.layout.fragment_admin__account, container, false);
         AnhXa(view);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-       LoadAllAccount();
+        LoadAllAccount();
         return view;
     }
 
-    public void AnhXa(View view){
+    public void AnhXa(View view) {
         recyclerView = view.findViewById(R.id.list_account);
     }
 
-    public void LoadAllAccount(){
+    public void LoadAllAccount() {
         daoAccount = new DAO_Account();
         daoAccount.GetAllAccounts(new DAO_Account.ListAccountCallBack() {
             @Override
