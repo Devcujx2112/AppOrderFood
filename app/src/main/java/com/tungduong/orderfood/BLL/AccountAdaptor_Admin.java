@@ -1,36 +1,45 @@
 package com.tungduong.orderfood.BLL;
 
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.GlideExperiments;
 import com.tungduong.orderfood.Entity.Account;
-import com.tungduong.orderfood.GUI.Admin_Account;
-import com.tungduong.orderfood.GUI.ChiTiet_AccountAdmin;
 import com.tungduong.orderfood.R;
 
 import java.util.List;
 
 public class AccountAdaptor_Admin extends RecyclerView.Adapter<MyViewHolder> {
-    private Admin_Account adminAccount;
     private Context context;
     private List<Account> accountList;
+    private OnItemClickListener listener;
 
-    public AccountAdaptor_Admin(List<Account> accountList,Context context) {
+    // Constructor
+    public AccountAdaptor_Admin(List<Account> accountList, Context context) {
         this.accountList = accountList;
         this.context = context;
     }
 
+    // Interface để xử lý sự kiện click
+    public interface OnItemClickListener {
+        void onItemClick(Account account);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    // Phương thức để cập nhật danh sách account
+    public void updateData(List<Account> newAccountList) {
+        this.accountList = newAccountList;
+        notifyDataSetChanged(); // Cập nhật lại RecyclerView
+    }
 
     @NonNull
     @Override
@@ -44,27 +53,33 @@ public class AccountAdaptor_Admin extends RecyclerView.Adapter<MyViewHolder> {
         Account account = accountList.get(position);
         String imageUrl = account.getImage();
 
+        // Load ảnh từ URL
         if (holder.img_avatar != null && context != null) {
-            Glide.with(holder.itemView.getContext()).load(imageUrl).placeholder(R.drawable.logo_admin).error(R.drawable.error_avatar).into(holder.img_avatar);
+            Glide.with(holder.itemView.getContext())
+                    .load(imageUrl)
+                    .placeholder(R.drawable.logo_admin)
+                    .error(R.drawable.error_avatar)
+                    .into(holder.img_avatar);
         }
 
         holder.email.setText(account.getEmail());
         holder.phone.setText(account.getPhone());
 
+        // Hiển thị trạng thái tài khoản
         String db_warning = account.getWarning();
         if ("ban".equals(db_warning)) {
             holder.warning.setText("Tài khoản đã bị vô hiệu hóa");
-            holder.warning.setBackgroundColor(ContextCompat.getColor(context,R.color.red));
-        }
-        else if ("active".equals(db_warning)) {
+            holder.warning.setBackgroundColor(ContextCompat.getColor(context, R.color.red));
+        } else if ("active".equals(db_warning)) {
             holder.warning.setText("Hoạt động");
-            holder.warning.setBackgroundColor(ContextCompat.getColor(context,R.color.green));
+            holder.warning.setBackgroundColor(ContextCompat.getColor(context, R.color.green));
         }
 
+        // Xử lý sự kiện click item
         holder.itemView.setOnClickListener(v -> {
-            Intent intent = new Intent(v.getContext(), ChiTiet_AccountAdmin.class);
-            intent.putExtra("Accounts", account);
-            v.getContext().startActivity(intent);
+            if (listener != null) {
+                listener.onItemClick(account); // Gửi sự kiện đến callback
+            }
         });
     }
 
@@ -76,8 +91,7 @@ public class AccountAdaptor_Admin extends RecyclerView.Adapter<MyViewHolder> {
 
 class MyViewHolder extends RecyclerView.ViewHolder {
     ImageView img_avatar;
-    TextView email, phone,warning;
-
+    TextView email, phone, warning;
 
     public MyViewHolder(@NonNull View itemView) {
         super(itemView);

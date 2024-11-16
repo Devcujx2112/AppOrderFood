@@ -7,12 +7,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-import androidx.fragment.app.Fragment;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
-
-
 import com.bumptech.glide.Glide;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.tungduong.orderfood.DAO.DAO_Account;
@@ -75,7 +72,10 @@ public class ChiTiet_AccountAdmin extends AppCompatActivity {
                                     DAO_Account daoAccount = new DAO_Account();
                                     daoAccount.BanAccount(uid);
 
-                                    
+                                    Intent resultIntent = new Intent();
+                                    resultIntent.putExtra("isUpdated", true); // Gửi thông tin cần cập nhật
+                                    setResult(RESULT_OK, resultIntent);
+                                    finish(); // Quay lại Activity/Fragment trước đó
                                 })
                                 .setNegativeButton("Không", (dialog, which) -> dialog.dismiss())
                                 .show();
