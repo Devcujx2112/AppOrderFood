@@ -2,6 +2,8 @@ package com.tungduong.orderfood.GUI;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -49,10 +51,12 @@ public class ChiTiet_AccountAdmin extends AppCompatActivity {
                 if ("ban".equals(warning)){
                     txt_warning.setText("Tài khoản đã bị vô hiệu hóa");
                     txt_warning.setBackgroundColor(ContextCompat.getColor(ChiTiet_AccountAdmin.this,R.color.red));
+                    btn_warning.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#008000")));
                 }
                 else if ("active".equals(warning)){
                     txt_warning.setText("Hoạt động");
                     txt_warning.setBackgroundColor(ContextCompat.getColor(ChiTiet_AccountAdmin.this,R.color.green));
+                    btn_warning.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B22222")));
                 }
 
                 Glide.with(this)
@@ -65,6 +69,7 @@ public class ChiTiet_AccountAdmin extends AppCompatActivity {
                 btn_warning.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                         new AlertDialog.Builder(ChiTiet_AccountAdmin.this)
                                 .setTitle("Xác nhận")
                                 .setMessage("Bạn có muốn thay đổi trạng thái tài khoản không ?")
