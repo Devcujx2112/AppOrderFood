@@ -15,7 +15,6 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
-        <!-- Avatar -->
         <ImageView
             android:id="@+id/img_Avatar"
             android:layout_width="64dp"
@@ -26,7 +25,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Container for Username and Phone Number -->
         <LinearLayout
             android:id="@+id/textContainer"
             android:layout_width="0dp"
@@ -38,7 +36,6 @@
             app:layout_constraintStart_toEndOf="@id/img_Avatar"
             app:layout_constraintTop_toTopOf="parent">
 
-            <!-- Username -->
             <TextView
                 android:id="@+id/account_email"
                 android:layout_width="wrap_content"
@@ -51,7 +48,6 @@
                 android:textSize="18sp"
                 android:textStyle="bold" />
 
-            <!-- Phone Number -->
             <TextView
                 android:id="@+id/account_phone"
                 android:layout_width="wrap_content"

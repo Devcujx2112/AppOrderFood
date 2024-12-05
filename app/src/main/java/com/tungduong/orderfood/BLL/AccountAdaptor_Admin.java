@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.tungduong.orderfood.Entity.Account;
 import com.tungduong.orderfood.R;
-
 import java.util.List;
 
 public class AccountAdaptor_Admin extends RecyclerView.Adapter<MyViewHolder> {

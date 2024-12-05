@@ -1,42 +1,42 @@
 package com.tungduong.orderfood.Entity;
 
 public class TypeFood {
-    private String maLoaiDoAn;
-    private String tenLoaiDoAn;
-    private String image;
+    private String IDTypeFood;
+    private String NameTypeFood;
+    private String imageTypeFood;
     private String moTa;
 
     public TypeFood(){}
 
-    public TypeFood(String maLoaiDoAn, String tenLoaiDoAn, String image, String moTa) {
-        this.maLoaiDoAn = maLoaiDoAn;
-        this.tenLoaiDoAn = tenLoaiDoAn;
-        this.image = image;
+    public TypeFood(String IDTypeFood, String NameTypeFood, String imageTypeFood, String moTa) {
+        this.IDTypeFood = IDTypeFood;
+        this.NameTypeFood = NameTypeFood;
+        this.imageTypeFood = imageTypeFood;
         this.moTa = moTa;
     }
 
-    public String getMaLoaiDoAn() {
-        return maLoaiDoAn;
+    public String getIDTypeFood() {
+        return IDTypeFood;
     }
 
-    public void setMaLoaiDoAn(String maLoaiDoAn) {
-        this.maLoaiDoAn = maLoaiDoAn;
+    public void setIDTypeFood(String IDTypeFood) {
+        this.IDTypeFood = IDTypeFood;
     }
 
-    public String getTenLoaiDoAn() {
-        return tenLoaiDoAn;
+    public String getNameTypeFood() {
+        return NameTypeFood;
     }
 
-    public void setTenLoaiDoAn(String tenLoaiDoAn) {
-        this.tenLoaiDoAn = tenLoaiDoAn;
+    public void setNameTypeFood(String NameTypeFood) {
+        this.NameTypeFood = NameTypeFood;
     }
 
-    public String getImage() {
-        return image;
+    public String getimageTypeFood() {
+        return imageTypeFood;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setimageTypeFood(String imageTypeFood) {
+        this.imageTypeFood = imageTypeFood;
     }
 
     public String getMoTa() {
@@ -50,9 +50,9 @@ public class TypeFood {
     @Override
     public String toString() {
         return "TypeFood{" +
-                "maLoaiDoAn='" + maLoaiDoAn + '\'' +
-                ", tenLoaiDoAn='" + tenLoaiDoAn + '\'' +
-                ", image='" + image + '\'' +
+                "IDTypeFood='" + IDTypeFood + '\'' +
+                ", NameTypeFood='" + NameTypeFood + '\'' +
+                ", imageTypeFood='" + imageTypeFood + '\'' +
                 ", moTa='" + moTa + '\'' +
                 '}';
     }

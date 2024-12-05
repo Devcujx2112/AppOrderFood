@@ -80,7 +80,7 @@ public class ChiTiet_AccountAdmin extends AppCompatActivity {
                                     Intent resultIntent = new Intent();
                                     resultIntent.putExtra("isUpdated", true); // Gửi thông tin cần cập nhật
                                     setResult(RESULT_OK, resultIntent);
-                                    finish(); // Quay lại Activity/Fragment trước đó
+                                    finish();
                                 })
                                 .setNegativeButton("Không", (dialog, which) -> dialog.dismiss())
                                 .show();

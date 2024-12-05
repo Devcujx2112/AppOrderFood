@@ -202,7 +202,6 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-    <!-- Floating Action Button -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_warning"
         android:layout_width="wrap_content"
