@@ -83,7 +83,13 @@ public class Admin_AddTypeFood extends AppCompatActivity {
             }
         });
 
-        
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Admin_AddTypeFood.this, Admin_TypeFood.class);
+
+            }
+        });
     }
 
     public void SaveStorageImage(){
@@ -118,9 +124,19 @@ public class Admin_AddTypeFood extends AppCompatActivity {
         String TypeName = nameTypeFood.getText().toString();
         String TypeMoTa = mota.getText().toString();
 
+        if (TypeId.isEmpty() || TypeName.isEmpty() || TypeMoTa.isEmpty()) {
+            Toast.makeText(Admin_AddTypeFood.this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         typeFood = new TypeFood(TypeId,TypeName,imageURL,TypeMoTa);
         daoTypeFood = new DAO_TypeFood();
         daoTypeFood.InsertTypeFood(typeFood,Admin_AddTypeFood.this);
+
+        id.setText("");
+        nameTypeFood.setText("");
+        mota.setText("");
+        imgTypeFood.setImageResource(0);
     }
 
     public void AnhXa(){

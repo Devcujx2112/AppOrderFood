@@ -1,15 +1,13 @@
-<?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/recard"
-    android:layout_marginStart="12dp"
-    android:layout_marginEnd="12dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginHorizontal="10dp"
     android:layout_marginVertical="10dp"
-    app:cardCornerRadius="20dp"
+    android:layout_marginStart="12dp"
+    android:layout_marginEnd="12dp"
+    app:cardCornerRadius="18dp"
     app:cardElevation="8dp">
 
     <RelativeLayout
@@ -17,27 +15,25 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/image_TypeFood"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:id="@+id/image_TypeFood"
             android:layout_marginStart="20dp"
+            android:background="@color/lavender"
             android:scaleType="centerCrop"
             android:src="@drawable/drink"
-            android:background="@color/lavender"
-            app:shapeAppearanceOverlay="@style/roundedImageViewRounded"/>
+            app:shapeAppearanceOverlay="@style/roundedImageViewRounded" />
 
         <TextView
+            android:id="@+id/name_TypeFood"
             android:layout_width="120dp"
             android:layout_height="30dp"
-            android:id="@+id/name_TypeFood"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="25dp"
+            android:layout_toEndOf="@id/image_TypeFood"
             android:text="Name"
             android:textColor="@color/lavender"
-            android:textSize="20dp"
-            android:layout_toEndOf="@id/image_TypeFood"
-            android:layout_marginTop="25dp"
-            android:layout_marginStart="50dp"/>
-
-
+            android:textSize="20dp" />
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

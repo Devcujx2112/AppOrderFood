@@ -14,7 +14,7 @@ import com.tungduong.orderfood.Entity.Account;
 import com.tungduong.orderfood.R;
 import java.util.List;
 
-public class AccountAdaptor_Admin extends RecyclerView.Adapter<MyViewHolder> {
+public class AccountAdaptor_Admin extends RecyclerView.Adapter<Adaptor_Account_Admin> {
     private Context context;
     private List<Account> accountList;
     private OnItemClickListener listener;
@@ -42,13 +42,13 @@ public class AccountAdaptor_Admin extends RecyclerView.Adapter<MyViewHolder> {
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public Adaptor_Account_Admin onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_account_admin, parent, false);
-        return new MyViewHolder(view);
+        return new Adaptor_Account_Admin(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull Adaptor_Account_Admin holder, int position) {
         Account account = accountList.get(position);
         String imageUrl = account.getImage();
 
@@ -56,8 +56,7 @@ public class AccountAdaptor_Admin extends RecyclerView.Adapter<MyViewHolder> {
         if (holder.img_avatar != null && context != null) {
             Glide.with(holder.itemView.getContext())
                     .load(imageUrl)
-                    .placeholder(R.drawable.logo_admin)
-                    .error(R.drawable.error_avatar)
+                    .placeholder(R.drawable.error_avatar)
                     .into(holder.img_avatar);
         }
 
@@ -88,11 +87,11 @@ public class AccountAdaptor_Admin extends RecyclerView.Adapter<MyViewHolder> {
     }
 }
 
-class MyViewHolder extends RecyclerView.ViewHolder {
+class Adaptor_Account_Admin extends RecyclerView.ViewHolder {
     ImageView img_avatar;
     TextView email, phone, warning;
 
-    public MyViewHolder(@NonNull View itemView) {
+    public Adaptor_Account_Admin(@NonNull View itemView) {
         super(itemView);
         img_avatar = itemView.findViewById(R.id.img_Avatar);
         email = itemView.findViewById(R.id.account_email);
