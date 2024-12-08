@@ -1,13 +1,33 @@
 {
   "project_info": {
-    "project_number": "371211977144",
-    "project_id": "app-order-food-c0831",
-    "storage_bucket": "app-order-food-c0831.firebasestorage.app"
+    "project_number": "82366284949",
+    "firebase_url": "https://crud-firebase-7b852-default-rtdb.firebaseio.com",
+    "project_id": "crud-firebase-7b852",
+    "storage_bucket": "crud-firebase-7b852.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:371211977144:android:6cdc348b40fe6c5f004f4d",
+        "mobilesdk_app_id": "1:82366284949:android:0b0bbde5920554dc94479c",
+        "android_client_info": {
+          "package_name": "com.tungduong.crud_firebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBm7_74rxl3YZSxbX_jP2vZIVPe0iQwKM0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:82366284949:android:cb7007b5420a4ed294479c",
         "android_client_info": {
           "package_name": "com.tungduong.orderfood"
         }
@@ -15,7 +35,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyApNjrdX1VmGkn5Ygg06u_5JKcrnvQh5y8"
+          "current_key": "AIzaSyBm7_74rxl3YZSxbX_jP2vZIVPe0iQwKM0"
         }
       ],
       "services": {
