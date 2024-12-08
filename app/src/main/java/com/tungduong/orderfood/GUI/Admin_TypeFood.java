@@ -27,7 +27,6 @@ public class Admin_TypeFood extends Fragment {
     TypeFoodAdapter_Admin adaptorTypeFood;
     List<TypeFood> typeFoodList;
     DAO_TypeFood daoTypeFood;
-    private static final int REQUEST_CODE_DETAIL = 50;
 
 
     @Override

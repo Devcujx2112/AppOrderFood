@@ -1,0 +1,106 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GUI.Admin_AddTypeFood">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="20dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:padding="20dp"
+            android:background="@drawable/lavender_border">
+
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/update_imageTF"
+                android:id="@+id/update_image"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:scaleType="centerCrop"
+                android:contentDescription="Image upload" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:id="@+id/update_idTF"
+                android:background="@drawable/lavender_border"
+                android:layout_marginTop="20dp"
+                android:padding="16dp"
+                android:hint="ID"
+                android:gravity="start|center_vertical"
+                android:textColor="@color/lavender"
+                android:focusable="false"
+                android:clickable="false"
+                android:enabled="false" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:id="@+id/update_nameTF"
+                android:background="@drawable/lavender_border"
+                android:layout_marginTop="20dp"
+                android:padding="16dp"
+                android:hint="Tên loại sản phẩm"
+                android:gravity="start|center_vertical"
+                android:textColor="@color/lavender" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:id="@+id/update_motaTF"
+                android:background="@drawable/lavender_border"
+                android:layout_marginTop="20dp"
+                android:padding="16dp"
+                android:hint="Mô tả"
+                android:gravity="start|center_vertical"
+                android:textColor="@color/lavender" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:text="Cập nhật"
+                    android:id="@+id/update_TF"
+                    android:textSize="18sp"
+                    app:cornerRadius="20dp"
+                    android:backgroundTint="@color/green"
+                    android:layout_marginEnd="10dp" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:text="Xóa"
+                    android:id="@+id/delete_TF"
+                    android:textSize="18sp"
+                    app:cornerRadius="20dp"
+                    android:backgroundTint="@color/red" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</ScrollView>

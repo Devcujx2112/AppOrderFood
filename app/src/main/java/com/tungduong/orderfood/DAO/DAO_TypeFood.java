@@ -68,5 +68,21 @@ public class DAO_TypeFood {
         });
     }
 
+    public void UpdateTypeFood(TypeFood typeFood,Context context){
+       databaseReference.child(typeFood.getIDTypeFood()).setValue(typeFood).addOnSuccessListener(new OnSuccessListener<Void>() {
+           @Override
+           public void onSuccess(Void unused) {
+                Toast.makeText(context,"Cập nhật thành công",Toast.LENGTH_SHORT).show();
+           }
+       }).addOnFailureListener(new OnFailureListener() {
+           @Override
+           public void onFailure(@NonNull Exception e) {
+               Toast.makeText(context,"Cập nhật thất bại" + e.getMessage() ,Toast.LENGTH_SHORT).show();
+           }
+       });
+    }
 
+    public void DeleteTypeFood(){
+
+    }
 }

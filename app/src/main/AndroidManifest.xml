@@ -17,6 +17,9 @@
         android:theme="@style/Theme.OrderFood"
         tools:targetApi="31">
         <activity
+            android:name=".GUI.Admin_Update_Delete_TypeFood"
+            android:exported="false" />
+        <activity
             android:name=".GUI.Admin_AddTypeFood"
             android:exported="false" />
         <activity
