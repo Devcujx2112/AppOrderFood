@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +23,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -83,13 +86,7 @@ public class Admin_AddTypeFood extends AppCompatActivity {
             }
         });
 
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Admin_AddTypeFood.this, Admin_TypeFood.class);
 
-            }
-        });
     }
 
     public void SaveStorageImage(){
@@ -141,7 +138,6 @@ public class Admin_AddTypeFood extends AppCompatActivity {
 
     public void AnhXa(){
         imgTypeFood = findViewById(R.id.upload_img);
-        cancel = findViewById(R.id.CanCelButton);
         save = findViewById(R.id.saveButton);
 
         id = findViewById(R.id.upload_id);

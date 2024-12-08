@@ -71,7 +71,7 @@ public class Admin_Account extends Fragment {
         if (requestCode == REQUEST_CODE_DETAIL && resultCode == RESULT_OK) {
             boolean isUpdated = data != null && data.getBooleanExtra("isUpdated", false);
             if (isUpdated) {
-                LoadAllAccount(); // Load lại danh sách khi có thay đổi
+                LoadAllAccount();
             }
         }
     }

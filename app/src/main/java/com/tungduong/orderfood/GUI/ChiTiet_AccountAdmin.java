@@ -78,7 +78,7 @@ public class ChiTiet_AccountAdmin extends AppCompatActivity {
                                     daoAccount.BanAccount(uid);
 
                                     Intent resultIntent = new Intent();
-                                    resultIntent.putExtra("isUpdated", true); // Gửi thông tin cần cập nhật
+                                    resultIntent.putExtra("isUpdated", true);
                                     setResult(RESULT_OK, resultIntent);
                                     finish();
                                 })

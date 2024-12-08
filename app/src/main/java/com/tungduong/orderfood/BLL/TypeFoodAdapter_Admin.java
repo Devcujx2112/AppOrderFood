@@ -25,6 +25,7 @@ public class TypeFoodAdapter_Admin extends RecyclerView.Adapter<Adaptor_TypeFood
         this.typeFoodList = newTypeFoodList;
     }
 
+
     @NonNull
     @Override
     public Adaptor_TypeFood_Admin onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -36,9 +37,15 @@ public class TypeFoodAdapter_Admin extends RecyclerView.Adapter<Adaptor_TypeFood
     public void onBindViewHolder(@NonNull Adaptor_TypeFood_Admin holder, int position) {
         TypeFood typeFood = typeFoodList.get(position);
         String imageURL = typeFood.getimageTypeFood();
-
         Glide.with(holder.itemView.getContext()).load(imageURL).placeholder(R.drawable.ic_launcher_foreground).into(holder.typeImg);
         holder.typeName.setText(typeFood.getNameTypeFood());
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
 
