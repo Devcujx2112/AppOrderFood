@@ -89,7 +89,7 @@ public class Admin_AddTypeFood extends AppCompatActivity {
 
     }
 
-    public void SaveStorageImage(){
+    public void SaveStorageImage() {
         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("TypeFood Image").child(uri.getLastPathSegment());
 
         AlertDialog.Builder builder = new AlertDialog.Builder(Admin_AddTypeFood.this);
@@ -102,7 +102,7 @@ public class Admin_AddTypeFood extends AppCompatActivity {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                while (!uriTask.isComplete());
+                while (!uriTask.isComplete()) ;
                 Uri urlImage = uriTask.getResult();
                 imageURL = urlImage.toString();
                 AddTypeFood();
@@ -116,7 +116,7 @@ public class Admin_AddTypeFood extends AppCompatActivity {
         });
     }
 
-    public void AddTypeFood(){
+    public void AddTypeFood() {
         String TypeId = id.getText().toString();
         String TypeName = nameTypeFood.getText().toString();
         String TypeMoTa = mota.getText().toString();
@@ -126,9 +126,9 @@ public class Admin_AddTypeFood extends AppCompatActivity {
             return;
         }
 
-        typeFood = new TypeFood(TypeId,TypeName,imageURL,TypeMoTa);
+        typeFood = new TypeFood(TypeId, TypeName, imageURL, TypeMoTa);
         daoTypeFood = new DAO_TypeFood();
-        daoTypeFood.InsertTypeFood(typeFood,Admin_AddTypeFood.this);
+        daoTypeFood.InsertTypeFood(typeFood, Admin_AddTypeFood.this);
 
         id.setText("");
         nameTypeFood.setText("");
@@ -136,7 +136,7 @@ public class Admin_AddTypeFood extends AppCompatActivity {
         imgTypeFood.setImageResource(0);
     }
 
-    public void AnhXa(){
+    public void AnhXa() {
         imgTypeFood = findViewById(R.id.upload_img);
         save = findViewById(R.id.saveButton);
 

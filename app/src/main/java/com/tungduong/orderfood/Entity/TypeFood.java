@@ -6,7 +6,8 @@ public class TypeFood {
     private String imageTypeFood;
     private String moTa;
 
-    public TypeFood(){}
+    public TypeFood() {
+    }
 
     public TypeFood(String IDTypeFood, String NameTypeFood, String imageTypeFood, String moTa) {
         this.IDTypeFood = IDTypeFood;

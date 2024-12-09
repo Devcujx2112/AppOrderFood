@@ -9,7 +9,8 @@ public class Product {
     private String loaiDoAn;
     private String moTa;
 
-    public Product(){}
+    public Product() {
+    }
 
     public Product(String masp, String tensp, int soLuong, String giaTien, String image, String loaiDoAn, String moTa) {
         this.masp = masp;

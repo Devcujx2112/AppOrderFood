@@ -17,7 +17,7 @@ public class Account implements Parcelable {
     public Account() {
     }
 
-    public Account( String fullName, String role, String email, String phone, String image, String warning) {
+    public Account(String fullName, String role, String email, String phone, String image, String warning) {
         this.fullName = fullName;
         this.role = role;
         this.email = email;
@@ -113,6 +113,7 @@ public class Account implements Parcelable {
     public int describeContents() {
         return 0;
     }
+
     //Ghi thuộc tính của đối tượng vào 1 phương thức
     @Override
     public void writeToParcel(@NonNull Parcel parcel, int i) {
@@ -126,7 +127,7 @@ public class Account implements Parcelable {
     }
 
     //Đọc và khôi phục lại đối tượng ban đầu
-    protected Account(Parcel in){
+    protected Account(Parcel in) {
         id = in.readString();
         fullName = in.readString();
         role = in.readString();
