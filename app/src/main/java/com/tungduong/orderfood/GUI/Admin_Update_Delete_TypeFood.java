@@ -1,24 +1,36 @@
 package com.tungduong.orderfood.GUI;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.tungduong.orderfood.DAO.DAO_TypeFood;
 import com.tungduong.orderfood.R;
 
 public class Admin_Update_Delete_TypeFood extends AppCompatActivity {
     ImageView update_imgTF;
-    EditText update_idTF,update_nameTF,update_motaTF;
-    Button update_TF,delete_TF;
+    EditText update_idTF, update_nameTF, update_motaTF;
+    Button update_TF, delete_TF;
+    Uri uri;
+    DAO_TypeFood daoTypeFood;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +40,7 @@ public class Admin_Update_Delete_TypeFood extends AppCompatActivity {
         AnhXa();
 
         Bundle bundle = getIntent().getExtras();
-        if (bundle != null){
+        if (bundle != null) {
             update_idTF.setText(bundle.getString("Id_TypeFood"));
             update_nameTF.setText(bundle.getString("Name_TypeFood"));
             update_motaTF.setText(bundle.getString("MoTa_TypeFood"));
@@ -36,27 +48,65 @@ public class Admin_Update_Delete_TypeFood extends AppCompatActivity {
 
         }
 
+        ActivityResultLauncher<Intent> activityResultLauncherImage = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),//khởi động 1 intent nhận kết quả
+                new ActivityResultCallback<ActivityResult>() {//nhận kết quả trả về
+                    @Override
+                    public void onActivityResult(ActivityResult result) {
+                        if (result.getResultCode() == Activity.RESULT_OK) {
+                            Intent data = result.getData();
+                            assert data != null;
+                            uri = data.getData();
+                            update_imgTF.setImageURI(uri);
+                        } else {
+                            Toast.makeText(Admin_Update_Delete_TypeFood.this, "Khong co image", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+        );
+
+        update_imgTF.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                activityResultLauncherImage.launch(intent);
+            }
+        });
+
         update_TF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                UpdateTypeFood();
             }
         });
     }
 
-    public void UpdateTypeFood(){
+    public void UpdateTypeFood() {
         String id = update_idTF.getText().toString();
         String name = update_nameTF.getText().toString();
         String mota = update_motaTF.getText().toString();
+
+        String oldImageUrl = getIntent().getStringExtra("Image");
+        daoTypeFood = new DAO_TypeFood();
+        daoTypeFood.SelectImage(id, name, uri, oldImageUrl, mota, this);
+        SetText();
     }
 
-    public void AnhXa(){
-        update_imgTF = findViewById(R.id.update_image);
+    public void AnhXa() {
+        update_imgTF = findViewById(R.id.update_imageTF);
         update_idTF = findViewById(R.id.update_idTF);
         update_nameTF = findViewById(R.id.update_nameTF);
         update_motaTF = findViewById(R.id.update_motaTF);
 
         update_TF = findViewById(R.id.update_TF);
         delete_TF = findViewById(R.id.delete_TF);
+    }
+
+    public void SetText() {
+        update_idTF.setText("");
+        update_nameTF.setText("");
+        update_motaTF.setText("");
+        update_imgTF.setImageResource(0);
     }
 }

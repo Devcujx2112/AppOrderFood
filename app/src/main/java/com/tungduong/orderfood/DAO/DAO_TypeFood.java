@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -68,19 +69,89 @@ public class DAO_TypeFood {
         });
     }
 
-    public void UpdateTypeFood(TypeFood typeFood,Context context){
-       databaseReference.child(typeFood.getIDTypeFood()).setValue(typeFood).addOnSuccessListener(new OnSuccessListener<Void>() {
-           @Override
-           public void onSuccess(Void unused) {
-                Toast.makeText(context,"Cập nhật thành công",Toast.LENGTH_SHORT).show();
-           }
-       }).addOnFailureListener(new OnFailureListener() {
-           @Override
-           public void onFailure(@NonNull Exception e) {
-               Toast.makeText(context,"Cập nhật thất bại" + e.getMessage() ,Toast.LENGTH_SHORT).show();
-           }
-       });
+//    public void UpdateTypeFood(String typeId,String typeName, String imageUrl, String typeMota,Context context){
+//        TypeFood typeFood = new TypeFood(typeId,typeName,imageUrl,typeMota);
+//       databaseReference.child(typeFood.getIDTypeFood()).setValue(typeFood).addOnSuccessListener(new OnSuccessListener<Void>() {
+//           @Override
+//           public void onSuccess(Void unused) {
+//                Toast.makeText(context,"Cập nhật thành công",Toast.LENGTH_SHORT).show();
+//           }
+//       }).addOnFailureListener(new OnFailureListener() {
+//           @Override
+//           public void onFailure(@NonNull Exception e) {
+//               Toast.makeText(context,"Cập nhật thất bại" + e.getMessage() ,Toast.LENGTH_SHORT).show();
+//           }
+//       });
+//    }
+
+    public void SelectImage( String typeId,  String typeName,  Uri newImageUri,  String oldImageUrl,  String typeMota, Context context) {
+        if (newImageUri != null) {
+            // Người dùng đã chọn ảnh mới
+            StorageReference newImageRef = FirebaseStorage.getInstance().getReference().child("TypeFood Image").child(newImageUri.getLastPathSegment());
+
+            // Hiển thị ProgressDialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setCancelable(false);
+            builder.setView(R.layout.progress_layout);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+            //Upload new iamge in storage
+            newImageRef.putFile(newImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    taskSnapshot.getStorage().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            if (task.isSuccessful()){
+                                String newImageUrl = task.getResult().toString();
+                                UpdatedTypeFood(typeId,typeName,newImageUrl,typeMota,context);
+
+                                if (oldImageUrl != null && !oldImageUrl.isEmpty()){
+                                    StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(oldImageUrl);
+                                    storageReference.delete();
+                                }
+                                dialog.dismiss();
+                            }
+                            else {
+                                Toast.makeText(context,"Khong the lay url anh moi", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                        }
+                    });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(context, "Lỗi khi upload ảnh mới: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+            });
+
+        } else {
+            // Người dùng không chọn ảnh mới, giữ lại ảnh cũ
+            UpdatedTypeFood(typeId, typeName, oldImageUrl, typeMota, context);
+        }
     }
+
+    private void UpdatedTypeFood(String typeId, String typeName, String imageUrl, String typeMota, Context context) {
+        TypeFood typeFood = new TypeFood(typeId, typeName, imageUrl, typeMota);
+
+        databaseReference.child(typeId).setValue(typeFood)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(context, "Cập nhật thành công!", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(context, "Cập nhật thất bại: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
 
     public void DeleteTypeFood(){
 
