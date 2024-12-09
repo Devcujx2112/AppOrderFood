@@ -2,6 +2,7 @@ package com.tungduong.orderfood.GUI;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -15,28 +16,25 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 import com.tungduong.orderfood.DAO.DAO_TypeFood;
 import com.tungduong.orderfood.R;
 
-public class Admin_Update_Delete_TypeFood extends AppCompatActivity {
+public class Admin_ChiTiet_TypeFood extends AppCompatActivity {
     ImageView update_imgTF;
     EditText update_idTF, update_nameTF, update_motaTF;
     Button update_TF, delete_TF;
     Uri uri;
     DAO_TypeFood daoTypeFood;
+    Drawable add_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_admin_update_delete_type_food);
+        setContentView(R.layout.activity_admin_chitiet_typefood);
         AnhXa();
 
         Bundle bundle = getIntent().getExtras();
@@ -59,7 +57,7 @@ public class Admin_Update_Delete_TypeFood extends AppCompatActivity {
                             uri = data.getData();
                             update_imgTF.setImageURI(uri);
                         } else {
-                            Toast.makeText(Admin_Update_Delete_TypeFood.this, "Khong co image", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Admin_ChiTiet_TypeFood.this, "Không có hình ảnh nào được chọn", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -80,6 +78,13 @@ public class Admin_Update_Delete_TypeFood extends AppCompatActivity {
                 UpdateTypeFood();
             }
         });
+
+        delete_TF.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DeleteTypeFood();
+            }
+        });
     }
 
     public void UpdateTypeFood() {
@@ -87,10 +92,24 @@ public class Admin_Update_Delete_TypeFood extends AppCompatActivity {
         String name = update_nameTF.getText().toString();
         String mota = update_motaTF.getText().toString();
 
+        if (id.isEmpty() || name.isEmpty() || mota.isEmpty()){
+            Toast.makeText(this,"Vui lòng điền đầy đủ thông tin",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         String oldImageUrl = getIntent().getStringExtra("Image");
         daoTypeFood = new DAO_TypeFood();
         daoTypeFood.SelectImage(id, name, uri, oldImageUrl, mota, this);
         SetText();
+    }
+
+    public void DeleteTypeFood(){
+        String id = update_idTF.getText().toString();
+        String imageURL = getIntent().getStringExtra("Image");
+        daoTypeFood = new DAO_TypeFood();
+        daoTypeFood.DeleteTypeFood(id,imageURL,this);
+        SetText();
+
     }
 
     public void AnhXa() {
@@ -101,12 +120,13 @@ public class Admin_Update_Delete_TypeFood extends AppCompatActivity {
 
         update_TF = findViewById(R.id.update_TF);
         delete_TF = findViewById(R.id.delete_TF);
+        add_image = getResources().getDrawable(R.drawable.add_image);
     }
 
     public void SetText() {
         update_idTF.setText("");
         update_nameTF.setText("");
         update_motaTF.setText("");
-        update_imgTF.setImageResource(0);
+        update_imgTF.setImageDrawable(add_image);
     }
 }

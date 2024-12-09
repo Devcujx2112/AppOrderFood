@@ -46,7 +46,7 @@ public class AccountAdaptor_Admin extends RecyclerView.Adapter<Adaptor_Account_A
     @NonNull
     @Override
     public Adaptor_Account_Admin onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_account_admin, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_admin_account, parent, false);
         return new Adaptor_Account_Admin(view);
     }
 

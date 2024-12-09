@@ -2,10 +2,9 @@ package com.tungduong.orderfood.GUI;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.media.Image;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,11 +19,6 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -44,12 +38,13 @@ public class Admin_AddTypeFood extends AppCompatActivity {
     Uri uri;
     DAO_TypeFood daoTypeFood;
     TypeFood typeFood;
+    Drawable add_image;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_admin_add_type_food);
+        setContentView(R.layout.activity_admin_add_typefood);
 
         AnhXa();
 
@@ -64,7 +59,7 @@ public class Admin_AddTypeFood extends AppCompatActivity {
                             uri = data.getData();
                             imgTypeFood.setImageURI(uri);
                         } else {
-                            Toast.makeText(Admin_AddTypeFood.this, "Khong co image", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(Admin_AddTypeFood.this, "Không có ảnh nào được chọn", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -85,11 +80,22 @@ public class Admin_AddTypeFood extends AppCompatActivity {
                 SaveStorageImage();
             }
         });
-
-
     }
 
     public void SaveStorageImage() {
+        String TypeId = id.getText().toString();
+        String TypeName = nameTypeFood.getText().toString();
+        String TypeMoTa = mota.getText().toString();
+
+        if (TypeId.isEmpty() || TypeName.isEmpty() || TypeMoTa.isEmpty()) {
+            Toast.makeText(Admin_AddTypeFood.this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (uri == null) {
+            Toast.makeText(Admin_AddTypeFood.this, "Vui lòng thêm ảnh của loại sản phẩm", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("TypeFood Image").child(uri.getLastPathSegment());
 
         AlertDialog.Builder builder = new AlertDialog.Builder(Admin_AddTypeFood.this);
@@ -105,7 +111,7 @@ public class Admin_AddTypeFood extends AppCompatActivity {
                 while (!uriTask.isComplete()) ;
                 Uri urlImage = uriTask.getResult();
                 imageURL = urlImage.toString();
-                AddTypeFood();
+                AddTypeFood(TypeId, TypeName, TypeMoTa);
                 dialog.dismiss();
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -116,24 +122,12 @@ public class Admin_AddTypeFood extends AppCompatActivity {
         });
     }
 
-    public void AddTypeFood() {
-        String TypeId = id.getText().toString();
-        String TypeName = nameTypeFood.getText().toString();
-        String TypeMoTa = mota.getText().toString();
-
-        if (TypeId.isEmpty() || TypeName.isEmpty() || TypeMoTa.isEmpty()) {
-            Toast.makeText(Admin_AddTypeFood.this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
+    public void AddTypeFood(String TypeId, String TypeName, String TypeMoTa) {
         typeFood = new TypeFood(TypeId, TypeName, imageURL, TypeMoTa);
         daoTypeFood = new DAO_TypeFood();
         daoTypeFood.InsertTypeFood(typeFood, Admin_AddTypeFood.this);
 
-        id.setText("");
-        nameTypeFood.setText("");
-        mota.setText("");
-        imgTypeFood.setImageResource(0);
+        SetText();
     }
 
     public void AnhXa() {
@@ -143,6 +137,14 @@ public class Admin_AddTypeFood extends AppCompatActivity {
         id = findViewById(R.id.upload_id);
         nameTypeFood = findViewById(R.id.upload_nameTypeFood);
         mota = findViewById(R.id.upload_moTa);
+        add_image = getResources().getDrawable(R.drawable.add_image);
+    }
+
+    public void SetText(){
+        id.setText("");
+        nameTypeFood.setText("");
+        mota.setText("");
+        imgTypeFood.setImageDrawable(add_image);
     }
 
 }

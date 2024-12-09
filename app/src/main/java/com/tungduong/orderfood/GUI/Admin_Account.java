@@ -56,7 +56,7 @@ public class Admin_Account extends Fragment {
                         @Override
                         public void onItemClick(Account account) {
                             // Khi người dùng click vào account, mở Activity chi tiết
-                            Intent intent = new Intent(getContext(), ChiTiet_AccountAdmin.class);
+                            Intent intent = new Intent(getContext(), Admin_ChiTiet_Account.class);
                             intent.putExtra("Accounts", account);
                             startActivityForResult(intent, REQUEST_CODE_DETAIL); // Yêu cầu kết quả sau khi sửa
                         }

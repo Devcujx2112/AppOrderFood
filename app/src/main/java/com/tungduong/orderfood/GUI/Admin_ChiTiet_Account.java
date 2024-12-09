@@ -18,7 +18,7 @@ import com.tungduong.orderfood.DAO.DAO_Account;
 import com.tungduong.orderfood.Entity.Account;
 import com.tungduong.orderfood.R;
 
-public class ChiTiet_AccountAdmin extends AppCompatActivity {
+public class Admin_ChiTiet_Account extends AppCompatActivity {
     ImageView img_avatar;
     TextView txt_fullName, txt_email, txt_phone, txt_role, txt_warning;
     FloatingActionButton btn_warning;
@@ -27,7 +27,7 @@ public class ChiTiet_AccountAdmin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_chi_tiet_account_admin);
+        setContentView(R.layout.activity_admin_chitiet_account);
         AnhXa();
 
         Intent intent = getIntent();
@@ -50,12 +50,12 @@ public class ChiTiet_AccountAdmin extends AppCompatActivity {
 
                 if ("ban".equals(warning)){
                     txt_warning.setText("Tài khoản đã bị vô hiệu hóa");
-                    txt_warning.setBackgroundColor(ContextCompat.getColor(ChiTiet_AccountAdmin.this,R.color.red));
+                    txt_warning.setBackgroundColor(ContextCompat.getColor(Admin_ChiTiet_Account.this,R.color.red));
                     btn_warning.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#008000")));
                 }
                 else if ("active".equals(warning)){
                     txt_warning.setText("Hoạt động");
-                    txt_warning.setBackgroundColor(ContextCompat.getColor(ChiTiet_AccountAdmin.this,R.color.green));
+                    txt_warning.setBackgroundColor(ContextCompat.getColor(Admin_ChiTiet_Account.this,R.color.green));
                     btn_warning.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#B22222")));
                 }
 
@@ -70,7 +70,7 @@ public class ChiTiet_AccountAdmin extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
 
-                        new AlertDialog.Builder(ChiTiet_AccountAdmin.this)
+                        new AlertDialog.Builder(Admin_ChiTiet_Account.this)
                                 .setTitle("Xác nhận")
                                 .setMessage("Bạn có muốn thay đổi trạng thái tài khoản không ?")
                                 .setPositiveButton("Có", (dialog, which) -> {
@@ -90,7 +90,7 @@ public class ChiTiet_AccountAdmin extends AppCompatActivity {
 
 
             } else {
-                Toast.makeText(ChiTiet_AccountAdmin.this, "Không thể Intent data", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Admin_ChiTiet_Account.this, "Không thể Intent data", Toast.LENGTH_SHORT).show();
             }
         }
 

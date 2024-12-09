@@ -35,14 +35,38 @@ public class DAO_TypeFood {
     DatabaseReference databaseReference = firebaseDatabase.getReference("TypeFood");
 
     public void InsertTypeFood(TypeFood typeFood, Context context) {
-        databaseReference.child(typeFood.getIDTypeFood()).setValue(typeFood).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                Toast.makeText(context, "Thêm loại sản phẩm thành công", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(context, "Thêm loại sản phẩm thất bại", Toast.LENGTH_SHORT).show();
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setCancelable(false);
+        builder.setView(R.layout.progress_layout);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        databaseReference.orderByChild("idtypeFood").equalTo(typeFood.getIDTypeFood()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    Toast.makeText(context, "ID này đã tồn tại. Vui lòng chọn ID khác", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                } else {
+                    databaseReference.child(typeFood.getIDTypeFood()).setValue(typeFood).addOnCompleteListener(task -> {
+                        dialog.dismiss();
+                        if (task.isSuccessful()) {
+                            Toast.makeText(context, "Thêm loại sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(context, "Thêm loại sản phẩm thất bại", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(context, "Lỗi kết nối với Firebase: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             }
         });
     }
+
 
     public interface ListTypeFoodCallBack {
         void CallBack(List<TypeFood> typeFood);
@@ -137,7 +161,28 @@ public class DAO_TypeFood {
     }
 
 
-    public void DeleteTypeFood() {
+    public void DeleteTypeFood(String id, String imageURl,Context context) {
+        databaseReference.child(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    databaseReference.child(id).removeValue().addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(imageURl);
+                            storageReference.delete();
+                            Toast.makeText(context,"Xóa loại sản phẩm thành công",Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(context,"Xóa loại sản phẩm thất bại",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(context, "Lỗi kết nối Firebase: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
