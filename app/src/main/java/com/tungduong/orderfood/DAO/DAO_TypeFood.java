@@ -185,4 +185,37 @@ public class DAO_TypeFood {
             }
         });
     }
+
+    public void SelectItemsInSpinner(List<String> typeFood, OnDataLoadedListener listener) {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                typeFood.clear();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String nameTypeFood = dataSnapshot.child("nameTypeFood").getValue(String.class);
+                    if (nameTypeFood != null) {
+                        typeFood.add(nameTypeFood);
+                    }
+                }
+                Log.d("DAO_TypeFood", "Data loaded: " + typeFood.toString());
+
+                // Gọi listener để báo khi dữ liệu đã tải xong
+                if (listener != null) {
+                    listener.onDataLoaded(typeFood);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("DAO_TypeFood", "Lỗi khi tải dữ liệu: " + error.getMessage());
+            }
+        });
+    }
+
+    // Định nghĩa interface để thông báo khi dữ liệu đã tải xong
+    public interface OnDataLoadedListener {
+        void onDataLoaded(List<String> typeFood);
+    }
+
+
 }
