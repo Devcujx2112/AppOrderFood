@@ -131,12 +131,12 @@ public class Admin_AddTypeFood extends AppCompatActivity {
     }
 
     public void AnhXa() {
-        imgTypeFood = findViewById(R.id.upload_img);
-        save = findViewById(R.id.saveButton);
+        imgTypeFood = findViewById(R.id.upload_imgTF);
+        save = findViewById(R.id.saveButtonTF);
 
-        id = findViewById(R.id.upload_id);
-        nameTypeFood = findViewById(R.id.upload_nameTypeFood);
-        mota = findViewById(R.id.upload_moTa);
+        id = findViewById(R.id.upload_idTF);
+        nameTypeFood = findViewById(R.id.upload_nameTypeFoodTF);
+        mota = findViewById(R.id.upload_moTaTF);
         add_image = getResources().getDrawable(R.drawable.add_image);
     }
 
