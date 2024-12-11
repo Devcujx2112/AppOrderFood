@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,13 +8,12 @@
     app:cardCornerRadius="15dp"
     tools:cardElevation="3dp">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/img_product"
             android:layout_width="0dp"
             android:layout_height="111dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -28,33 +26,52 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView3">
+            app:layout_constraintTop_toBottomOf="@+id/img_product">
 
+            <!-- TextView tên sản phẩm -->
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/name_product"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="Bánh gà"
-                android:textSize="16dp"
+                android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <!-- TextView loại đồ ăn, căn dưới Bánh gà một chút -->
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/typeFood"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="8dp"
+                android:text="Loại đồ ăn"
+                android:textColor="@color/orange"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/name_product" />
+
+            <!-- TextView số lượng, căn dưới loại đồ ăn -->
+            <TextView
+                android:id="@+id/soLuong_product"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Số lượng : 56"
-                app:layout_constraintStart_toStartOf="@+id/textView5"
-                app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                app:layout_constraintStart_toStartOf="@+id/name_product"
+                app:layout_constraintTop_toBottomOf="@+id/typeFood" />
 
+            <!-- TextView giá tiền -->
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/giaTien_product"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -64,20 +81,22 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textView6"
-                app:layout_constraintTop_toBottomOf="@+id/textView6"
+                app:layout_constraintStart_toStartOf="@+id/soLuong_product"
+                app:layout_constraintTop_toBottomOf="@+id/soLuong_product"
                 app:layout_constraintVertical_bias="0.0" />
 
+            <!-- Ngôi sao -->
             <ImageView
                 android:id="@+id/imageView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_marginEnd="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView8"
+                android:src="@drawable/star"
+                app:layout_constraintBottom_toBottomOf="@+id/giaTien_product"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView8"
-                tools:src="@drawable/star" />
+                app:layout_constraintTop_toTopOf="@+id/giaTien_product" />
 
+            <!-- TextView điểm số (5 sao) -->
             <TextView
                 android:id="@+id/textView9"
                 android:layout_width="wrap_content"
