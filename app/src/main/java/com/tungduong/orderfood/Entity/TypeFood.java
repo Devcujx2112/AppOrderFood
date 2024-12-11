@@ -1,35 +1,35 @@
 package com.tungduong.orderfood.Entity;
 
 public class TypeFood {
-    private String IDTypeFood;
-    private String NameTypeFood;
+    private String idTypeFood;
+    private String nameTypeFood;
     private String imageTypeFood;
     private String moTa;
 
     public TypeFood() {
     }
 
-    public TypeFood(String IDTypeFood, String NameTypeFood, String imageTypeFood, String moTa) {
-        this.IDTypeFood = IDTypeFood;
-        this.NameTypeFood = NameTypeFood;
+    public TypeFood(String idTypeFood, String nameTypeFood, String imageTypeFood, String moTa) {
+        this.idTypeFood = idTypeFood;
+        this.nameTypeFood = nameTypeFood;
         this.imageTypeFood = imageTypeFood;
         this.moTa = moTa;
     }
 
-    public String getIDTypeFood() {
-        return IDTypeFood;
+    public String getidTypeFood() {
+        return idTypeFood;
     }
 
-    public void setIDTypeFood(String IDTypeFood) {
-        this.IDTypeFood = IDTypeFood;
+    public void setidTypeFood(String idTypeFood) {
+        this.idTypeFood = TypeFood.this.idTypeFood;
     }
 
-    public String getNameTypeFood() {
-        return NameTypeFood;
+    public String getnameTypeFood() {
+        return nameTypeFood;
     }
 
-    public void setNameTypeFood(String NameTypeFood) {
-        this.NameTypeFood = NameTypeFood;
+    public void setnameTypeFood(String nameTypeFood) {
+        this.nameTypeFood = nameTypeFood;
     }
 
     public String getimageTypeFood() {
@@ -51,8 +51,8 @@ public class TypeFood {
     @Override
     public String toString() {
         return "TypeFood{" +
-                "IDTypeFood='" + IDTypeFood + '\'' +
-                ", NameTypeFood='" + NameTypeFood + '\'' +
+                "idTypeFood='" + idTypeFood + '\'' +
+                ", nameTypeFood='" + nameTypeFood + '\'' +
                 ", imageTypeFood='" + imageTypeFood + '\'' +
                 ", moTa='" + moTa + '\'' +
                 '}';

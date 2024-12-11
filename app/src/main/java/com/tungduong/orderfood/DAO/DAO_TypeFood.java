@@ -41,14 +41,14 @@ public class DAO_TypeFood {
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        databaseReference.orderByChild("idtypeFood").equalTo(typeFood.getIDTypeFood()).addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.orderByChild("idtypeFood").equalTo(typeFood.getidTypeFood()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     Toast.makeText(context, "ID này đã tồn tại. Vui lòng chọn ID khác", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 } else {
-                    databaseReference.child(typeFood.getIDTypeFood()).setValue(typeFood).addOnCompleteListener(task -> {
+                    databaseReference.child(typeFood.getidTypeFood()).setValue(typeFood).addOnCompleteListener(task -> {
                         dialog.dismiss();
                         if (task.isSuccessful()) {
                             Toast.makeText(context, "Thêm loại sản phẩm thành công", Toast.LENGTH_SHORT).show();
@@ -186,7 +186,7 @@ public class DAO_TypeFood {
         });
     }
 
-    public void SelectItemsInSpinner(List<String> typeFood, OnDataLoadedListener listener) {
+    public void SelectItemsInSpinner(List<String> typeFood, OnDataTypeFoodInSpinner listener) {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -199,7 +199,6 @@ public class DAO_TypeFood {
                 }
                 Log.d("DAO_TypeFood", "Data loaded: " + typeFood.toString());
 
-                // Gọi listener để báo khi dữ liệu đã tải xong
                 if (listener != null) {
                     listener.onDataLoaded(typeFood);
                 }
@@ -212,8 +211,7 @@ public class DAO_TypeFood {
         });
     }
 
-    // Định nghĩa interface để thông báo khi dữ liệu đã tải xong
-    public interface OnDataLoadedListener {
+    public interface OnDataTypeFoodInSpinner {
         void onDataLoaded(List<String> typeFood);
     }
 

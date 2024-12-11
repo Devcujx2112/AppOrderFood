@@ -41,15 +41,15 @@ public class TypeFoodAdapter_Admin extends RecyclerView.Adapter<Adaptor_TypeFood
         TypeFood typeFood = typeFoodList.get(position);
         String imageURL = typeFood.getimageTypeFood();
         Glide.with(holder.itemView.getContext()).load(imageURL).placeholder(R.drawable.ic_launcher_foreground).into(holder.typeImg);
-        holder.typeName.setText(typeFood.getNameTypeFood());
+        holder.typeName.setText(typeFood.getnameTypeFood());
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, Admin_ChiTiet_TypeFood.class);
                 intent.putExtra("Image", typeFoodList.get(holder.getAdapterPosition()).getimageTypeFood());
-                intent.putExtra("Id_TypeFood", typeFoodList.get(holder.getAdapterPosition()).getIDTypeFood());
-                intent.putExtra("Name_TypeFood", typeFoodList.get(holder.getAdapterPosition()).getNameTypeFood());
+                intent.putExtra("Id_TypeFood", typeFoodList.get(holder.getAdapterPosition()).getidTypeFood());
+                intent.putExtra("Name_TypeFood", typeFoodList.get(holder.getAdapterPosition()).getnameTypeFood());
                 intent.putExtra("MoTa_TypeFood", typeFoodList.get(holder.getAdapterPosition()).getMoTa());
                 context.startActivity(intent);
             }
