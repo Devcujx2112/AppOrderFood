@@ -1,15 +1,24 @@
 package com.tungduong.orderfood.DAO;
 
 import android.content.Context;
+import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.tungduong.orderfood.Entity.Product;
 import com.tungduong.orderfood.R;
 
@@ -78,4 +87,74 @@ public class DAO_Product {
             }
         });
     }
+
+    public void SelectImage(String masp, String tensp,int soLuong,String giaTien, Uri newImageUri, String oldImageUri,String typeFood, String moTa, Context context){
+        if (newImageUri != null){
+            StorageReference newImagePD = FirebaseStorage.getInstance().getReference().child("Product Image").child(newImageUri.getLastPathSegment());
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setCancelable(false);
+            builder.setView(R.layout.progress_layout);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+            newImagePD.putFile(newImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    taskSnapshot.getStorage().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            if (task.isSuccessful()){
+                                String newImageUrl = task.getResult().toString();
+                                UpdateProduct(masp,tensp,soLuong,giaTien,newImageUrl,typeFood,moTa,context);
+
+                                if (oldImageUri != null && !oldImageUri.isEmpty()){
+                                    StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(oldImageUri);
+                                    storageReference.delete();
+                                }
+                                dialog.dismiss();
+                            }
+                            else {
+                                Toast.makeText(context, "Không thể lấy URL new Image", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                        }
+                    });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(context, "Lỗi khi upload ảnh mới: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+            });
+        }
+        else {
+            UpdateProduct(masp,tensp,soLuong,giaTien,oldImageUri,typeFood,moTa,context);
+        }
+    }
+
+    public void UpdateProduct(String masp, String tensp,int soLuong,String giaTien, String imageUri,String typeFood, String moTa, Context context){
+        Product product = new Product(masp,tensp,soLuong,giaTien,imageUri,typeFood,moTa);
+        databaseReference.child(masp).setValue(product).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(context, "Cập nhật thành công!", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(context, "Cập nhật thất bại: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }
+
+
+
+
+
+
+
+
+

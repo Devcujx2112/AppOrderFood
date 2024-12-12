@@ -1,0 +1,135 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GUI.Admin_AddTypeFood">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:padding="15dp"
+            android:background="@drawable/lavender_border">
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="160dp"
+                android:src="@drawable/add_image"
+                android:id="@+id/update_ImgPD"
+                android:layout_marginTop="10dp"
+                android:layout_gravity="center"
+                android:scaleType="fitXY" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:id="@+id/update_maspPD"
+                android:background="@drawable/lavender_border"
+                android:layout_marginTop="15dp"
+                android:padding="16dp"
+                android:hint="Mã sản phẩm"
+                android:gravity="start|center_vertical"
+                android:textColor="@color/lavender" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:id="@+id/update_namePD"
+                android:background="@drawable/lavender_border"
+                android:layout_marginTop="15dp"
+                android:padding="16dp"
+                android:hint="Tên sản phẩm"
+                android:gravity="start|center_vertical"
+                android:textColor="@color/lavender" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:id="@+id/update_soLuongPD"
+                android:background="@drawable/lavender_border"
+                android:layout_marginTop="15dp"
+                android:padding="16dp"
+                android:hint="Số lượng"
+                android:gravity="start|center_vertical"
+                android:textColor="@color/lavender" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:id="@+id/update_giaTienPD"
+                android:background="@drawable/lavender_border"
+                android:layout_marginTop="15dp"
+                android:padding="16dp"
+                android:hint="Giá tiền"
+                android:gravity="start|center_vertical"
+                android:textColor="@color/lavender" />
+
+            <Spinner
+                android:id="@+id/update_typeFoodPD"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:background="@drawable/lavender_border"
+                android:padding="16dp"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:spinnerMode="dropdown" />
+
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:id="@+id/update_moTaPD"
+                android:background="@drawable/lavender_border"
+                android:layout_marginTop="20dp"
+                android:padding="16dp"
+                android:hint="Mô tả"
+                android:gravity="start|center_vertical"
+                android:textColor="@color/lavender" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="15dp"
+                android:gravity="center_horizontal">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/green"
+                    android:text="Update"
+                    android:id="@+id/updateButtonPD"
+                    android:textSize="18sp"
+                    android:layout_marginEnd="10dp"
+                    app:cornerRadius="15dp" />
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="60dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/red"
+                    android:text="Delete"
+                    android:id="@+id/deleteButtonPD"
+                    android:textSize="18sp"
+                    app:cornerRadius="15dp" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+</ScrollView>

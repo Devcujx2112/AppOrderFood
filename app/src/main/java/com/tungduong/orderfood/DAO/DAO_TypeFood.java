@@ -97,7 +97,7 @@ public class DAO_TypeFood {
     public void SelectImage(String typeId, String typeName, Uri newImageUri, String oldImageUrl, String typeMota, Context context) {
         if (newImageUri != null) {
             // Select new image
-            StorageReference newImageRef = FirebaseStorage.getInstance().getReference().child("TypeFood Image").child(newImageUri.getLastPathSegment());
+            StorageReference newImageTF = FirebaseStorage.getInstance().getReference().child("TypeFood Image").child(newImageUri.getLastPathSegment());
 
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
             builder.setCancelable(false);
@@ -106,7 +106,7 @@ public class DAO_TypeFood {
             dialog.show();
 
             //Upload new iamge in storage - delete old image
-            newImageRef.putFile(newImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            newImageTF.putFile(newImageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                     taskSnapshot.getStorage().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -122,7 +122,7 @@ public class DAO_TypeFood {
                                 }
                                 dialog.dismiss();
                             } else {
-                                Toast.makeText(context, "Khong the lay url anh moi", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Không thể lấy URL new Image", Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
                             }
                         }

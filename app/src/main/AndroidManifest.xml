@@ -17,6 +17,9 @@
         android:theme="@style/Theme.OrderFood"
         tools:targetApi="31">
         <activity
+            android:name=".GUI.Admin_ChiTiet_Product"
+            android:exported="false" />
+        <activity
             android:name=".GUI.Admin_AddProduct"
             android:exported="false" />
         <activity
