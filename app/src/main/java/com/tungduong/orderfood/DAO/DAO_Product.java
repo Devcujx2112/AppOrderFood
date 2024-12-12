@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
@@ -29,7 +30,7 @@ public class DAO_Product {
     FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
     DatabaseReference databaseReference = firebaseDatabase.getReference("Product");
 
-    public void AddProDuct(Product product, Context context){
+    public void AddProDuct(Product product, Context context) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setCancelable(false);
         builder.setView(R.layout.progress_layout);
@@ -39,19 +40,17 @@ public class DAO_Product {
         databaseReference.orderByChild("ProductID").equalTo(product.getMasp()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()){
-                    Toast.makeText(context,"Mã sản phẩm này đã tồn tại. Vui lòng chọn mã khác",Toast.LENGTH_SHORT).show();
+                if (snapshot.exists()) {
+                    Toast.makeText(context, "Mã sản phẩm này đã tồn tại. Vui lòng chọn mã khác", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
-                }
-                else{
+                } else {
                     databaseReference.child(product.getMasp()).setValue(product).addOnCompleteListener(task -> {
-                       dialog.dismiss();
-                       if (task.isSuccessful()){
-                           Toast.makeText(context,"Thêm sản phẩm thành công",Toast.LENGTH_SHORT).show();
-                       }
-                       else {
-                           Toast.makeText(context,"Thêm sản phẩm thất bại",Toast.LENGTH_SHORT).show();
-                       }
+                        dialog.dismiss();
+                        if (task.isSuccessful()) {
+                            Toast.makeText(context, "Thêm sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(context, "Thêm sản phẩm thất bại", Toast.LENGTH_SHORT).show();
+                        }
                     });
                 }
             }
@@ -64,17 +63,18 @@ public class DAO_Product {
         });
     }
 
-    public interface ListProductCallBack{
+    public interface ListProductCallBack {
         void CallBack(List<Product> product);
     }
-    public void GetAllProduct(ListProductCallBack callBack){
+
+    public void GetAllProduct(ListProductCallBack callBack) {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<Product> productsList = new ArrayList<>();
-                for(DataSnapshot dataSnapshot : snapshot.getChildren()){
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Product product = dataSnapshot.getValue(Product.class);
-                    if (product != null){
+                    if (product != null) {
                         productsList.add(product);
                     }
                 }
@@ -88,8 +88,8 @@ public class DAO_Product {
         });
     }
 
-    public void SelectImage(String masp, String tensp,int soLuong,String giaTien, Uri newImageUri, String oldImageUri,String typeFood, String moTa, Context context){
-        if (newImageUri != null){
+    public void SelectImage(String masp, String tensp, int soLuong, String giaTien, Uri newImageUri, String oldImageUri, String typeFood, String moTa, Context context) {
+        if (newImageUri != null) {
             StorageReference newImagePD = FirebaseStorage.getInstance().getReference().child("Product Image").child(newImageUri.getLastPathSegment());
 
             AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -104,17 +104,16 @@ public class DAO_Product {
                     taskSnapshot.getStorage().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
                         @Override
                         public void onComplete(@NonNull Task<Uri> task) {
-                            if (task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 String newImageUrl = task.getResult().toString();
-                                UpdateProduct(masp,tensp,soLuong,giaTien,newImageUrl,typeFood,moTa,context);
+                                UpdateProduct(masp, tensp, soLuong, giaTien, newImageUrl, typeFood, moTa, context);
 
-                                if (oldImageUri != null && !oldImageUri.isEmpty()){
+                                if (oldImageUri != null && !oldImageUri.isEmpty()) {
                                     StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(oldImageUri);
                                     storageReference.delete();
                                 }
                                 dialog.dismiss();
-                            }
-                            else {
+                            } else {
                                 Toast.makeText(context, "Không thể lấy URL new Image", Toast.LENGTH_SHORT).show();
                                 dialog.dismiss();
                             }
@@ -128,14 +127,13 @@ public class DAO_Product {
                     dialog.dismiss();
                 }
             });
-        }
-        else {
-            UpdateProduct(masp,tensp,soLuong,giaTien,oldImageUri,typeFood,moTa,context);
+        } else {
+            UpdateProduct(masp, tensp, soLuong, giaTien, oldImageUri, typeFood, moTa, context);
         }
     }
 
-    public void UpdateProduct(String masp, String tensp,int soLuong,String giaTien, String imageUri,String typeFood, String moTa, Context context){
-        Product product = new Product(masp,tensp,soLuong,giaTien,imageUri,typeFood,moTa);
+    public void UpdateProduct(String masp, String tensp, int soLuong, String giaTien, String imageUri, String typeFood, String moTa, Context context) {
+        Product product = new Product(masp, tensp, soLuong, giaTien, imageUri, typeFood, moTa);
         databaseReference.child(masp).setValue(product).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
@@ -145,6 +143,38 @@ public class DAO_Product {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(context, "Cập nhật thất bại: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void DeleteProduct(String masp, String image, Context context) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setCancelable(false);
+        builder.setView(R.layout.progress_layout);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        databaseReference.child(masp).addListenerForSingleValueEvent(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                databaseReference.child(masp).removeValue().addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(image);
+                        storageReference.delete();
+                        Toast.makeText(context, "Xóa sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    } else {
+                        Toast.makeText(context, "Xóa loại sản phẩm thất bại", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(context, "Lỗi kết nối Firebase: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             }
         });
     }

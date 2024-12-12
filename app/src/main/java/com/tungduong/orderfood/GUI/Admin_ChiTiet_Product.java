@@ -106,7 +106,6 @@ public class Admin_ChiTiet_Product extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 selectedTypeFood = parentView.getItemAtPosition(position).toString();
-                Log.d("Spinner", "Selected: " + selectedTypeFood);
             }
 
             @Override
@@ -131,6 +130,21 @@ public class Admin_ChiTiet_Product extends AppCompatActivity {
                 UpdateProduct();
             }
         });
+
+        deletePD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DeleteProduct();
+            }
+        });
+    }
+
+    public void DeleteProduct(){
+        String masp = update_masp.getText().toString();
+        String image = getIntent().getStringExtra("Image_Product");
+        daoProduct = new DAO_Product();
+        daoProduct.DeleteProduct(masp,image,this);
+        SetText();
     }
 
     public void UpdateProduct() {
@@ -148,7 +162,7 @@ public class Admin_ChiTiet_Product extends AppCompatActivity {
 
         String oldImageUrl = getIntent().getStringExtra("Image_Product");
         daoProduct = new DAO_Product();
-        daoProduct.SelectImage(masp,tensp,soLuong,giaTien,uri,oldImageUrl,selectedTypeFood,moTa,Admin_ChiTiet_Product.this);
+        daoProduct.SelectImage(masp, tensp, soLuong, giaTien, uri, oldImageUrl, selectedTypeFood, moTa, Admin_ChiTiet_Product.this);
         SetText();
     }
 
