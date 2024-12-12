@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".GUI.Admin_Product">
 
+    <!-- EditText cho tìm kiếm sản phẩm -->
     <EditText
         android:id="@+id/search_product"
         android:layout_width="0dp"
@@ -14,16 +15,29 @@
         android:layout_margin="16dp"
         android:background="@drawable/lavender_border"
         android:backgroundTint="@color/orange"
-        android:drawableStart="@drawable/search"
-        android:drawablePadding="8dp"
         android:gravity="center"
         android:hint="Tìm kiếm sản phẩm..."
         android:inputType="text"
         android:padding="12dp"
         android:textColor="@color/white"
         android:textColorHint="@color/gray"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/search_icon"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <!-- ImageView cho biểu tượng tìm kiếm -->
+
+    <ImageView
+        android:id="@+id/search_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/lavender_border"
+        android:backgroundTint="@color/orange"
+        android:padding="8dp"
+        android:src="@drawable/search"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -35,8 +49,9 @@
         app:layout_constraintBottom_toTopOf="@id/fab_reloadProduct"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_product" />
+        app:layout_constraintTop_toBottomOf="@id/search_product"/>
 
+    <!-- Floating Action Button để thêm sản phẩm -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_addProduct"
         android:layout_width="wrap_content"
@@ -48,6 +63,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:tint="@color/white" />
 
+    <!-- Floating Action Button để reload sản phẩm -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_reloadProduct"
         android:layout_width="wrap_content"

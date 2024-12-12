@@ -6,10 +6,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -22,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Admin_Product extends Fragment {
+    ImageView img;
     EditText searchProduct;
     FloatingActionButton reloadProduct, addProduct;
     RecyclerView recyclerView;
@@ -57,6 +63,39 @@ public class Admin_Product extends Fragment {
             }
         });
 
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String tensp = searchProduct.getText().toString().trim();
+                Log.d("Admin_Product", "Searching for: " + tensp);  // Log tên sản phẩm
+                if (tensp.isEmpty()) {
+                    Toast.makeText(getContext(), "Vui lòng nhập tên sản phẩm", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                daoProduct = new DAO_Product();
+                daoProduct.SearchProductFormTenSP(tensp, new DAO_Product.ListProductSearch() {
+                    @Override
+                    public void ListProduct(List<Product> product) {
+                        Log.d("Admin_Product", "Products found: " + product.size());  // Log số sản phẩm tìm thấy
+
+                        productList.clear();
+                        productList.addAll(product);
+
+                        if (adaptorProduct != null){
+                            adaptorProduct.notifyDataSetChanged();
+                        }
+                        else {
+                            adaptorProduct = new ProductAdaptor_Admin(getContext(),productList);
+                            recyclerView.setAdapter(adaptorProduct);
+                        }
+                        if (productList.isEmpty()){
+                            Toast.makeText(getContext(),"Không có sản phẩm nào phù hợp",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
+
         LoadAllProduct();
         return view;
     }
@@ -88,5 +127,6 @@ public class Admin_Product extends Fragment {
         reloadProduct = view.findViewById(R.id.fab_reloadProduct);
         addProduct = view.findViewById(R.id.fab_addProduct);
         recyclerView = view.findViewById(R.id.list_Product);
+        img = view.findViewById(R.id.search_icon);
     }
 }

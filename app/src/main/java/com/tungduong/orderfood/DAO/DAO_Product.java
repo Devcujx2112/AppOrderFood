@@ -37,7 +37,7 @@ public class DAO_Product {
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        databaseReference.orderByChild("ProductID").equalTo(product.getMasp()).addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.orderByChild("masp").equalTo(product.getMasp()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
@@ -178,6 +178,33 @@ public class DAO_Product {
             }
         });
     }
+
+    public interface ListProductSearch {
+        void ListProduct(List<Product> product);
+    }
+
+    public void SearchProductFormTenSP(String tensp, ListProductSearch ListProduct) {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Product> productsList = new ArrayList<>();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Product product = dataSnapshot.getValue(Product.class);
+                    if (product != null && product.getTensp().toLowerCase().contains(tensp.toLowerCase())) {
+                        // Kiểm tra nếu tên sản phẩm chứa từ khóa tìm kiếm (không phân biệt hoa thường)
+                        productsList.add(product);
+                    }
+                }
+                ListProduct.ListProduct(productsList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("Search product Admin", error.getMessage().trim());
+            }
+        });
+    }
+
 }
 
 
