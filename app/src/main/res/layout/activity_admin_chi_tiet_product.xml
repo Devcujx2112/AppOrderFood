@@ -40,6 +40,7 @@
                 android:background="@drawable/lavender_border"
                 android:layout_marginTop="15dp"
                 android:padding="16dp"
+                android:enabled="false"
                 android:hint="Mã sản phẩm"
                 android:gravity="start|center_vertical"
                 android:textColor="@color/lavender" />
@@ -61,21 +62,42 @@
                 android:id="@+id/update_soLuongPD"
                 android:background="@drawable/lavender_border"
                 android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
                 android:padding="16dp"
+                android:inputType="number"
                 android:hint="Số lượng"
                 android:gravity="start|center_vertical"
                 android:textColor="@color/lavender" />
 
-            <EditText
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:id="@+id/update_giaTienPD"
+                android:orientation="horizontal"
                 android:background="@drawable/lavender_border"
-                android:layout_marginTop="15dp"
-                android:padding="16dp"
-                android:hint="Giá tiền"
-                android:gravity="start|center_vertical"
-                android:textColor="@color/lavender" />
+                android:padding="5dp">
+
+                <EditText
+                    android:id="@+id/update_giaTienPD"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:hint="Nhập giá tiền"
+                    android:gravity="start|center_vertical"
+                    android:inputType="number"
+                    android:textColor="@color/lavender"
+                    android:background="@android:color/transparent"
+                    android:padding="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="VNĐ"
+                    android:textColor="@color/lavender"
+                    android:textSize="16sp"
+                    android:paddingEnd="10dp" />
+            </LinearLayout>
+
 
             <Spinner
                 android:id="@+id/update_typeFoodPD"

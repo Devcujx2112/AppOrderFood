@@ -42,7 +42,7 @@ public class Admin_ChiTiet_TypeFood extends AppCompatActivity {
             update_idTF.setText(bundle.getString("Id_TypeFood"));
             update_nameTF.setText(bundle.getString("Name_TypeFood"));
             update_motaTF.setText(bundle.getString("MoTa_TypeFood"));
-            Glide.with(this).load(bundle.getString("Image")).into(update_imgTF);
+            Glide.with(this).load(bundle.getString("Image_TypeFood")).into(update_imgTF);
 
         }
 
@@ -97,7 +97,7 @@ public class Admin_ChiTiet_TypeFood extends AppCompatActivity {
             return;
         }
 
-        String oldImageUrl = getIntent().getStringExtra("Image");
+        String oldImageUrl = getIntent().getStringExtra("Image_TypeFood");
         daoTypeFood = new DAO_TypeFood();
         daoTypeFood.SelectImage(id, name, uri, oldImageUrl, mota, this);
         SetText();
@@ -105,7 +105,7 @@ public class Admin_ChiTiet_TypeFood extends AppCompatActivity {
 
     public void DeleteTypeFood(){
         String id = update_idTF.getText().toString();
-        String imageURL = getIntent().getStringExtra("Image");
+        String imageURL = getIntent().getStringExtra("Image_TypeFood");
         daoTypeFood = new DAO_TypeFood();
         daoTypeFood.DeleteTypeFood(id,imageURL,this);
         SetText();

@@ -47,7 +47,7 @@ public class TypeFoodAdapter_Admin extends RecyclerView.Adapter<Adaptor_TypeFood
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(context, Admin_ChiTiet_TypeFood.class);
-                intent.putExtra("Image", typeFoodList.get(holder.getAdapterPosition()).getimageTypeFood());
+                intent.putExtra("Image_TypeFood", typeFoodList.get(holder.getAdapterPosition()).getimageTypeFood());
                 intent.putExtra("Id_TypeFood", typeFoodList.get(holder.getAdapterPosition()).getidTypeFood());
                 intent.putExtra("Name_TypeFood", typeFoodList.get(holder.getAdapterPosition()).getnameTypeFood());
                 intent.putExtra("MoTa_TypeFood", typeFoodList.get(holder.getAdapterPosition()).getMoTa());
