@@ -2,11 +2,15 @@ package com.tungduong.orderfood.DAO;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
+import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -15,6 +19,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.tungduong.orderfood.Entity.Account;
 import com.tungduong.orderfood.GUI.Admin_Profile;
 import com.tungduong.orderfood.GUI.GUI_AdminPage;
@@ -204,7 +211,7 @@ public class DAO_Account {
     }
 
     public interface ListCallBackAccount{
-        void CallBack(String email,String fullName,String sdt);
+        void CallBack(String email,String fullName,String sdt, String role, String warning);
     }
 
     public void SearchAccountFormEmail(String emailSearch,ListCallBackAccount callBackAccount){
@@ -217,8 +224,10 @@ public class DAO_Account {
                     if (email != null && email.equalsIgnoreCase(emailSearch)){
                         String fullName = dataSnapshot.child("fullName").getValue(String.class);
                         String sdt = dataSnapshot.child("phone").getValue(String.class);
+                        String role = dataSnapshot.child("role").getValue(String.class);
+                        String warning = dataSnapshot.child("warning").getValue(String.class);
 
-                        callBackAccount.CallBack(email,fullName,sdt);
+                        callBackAccount.CallBack(email,fullName,sdt,role,warning);
                         return;
                     }
                 }
@@ -227,6 +236,69 @@ public class DAO_Account {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.e("Search","Erros"+error.getMessage());
+            }
+        });
+    }
+
+    public void SelectAvatarAccount(Uri newImage, String oldImage,String fullName,String email, String sdt,String role,String warning,Context context){
+        if (newImage != null){
+            StorageReference newImageAvatar = FirebaseStorage.getInstance().getReference().child("Account Avatar").child(newImage.getLastPathSegment());
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(context);
+            builder.setCancelable(false);
+            builder.setView(R.layout.progress_layout);
+            AlertDialog dialog = builder.create();
+            dialog.show();
+
+            newImageAvatar.putFile(newImage).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    taskSnapshot.getStorage().getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Uri> task) {
+                            if (task.isSuccessful()){
+                                String newImageUrl = task.getResult().toString();
+                                UpdateAccount(newImageUrl,fullName,email,sdt,role,warning,context);
+
+                                if (oldImage != null && !oldImage.isEmpty()){
+                                    StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(oldImage);
+                                    storageReference.delete();
+                                }
+                                dialog.dismiss();
+                            }
+                            else {
+                                Toast.makeText(context, "Không thể lấy URL new Image", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
+                        }
+                    });
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(context, "Lỗi khi upload ảnh mới: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+            });
+        }
+        else {
+            UpdateAccount(oldImage,fullName,email,sdt,role,warning,context);
+        }
+    }
+
+    public void UpdateAccount(String imageUrl, String fullName,String email,String sdt,String role,String warning, Context context){
+        String decodedEmail = new String(Base64.decode(email, Base64.NO_WRAP));
+
+        Account account = new Account(fullName,role,decodedEmail,sdt,imageUrl,warning);
+        databaseReference.child(email).setValue(account).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(context, "Cập nhật thành công!", Toast.LENGTH_SHORT).show();
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(context, "Cập nhật thất bại: " + e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
