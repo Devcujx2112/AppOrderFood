@@ -1,6 +1,7 @@
 package com.tungduong.orderfood.GUI;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -26,7 +27,6 @@ public class GUI_Login extends AppCompatActivity {
     TextView tv_signin,tv_forgotPassWord;
     List<Account> accountList;
     DAO_Account daoAccount;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +63,10 @@ public class GUI_Login extends AppCompatActivity {
                 txt_email.setText("");
                 txt_passWord.setText("");
 
+                SharedPreferences sharedPreferences = getSharedPreferences("Profile", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("email", email);
+                editor.apply();
             }
         });
 
@@ -115,7 +119,6 @@ public class GUI_Login extends AppCompatActivity {
         btn_login = findViewById(R.id.btn_login);
         tv_signin = findViewById(R.id.tv_signin);
         tv_forgotPassWord = findViewById(R.id.forgot_passWord);
-
         daoAccount = new DAO_Account();
         accountList = new ArrayList<>();
     }

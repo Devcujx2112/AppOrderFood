@@ -42,7 +42,6 @@
                 android:hint="Full Name"
                 android:inputType="textPersonName"
                 android:padding="10dp"
-                android:text="Vũ Tùng Dương"
                 android:textColor="@android:color/black"
                 android:textSize="20sp" />
 
@@ -56,7 +55,6 @@
                 android:hint="Email"
                 android:inputType="textEmailAddress"
                 android:padding="10dp"
-                android:text="dev.duongvu2112@gmail.com"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="16sp" />
 
@@ -70,20 +68,6 @@
                 android:hint="Phone Number"
                 android:inputType="phone"
                 android:padding="10dp"
-                android:text="0123456789"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="16sp" />
-
-            <EditText
-                android:id="@+id/address"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:background="@drawable/lavender_border"
-                android:gravity="start|center_vertical"
-                android:hint="Address"
-                android:padding="10dp"
-                android:text=""
                 android:textColor="@android:color/darker_gray"
                 android:textSize="16sp" />
 

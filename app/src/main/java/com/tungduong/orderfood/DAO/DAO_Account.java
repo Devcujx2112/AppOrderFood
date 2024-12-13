@@ -4,10 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
-
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -18,11 +16,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.tungduong.orderfood.Entity.Account;
+import com.tungduong.orderfood.GUI.Admin_Profile;
 import com.tungduong.orderfood.GUI.GUI_AdminPage;
 import com.tungduong.orderfood.GUI.GUI_HomePage;
 import com.tungduong.orderfood.GUI.GUI_LockAccount;
 import com.tungduong.orderfood.R;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +38,6 @@ public class DAO_Account {
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        // Sử dụng Firebase Authentication để đăng nhập
         FirebaseAuth.getInstance().signInWithEmailAndPassword(email, passWord)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
@@ -202,6 +199,34 @@ public class DAO_Account {
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.e("FirebaseUpdate", "Lỗi khi đọc dữ liệu: " + error.getMessage());
 
+            }
+        });
+    }
+
+    public interface ListCallBackAccount{
+        void CallBack(String email,String fullName,String sdt);
+    }
+
+    public void SearchAccountFormEmail(String emailSearch,ListCallBackAccount callBackAccount){
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()){
+                    String email = dataSnapshot.child("email").getValue(String.class);
+
+                    if (email != null && email.equalsIgnoreCase(emailSearch)){
+                        String fullName = dataSnapshot.child("fullName").getValue(String.class);
+                        String sdt = dataSnapshot.child("phone").getValue(String.class);
+
+                        callBackAccount.CallBack(email,fullName,sdt);
+                        return;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("Search","Erros"+error.getMessage());
             }
         });
     }
