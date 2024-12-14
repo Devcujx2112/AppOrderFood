@@ -318,6 +318,40 @@ public class DAO_Account {
         });
     }
 
+    public void DeleteAccount(String uid, Context context){
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setCancelable(false);
+        builder.setView(R.layout.progress_layout);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        if (firebaseUser != null && firebaseUser.getUid().equals(uid)){
+            databaseReference.child(uid).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()){
+                        firebaseUser.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()){
+                                    Toast.makeText(context,"Xóa tài khoản thành công",Toast.LENGTH_SHORT).show();
+                                }
+                                else {
+                                    String error = task.getException() != null ? task.getException().getMessage() : "Lỗi không xác định";
+                                    Toast.makeText(context, "Xóa tài khoản thất bại: " + error, Toast.LENGTH_SHORT).show();
+                                }
+                                dialog.dismiss();
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
+    }
+
 }
 
 

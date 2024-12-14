@@ -5,6 +5,7 @@ import static android.content.Intent.getIntent;
 import static android.content.Intent.getIntentOld;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
@@ -15,6 +16,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
@@ -102,9 +104,6 @@ public class Admin_Profile extends Fragment {
             }
         });
 
-
-
-
         btn_xacNhan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -112,16 +111,44 @@ public class Admin_Profile extends Fragment {
                     Toast.makeText(getContext(), "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (uri == null) {
-                    Toast.makeText(getContext(), "Vui lòng thêm ảnh của loại sản phẩm", Toast.LENGTH_SHORT).show();
-                    return;
-                }
 //                SharedPreferences sharedPreferences_image = getContext().getSharedPreferences("User_Image",MODE_PRIVATE);
 //                imageUrl = sharedPreferences_image.getString("Image_Account","");
-
-                daoAccount.SelectAvatarAccount(uid_acc, uri, imageUrl, fullName_acc, encodedEmail, sdt_acc, role, warning, getContext());
+                String fnam = fullName.getText().toString().trim();
+                String sdt = phone.getText().toString().trim();
+                daoAccount.SelectAvatarAccount(uid_acc, uri, imageUrl, fnam, encodedEmail, sdt, role, warning, getContext());
+                Log.d("hehehehe", "onClick: "+ uid_acc+"-" + uri +"-"+ imageUrl +"-"+ fnam +"-"+ encodedEmail +"-"+ sdt +"-"+ role +"-"+ warning);
             }
         });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setTitle("Xác nhận xóa tài khoản");
+                builder.setMessage("Bạn có chắc chắn muốn xóa tài khoản này không? Hành động này không thể hoàn tác.");
+
+                builder.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Gọi hàm xóa tài khoản
+                        daoAccount.DeleteAccount(uid_acc, getContext());
+                        Intent intent = new Intent(getContext(),GUI_Login.class);
+                        startActivity(intent);
+                    }
+                });
+
+                builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Đóng dialog
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.show();
+            }
+        });
+
         return view;
     }
 
