@@ -4,6 +4,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,11 +62,6 @@ public class AccountAdaptor_Admin extends RecyclerView.Adapter<Adaptor_Account_A
 
         if (holder.img_avatar != null && context != null) {
             Glide.with(holder.itemView.getContext()).load(imageUrl).placeholder(R.drawable.error_avatar).into(holder.img_avatar);
-
-            SharedPreferences sharedPreferences = context.getSharedPreferences("Profile", MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putString("Image_Account", imageUrl);
-            editor.apply();
         }
 
         holder.email.setText(account.getEmail());

@@ -29,7 +29,9 @@ import com.tungduong.orderfood.GUI.GUI_HomePage;
 import com.tungduong.orderfood.GUI.GUI_LockAccount;
 import com.tungduong.orderfood.R;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class DAO_Account {
@@ -211,7 +213,7 @@ public class DAO_Account {
     }
 
     public interface ListCallBackAccount{
-        void CallBack(String email,String fullName,String sdt, String role, String warning);
+        void CallBack(String uid,String email,String image,String fullName,String sdt, String role, String warning);
     }
 
     public void SearchAccountFormEmail(String emailSearch,ListCallBackAccount callBackAccount){
@@ -223,11 +225,13 @@ public class DAO_Account {
 
                     if (email != null && email.equalsIgnoreCase(emailSearch)){
                         String fullName = dataSnapshot.child("fullName").getValue(String.class);
+                        String uid = dataSnapshot.child("id").getValue(String.class);
+                        String image = dataSnapshot.child("image").getValue(String.class);
                         String sdt = dataSnapshot.child("phone").getValue(String.class);
                         String role = dataSnapshot.child("role").getValue(String.class);
                         String warning = dataSnapshot.child("warning").getValue(String.class);
-
-                        callBackAccount.CallBack(email,fullName,sdt,role,warning);
+                        Log.e("123", "onDataChange: "+image+ uid + fullName + sdt + role + warning);
+                        callBackAccount.CallBack(uid,email,image,fullName,sdt,role,warning);
                         return;
                     }
                 }
@@ -240,7 +244,7 @@ public class DAO_Account {
         });
     }
 
-    public void SelectAvatarAccount(Uri newImage, String oldImage,String fullName,String email, String sdt,String role,String warning,Context context){
+    public void SelectAvatarAccount(String uid,Uri newImage, String oldImage,String fullName,String email, String sdt,String role,String warning,Context context){
         if (newImage != null){
             StorageReference newImageAvatar = FirebaseStorage.getInstance().getReference().child("Account Avatar").child(newImage.getLastPathSegment());
 
@@ -258,7 +262,7 @@ public class DAO_Account {
                         public void onComplete(@NonNull Task<Uri> task) {
                             if (task.isSuccessful()){
                                 String newImageUrl = task.getResult().toString();
-                                UpdateAccount(newImageUrl,fullName,email,sdt,role,warning,context);
+                                UpdateAccount(uid,newImageUrl,fullName,email,sdt,role,warning,context);
 
                                 if (oldImage != null && !oldImage.isEmpty()){
                                     StorageReference storageReference = FirebaseStorage.getInstance().getReferenceFromUrl(oldImage);
@@ -282,15 +286,26 @@ public class DAO_Account {
             });
         }
         else {
-            UpdateAccount(oldImage,fullName,email,sdt,role,warning,context);
+            UpdateAccount(uid,oldImage,fullName,email,sdt,role,warning,context);
         }
     }
 
-    public void UpdateAccount(String imageUrl, String fullName,String email,String sdt,String role,String warning, Context context){
+    public void UpdateAccount(String uid, String imageUrl, String fullName, String email, String sdt, String role, String warning, Context context) {
+        // Giải mã email
         String decodedEmail = new String(Base64.decode(email, Base64.NO_WRAP));
 
-        Account account = new Account(fullName,role,decodedEmail,sdt,imageUrl,warning);
-        databaseReference.child(email).setValue(account).addOnSuccessListener(new OnSuccessListener<Void>() {
+        // Tạo Map để chứa dữ liệu
+        Map<String, Object> accountData = new HashMap<>();
+        accountData.put("id", uid);
+        accountData.put("fullName", fullName);
+        accountData.put("email", decodedEmail);
+        accountData.put("phone", sdt);
+        accountData.put("role", role);
+        accountData.put("image", imageUrl);
+        accountData.put("warning", warning);
+
+        // Cập nhật giá trị vào Firebase
+        databaseReference.child(uid).updateChildren(accountData).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(context, "Cập nhật thành công!", Toast.LENGTH_SHORT).show();
@@ -302,6 +317,7 @@ public class DAO_Account {
             }
         });
     }
+
 }
 
 

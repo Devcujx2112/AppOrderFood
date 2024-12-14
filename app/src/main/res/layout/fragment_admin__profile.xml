@@ -29,8 +29,7 @@
                 android:layout_height="150dp"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/error_avatar" />
+                android:scaleType="centerCrop" />
 
             <EditText
                 android:id="@+id/fullName"

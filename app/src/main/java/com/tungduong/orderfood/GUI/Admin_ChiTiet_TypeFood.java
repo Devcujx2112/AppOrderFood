@@ -37,6 +37,8 @@ public class Admin_ChiTiet_TypeFood extends AppCompatActivity {
         setContentView(R.layout.activity_admin_chitiet_typefood);
         AnhXa();
 
+        daoTypeFood = new DAO_TypeFood();
+
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             update_idTF.setText(bundle.getString("Id_TypeFood"));
@@ -98,7 +100,6 @@ public class Admin_ChiTiet_TypeFood extends AppCompatActivity {
         }
 
         String oldImageUrl = getIntent().getStringExtra("Image_TypeFood");
-        daoTypeFood = new DAO_TypeFood();
         daoTypeFood.SelectImage(id, name, uri, oldImageUrl, mota, this);
         SetText();
     }
@@ -106,7 +107,6 @@ public class Admin_ChiTiet_TypeFood extends AppCompatActivity {
     public void DeleteTypeFood(){
         String id = update_idTF.getText().toString();
         String imageURL = getIntent().getStringExtra("Image_TypeFood");
-        daoTypeFood = new DAO_TypeFood();
         daoTypeFood.DeleteTypeFood(id,imageURL,this);
         SetText();
 
