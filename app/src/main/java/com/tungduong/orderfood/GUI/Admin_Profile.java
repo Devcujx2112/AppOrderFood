@@ -20,6 +20,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -111,12 +112,36 @@ public class Admin_Profile extends Fragment {
                     Toast.makeText(getContext(), "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                     return;
                 }
-//                SharedPreferences sharedPreferences_image = getContext().getSharedPreferences("User_Image",MODE_PRIVATE);
-//                imageUrl = sharedPreferences_image.getString("Image_Account","");
                 String fnam = fullName.getText().toString().trim();
                 String sdt = phone.getText().toString().trim();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                builder.setCancelable(false);
+                builder.setView(R.layout.progress_layout);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
                 daoAccount.SelectAvatarAccount(uid_acc, uri, imageUrl, fnam, encodedEmail, sdt, role, warning, getContext());
-                Log.d("hehehehe", "onClick: "+ uid_acc+"-" + uri +"-"+ imageUrl +"-"+ fnam +"-"+ encodedEmail +"-"+ sdt +"-"+ role +"-"+ warning);
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        dialog.dismiss();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+                        builder.setTitle("Đăng nhập");
+                        builder.setMessage("Vui lòng đăng nhập lại");
+
+                        builder.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(getContext(), GUI_Login.class);
+                                startActivity(intent);
+                            }
+                        });
+
+                        builder.show();
+                    }
+                }, 5000);
             }
         });
 
@@ -140,7 +165,6 @@ public class Admin_Profile extends Fragment {
                 builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Đóng dialog
                         dialog.dismiss();
                     }
                 });

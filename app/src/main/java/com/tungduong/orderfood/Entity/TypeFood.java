@@ -21,7 +21,7 @@ public class TypeFood {
     }
 
     public void setidTypeFood(String idTypeFood) {
-        this.idTypeFood = TypeFood.this.idTypeFood;
+        this.idTypeFood = idTypeFood;
     }
 
     public String getnameTypeFood() {

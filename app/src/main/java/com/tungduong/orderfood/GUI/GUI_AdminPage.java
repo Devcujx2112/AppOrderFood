@@ -1,7 +1,13 @@
 package com.tungduong.orderfood.GUI;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
@@ -12,12 +18,17 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.bumptech.glide.Glide;
 import com.google.android.material.navigation.NavigationView;
+import com.tungduong.orderfood.DAO.DAO_Account;
 import com.tungduong.orderfood.R;
 
 public class GUI_AdminPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
+    TextView txt_fullName, txt_email;
     private DrawerLayout drawerLayout;
+    ImageView image;
+    private String image_url,fullName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,16 +43,43 @@ public class GUI_AdminPage extends AppCompatActivity implements NavigationView.O
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.open_nav,R.string.close_nav);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_nav, R.string.close_nav);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-        if (savedInstanceState == null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new Admin_Account()).commit();
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new Admin_Account()).commit();
             navigationView.setCheckedItem(R.id.nav_Product);
         }
-    }
 
+        View headerView = navigationView.getHeaderView(0);
+        AnhXa(headerView);
+
+        SharedPreferences sharedPreferences_email = getSharedPreferences("Profile", MODE_PRIVATE);
+        String email = sharedPreferences_email.getString("email", "Email chưa có");
+
+        DAO_Account daoAccount = new DAO_Account();
+        daoAccount.SearchAccountFormEmail(email, new DAO_Account.ListCallBackAccount() {
+            @Override
+            public void CallBack(String uid, String emaildb, String imagedb, String fullNamedb, String sdt, String roledb, String warningdb) {
+                String idAcc = uid;
+                image_url = imagedb.toString().trim();
+                fullName = fullNamedb.toString().trim();
+                String email = emaildb.toString().trim();
+                String phone = sdt.toString().trim();
+                String role = roledb.toString().trim();
+                String warning = warningdb.toString().trim();
+
+                txt_fullName.setText(fullName);
+                Glide.with(GUI_AdminPage.this).load(image_url).into(image);
+            }
+
+        });
+
+        txt_email.setText(email);
+        Log.d("123123123123",""+ image_url);
+
+    }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
@@ -64,7 +102,8 @@ public class GUI_AdminPage extends AppCompatActivity implements NavigationView.O
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new Admin_Profile()).commit();
                 break;
             case R.id.nav_Logout:
-                Toast.makeText(this,"Dang xuat",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(GUI_AdminPage.this,GUI_Login.class);
+                startActivity(intent);
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
@@ -78,5 +117,11 @@ public class GUI_AdminPage extends AppCompatActivity implements NavigationView.O
         }else {
             super.onBackPressed();
         }
+    }
+
+    public void AnhXa(View view){
+        txt_email = view.findViewById(R.id.nav_email);
+        txt_fullName = view.findViewById(R.id.nav_fullName);
+        image = view.findViewById(R.id.nav_image);
     }
 }

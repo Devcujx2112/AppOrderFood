@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -41,9 +42,12 @@ public class Admin_ChiTiet_TypeFood extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            update_idTF.setText(bundle.getString("Id_TypeFood"));
-            update_nameTF.setText(bundle.getString("Name_TypeFood"));
-            update_motaTF.setText(bundle.getString("MoTa_TypeFood"));
+            String id = bundle.getString("Id_TypeFood");
+            update_idTF.setText(id);
+            String name = bundle.getString("Name_TypeFood");
+            update_nameTF.setText(name);
+            String moTa = bundle.getString("MoTa_TypeFood");
+            update_motaTF.setText(moTa);
             Glide.with(this).load(bundle.getString("Image_TypeFood")).into(update_imgTF);
 
         }

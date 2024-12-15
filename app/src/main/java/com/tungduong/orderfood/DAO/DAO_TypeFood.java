@@ -41,7 +41,7 @@ public class DAO_TypeFood {
         AlertDialog dialog = builder.create();
         dialog.show();
 
-        databaseReference.orderByChild("idtypeFood").equalTo(typeFood.getidTypeFood()).addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.orderByChild("idTypeFood").equalTo(typeFood.getidTypeFood()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
