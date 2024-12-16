@@ -37,7 +37,7 @@
         android:id="@+id/nav_view"
         android:layout_gravity="start"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/menu_items"
+        app:menu="@menu/menu_items_admin"
         app:itemIconTint="@color/lavender"
         app:itemTextColor="@color/lavender"/>
 

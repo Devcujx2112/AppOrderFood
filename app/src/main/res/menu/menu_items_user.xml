@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home_user"
+        android:icon="@drawable/home"
+        android:title="Home"/>
+    <item
+        android:id="@+id/gioHang_user"
+        android:icon="@drawable/giohang"
+        android:title="Shoping Cart"/>
+    <item
+        android:id="@+id/donHang_user"
+        android:icon="@drawable/donhang"
+        android:title="Order Status"/>
+    <item
+        android:id="@+id/profile_user"
+        android:icon="@drawable/profile_white"
+        android:title="Profile"/>
+</menu>

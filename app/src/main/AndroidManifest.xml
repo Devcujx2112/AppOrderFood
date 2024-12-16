@@ -17,6 +17,15 @@
         android:theme="@style/Theme.OrderFood"
         tools:targetApi="31">
         <activity
+            android:name=".GUI.GUI_Profile"
+            android:exported="false" />
+        <activity
+            android:name=".GUI.GUI_OrderStatus"
+            android:exported="false" />
+        <activity
+            android:name=".GUI.GUI_ShoppingCart"
+            android:exported="false" />
+        <activity
             android:name=".GUI.test"
             android:exported="false" />
         <activity
