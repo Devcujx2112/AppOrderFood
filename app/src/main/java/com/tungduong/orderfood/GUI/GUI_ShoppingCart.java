@@ -12,25 +12,25 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.tungduong.orderfood.R;
 
-public class GUI_HomePage extends AppCompatActivity {
+public class GUI_ShoppingCart extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_gui_home_page);
+        setContentView(R.layout.activity_gui_shopping_cart);
         AnhXa();
 
-        bottomNavigationView.setSelectedItemId(R.id.home_user);
+        bottomNavigationView.setSelectedItemId(R.id.gioHang_user);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()){
                 case R.id.home_user:
-                    return true;
-                case R.id.gioHang_user:
-                    startActivity(new Intent(getApplicationContext(),GUI_ShoppingCart.class));
+                    startActivity(new Intent(getApplicationContext(),GUI_HomePage.class));
                     overridePendingTransition(R.anim.slide_in_right,R.anim.slide_in_left);
                     finish();
+                    return true;
+                case R.id.gioHang_user:
                     return true;
                 case R.id.donHang_user:
                     startActivity(new Intent(getApplicationContext(),GUI_OrderStatus.class));
@@ -47,7 +47,7 @@ public class GUI_HomePage extends AppCompatActivity {
         });
     }
 
-    public void AnhXa(){
+    public void AnhXa() {
         bottomNavigationView = findViewById(R.id.bottomNavigation);
     }
 }
