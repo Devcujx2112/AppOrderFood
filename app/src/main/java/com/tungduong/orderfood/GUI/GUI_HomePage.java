@@ -19,8 +19,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.tungduong.orderfood.BLL.CategoriesAdaptor_User;
+import com.tungduong.orderfood.BLL.PopularAdaptor_User;
+import com.tungduong.orderfood.BLL.ProductAdaptor_Admin;
 import com.tungduong.orderfood.BLL.TypeFoodAdapter_Admin;
 import com.tungduong.orderfood.DAO.DAO_Account;
+import com.tungduong.orderfood.DAO.DAO_Product;
 import com.tungduong.orderfood.DAO.DAO_TypeFood;
 import com.tungduong.orderfood.Entity.Product;
 import com.tungduong.orderfood.Entity.TypeFood;
@@ -37,9 +40,11 @@ public class GUI_HomePage extends AppCompatActivity {
     RecyclerView list_categories, list_productUser;
     DAO_Account daoAccount;
     DAO_TypeFood daoTypeFood;
+    DAO_Product daoProduct;
     List<Product> productList;
     List<TypeFood> typeFoodList;
     CategoriesAdaptor_User adaptor_TypeFood;
+    PopularAdaptor_User adaptor_product;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +53,7 @@ public class GUI_HomePage extends AppCompatActivity {
         setContentView(R.layout.activity_gui_home_page);
         AnhXa();
         LoadAllTypeFood();
+        LoadAllProduct();
 
         daoTypeFood = new DAO_TypeFood();
         daoAccount = new DAO_Account();
@@ -94,6 +100,36 @@ public class GUI_HomePage extends AppCompatActivity {
 
         adaptor_TypeFood = new CategoriesAdaptor_User(this,typeFoodList);
         list_categories.setAdapter(adaptor_TypeFood);
+
+        GridLayoutManager gridLayoutManager2 = new GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false);
+        list_productUser.setLayoutManager(gridLayoutManager2);
+
+
+        adaptor_product = new PopularAdaptor_User(this,productList);
+        list_productUser.setAdapter(adaptor_product);
+    }
+
+    public void LoadAllProduct(){
+        daoProduct = new DAO_Product();
+        daoProduct.GetAllProduct(new DAO_Product.ListProductCallBack() {
+            @Override
+            public void CallBack(List<Product> product) {
+                productList.clear();
+                productList.addAll(product);
+
+                if (adaptor_product != null){
+                    adaptor_product.notifyDataSetChanged();
+                }
+                else {
+                    adaptor_product = new PopularAdaptor_User(GUI_HomePage.this,productList);
+                    list_productUser.setAdapter(adaptor_product);
+                }
+                if (productList.isEmpty()){
+                    Toast.makeText(GUI_HomePage.this,"Danh sách đồ ăn rỗng",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
     }
 
     public void LoadAllTypeFood(){
