@@ -62,23 +62,15 @@ public class GUI_AdminPage extends AppCompatActivity implements NavigationView.O
         daoAccount.SearchAccountFormEmail(email, new DAO_Account.ListCallBackAccount() {
             @Override
             public void CallBack(String uid, String emaildb, String imagedb, String fullNamedb, String sdt, String roledb, String warningdb) {
-                String idAcc = uid;
                 image_url = imagedb.toString().trim();
                 fullName = fullNamedb.toString().trim();
-                String email = emaildb.toString().trim();
-                String phone = sdt.toString().trim();
-                String role = roledb.toString().trim();
-                String warning = warningdb.toString().trim();
-
                 txt_fullName.setText(fullName);
-                Glide.with(GUI_AdminPage.this).load(image_url).into(image);
+                Glide.with(GUI_AdminPage.this).load(image_url).circleCrop().into(image);
             }
 
         });
 
         txt_email.setText(email);
-        Log.d("123123123123",""+ image_url);
-
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {

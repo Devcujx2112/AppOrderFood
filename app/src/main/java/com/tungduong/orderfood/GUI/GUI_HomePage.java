@@ -1,19 +1,45 @@
 package com.tungduong.orderfood.GUI;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.tungduong.orderfood.BLL.CategoriesAdaptor_User;
+import com.tungduong.orderfood.BLL.TypeFoodAdapter_Admin;
+import com.tungduong.orderfood.DAO.DAO_Account;
+import com.tungduong.orderfood.DAO.DAO_TypeFood;
+import com.tungduong.orderfood.Entity.Product;
+import com.tungduong.orderfood.Entity.TypeFood;
 import com.tungduong.orderfood.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GUI_HomePage extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
+    TextView txt_nameUser;
+    ImageView avatarUser;
+    EditText txt_search;
+    RecyclerView list_categories, list_productUser;
+    DAO_Account daoAccount;
+    DAO_TypeFood daoTypeFood;
+    List<Product> productList;
+    List<TypeFood> typeFoodList;
+    CategoriesAdaptor_User adaptor_TypeFood;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +47,12 @@ public class GUI_HomePage extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_gui_home_page);
         AnhXa();
+        LoadAllTypeFood();
+
+        daoTypeFood = new DAO_TypeFood();
+        daoAccount = new DAO_Account();
+        productList = new ArrayList<>();
+        typeFoodList = new ArrayList<>();
 
         bottomNavigationView.setSelectedItemId(R.id.home_user);
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -45,9 +77,52 @@ public class GUI_HomePage extends AppCompatActivity {
             }
             return false;
         });
+
+        SharedPreferences sharedPreferences_email = GUI_HomePage.this.getSharedPreferences("Profile", MODE_PRIVATE);
+        String email = sharedPreferences_email.getString("email", "Email chưa có");
+
+        daoAccount.SearchAccountFormEmail(email, new DAO_Account.ListCallBackAccount() {
+            @Override
+            public void CallBack(String uiddb, String emaildb, String imagedb, String fullNamedb, String sdtdb, String roledb, String warningdb) {
+                txt_nameUser.setText(fullNamedb);
+                Glide.with(GUI_HomePage.this).load(imagedb).circleCrop().error(R.drawable.error_avatar).into(avatarUser);
+            }
+        });
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false);
+        list_categories.setLayoutManager(gridLayoutManager);
+
+        adaptor_TypeFood = new CategoriesAdaptor_User(this,typeFoodList);
+        list_categories.setAdapter(adaptor_TypeFood);
+    }
+
+    public void LoadAllTypeFood(){
+        daoTypeFood = new DAO_TypeFood();
+        daoTypeFood.GetAllTypeFood(new DAO_TypeFood.ListTypeFoodCallBack() {
+            @Override
+            public void CallBack(List<TypeFood> typeFood) {
+                typeFoodList.clear();
+                typeFoodList.addAll(typeFood);
+
+                if (adaptor_TypeFood != null) {
+                    adaptor_TypeFood.notifyDataSetChanged();
+                } else {
+                    adaptor_TypeFood = new CategoriesAdaptor_User(GUI_HomePage.this, typeFoodList);
+                    list_categories.setAdapter(adaptor_TypeFood);
+                }
+                if (typeFoodList.isEmpty()) {
+                    Toast.makeText(GUI_HomePage.this, "Không có loại món ăn nào!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     public void AnhXa(){
         bottomNavigationView = findViewById(R.id.bottomNavigation);
+        txt_nameUser = findViewById(R.id.txt_nameUser);
+        avatarUser = findViewById(R.id.image_user);
+        txt_search = findViewById(R.id.txt_search);
+        list_categories = findViewById(R.id.list_categories);
+        list_productUser = findViewById(R.id.list_ProductUser);
     }
 }

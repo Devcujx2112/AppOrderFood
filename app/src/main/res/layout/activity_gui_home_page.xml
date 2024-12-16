@@ -36,7 +36,7 @@
                     android:background="@drawable/orange_light_banner"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editTextText2">
+                    app:layout_constraintTop_toBottomOf="@+id/txt_search">
 
                     <ImageView
                         android:id="@+id/imageView8"
@@ -111,7 +111,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/txt_nameUser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
@@ -123,17 +123,17 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
                 <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/image_user"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
                     android:layout_marginEnd="32dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView5"
+                    app:layout_constraintBottom_toBottomOf="@+id/txt_nameUser"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/textView2"
                     app:srcCompat="@drawable/profile_btn" />
 
                 <EditText
-                    android:id="@+id/editTextText2"
+                    android:id="@+id/txt_search"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="32dp"
@@ -150,7 +150,7 @@
                     android:textStyle="italic"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView5" />
+                    app:layout_constraintTop_toBottomOf="@+id/txt_nameUser" />
 
                 <TextView
                     android:id="@+id/textView11"
@@ -166,7 +166,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView2"
+                    android:id="@+id/list_categories"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -184,9 +184,10 @@
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/recyclerView2" />
+                    app:layout_constraintTop_toBottomOf="@+id/list_categories" />
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/list_ProductUser"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -198,169 +199,6 @@
 
         </LinearLayout>
     </ScrollView>
-
-<!--    <androidx.coordinatorlayout.widget.CoordinatorLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintBottom_toBottomOf="@id/scrollView"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent">-->
-
-<!--        <com.google.android.material.bottomappbar.BottomAppBar-->
-<!--            android:id="@+id/app_bar"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            app:backgroundTint="#f6f6f6"-->
-<!--            app:fabAlignmentMode="center"-->
-<!--            app:fabCradleMargin="10dp"-->
-<!--            app:fabCradleRoundedCornerRadius="28dp"-->
-<!--            app:fabCradleVerticalOffset="0dp">-->
-
-
-<!--            <LinearLayout-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent">-->
-
-<!--                <LinearLayout-->
-<!--                    android:id="@+id/homeBtn"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_weight="0.2"-->
-<!--                    android:gravity="center"-->
-<!--                    android:orientation="vertical">-->
-
-<!--                    <ImageView-->
-<!--                        android:id="@+id/image_home"-->
-<!--                        android:layout_width="24dp"-->
-<!--                        android:layout_height="24dp"-->
-<!--                        android:layout_weight="1"-->
-<!--                        app:srcCompat="@drawable/btn1" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/txt_home"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="Home"-->
-<!--                        android:textAlignment="center"-->
-<!--                        android:textColor="#676767"-->
-<!--                        android:textSize="12sp" />-->
-<!--                </LinearLayout>-->
-
-<!--                <LinearLayout-->
-<!--                    android:id="@+id/gioHangBtn"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_weight="0.2"-->
-<!--                    android:gravity="center"-->
-<!--                    android:orientation="vertical">-->
-
-<!--                    <ImageView-->
-<!--                        android:id="@+id/image_gioHang"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_weight="1"-->
-<!--                        app:srcCompat="@drawable/btn2" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/txt_gioHang"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="Home"-->
-<!--                        android:textAlignment="center"-->
-<!--                        android:textColor="#676767"-->
-<!--                        android:textSize="12sp" />-->
-<!--                </LinearLayout>-->
-
-<!--                <LinearLayout-->
-<!--                    android:id="@+id/donHangBtn1"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_weight="0.2"-->
-<!--                    android:gravity="center"-->
-<!--                    android:orientation="vertical"-->
-<!--                    android:visibility="visible">-->
-
-<!--                    <ImageView-->
-<!--                        android:id="@+id/image_donHang1"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_weight="1"-->
-<!--                        app:srcCompat="@drawable/btn4" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/txt_donhang1"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="Home"-->
-<!--                        android:textAlignment="center"-->
-<!--                        android:textColor="#676767"-->
-<!--                        android:textSize="12sp" />-->
-<!--                </LinearLayout>-->
-
-<!--                <LinearLayout-->
-<!--                    android:id="@+id/donHangBtn"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_weight="0.2"-->
-<!--                    android:gravity="center"-->
-<!--                    android:orientation="vertical">-->
-
-<!--                    <ImageView-->
-<!--                        android:id="@+id/image_donHang"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_weight="1"-->
-<!--                        app:srcCompat="@drawable/btn3" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/txt_donhang"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="Home"-->
-<!--                        android:textAlignment="center"-->
-<!--                        android:textColor="#676767"-->
-<!--                        android:textSize="12sp" />-->
-<!--                </LinearLayout>-->
-
-<!--                <LinearLayout-->
-<!--                    android:id="@+id/profileBtn"-->
-<!--                    android:layout_width="0dp"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_weight="0.2"-->
-<!--                    android:gravity="center"-->
-<!--                    android:orientation="vertical">-->
-
-<!--                    <ImageView-->
-<!--                        android:id="@+id/image_profile"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_weight="1"-->
-<!--                        app:srcCompat="@drawable/btn4" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/txt_profile"-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:text="Home"-->
-<!--                        android:textAlignment="center"-->
-<!--                        android:textColor="#676767"-->
-<!--                        android:textSize="12sp" />-->
-<!--                </LinearLayout>-->
-<!--            </LinearLayout>-->
-<!--        </com.google.android.material.bottomappbar.BottomAppBar>-->
-
-<!--        <com.google.android.material.floatingactionbutton.FloatingActionButton-->
-<!--            android:id="@+id/fab_giohang"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:elevation="3dp"-->
-<!--            android:src="@drawable/shopping_cart"-->
-<!--            app:backgroundTint="#ff5e00"-->
-<!--            app:layout_anchor="@id/app_bar"-->
-<!--            app:layout_anchorGravity="center" />-->
-
-
-<!--    </androidx.coordinatorlayout.widget.CoordinatorLayout>-->
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:layout_width="match_parent"
