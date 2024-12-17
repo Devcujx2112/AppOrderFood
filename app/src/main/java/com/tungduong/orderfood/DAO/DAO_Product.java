@@ -205,6 +205,31 @@ public class DAO_Product {
         });
     }
 
+    public interface ListProductWhereTypeFood {
+        void ListProduct(List<Product> product);
+    }
+
+    public void SearchProductWhereTypeFood(String typeFood,Context context, ListProductWhereTypeFood ListProduct) {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                List<Product> productsList = new ArrayList<>();
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    Product product = dataSnapshot.getValue(Product.class);
+                    if (product != null && product.getLoaiDoAn().toLowerCase().contains(typeFood.toLowerCase())) {
+                        productsList.add(product);
+                    }
+                }
+                ListProduct.ListProduct(productsList);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.e("Search product Admin", error.getMessage().trim());
+            }
+        });
+    }
+
 }
 
 

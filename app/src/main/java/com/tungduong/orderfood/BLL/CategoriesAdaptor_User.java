@@ -1,6 +1,7 @@
 package com.tungduong.orderfood.BLL;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.tungduong.orderfood.Entity.Product;
 import com.tungduong.orderfood.Entity.TypeFood;
+import com.tungduong.orderfood.GUI.GUI_Viewholder_TypeFood_User;
 import com.tungduong.orderfood.R;
 
 import java.util.List;
@@ -40,6 +42,16 @@ public class CategoriesAdaptor_User extends RecyclerView.Adapter<Adaptor_TypeFoo
         String imageURL = typeFood.getimageTypeFood();
         Glide.with(holder.itemView.getContext()).load(imageURL).into(holder.typeFood_img);
         holder.txt_name.setText(typeFood.getnameTypeFood());
+
+        holder.item_TypeFood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, GUI_Viewholder_TypeFood_User.class);
+                intent.putExtra("Image_TypeFood",typeFoodList.get(holder.getAdapterPosition()).getimageTypeFood());
+                intent.putExtra("Name_TypeFood",typeFoodList.get(holder.getAdapterPosition()).getnameTypeFood());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

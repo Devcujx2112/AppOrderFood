@@ -76,8 +76,6 @@ public class Admin_Product extends Fragment {
                 daoProduct.SearchProductFormTenSP(tensp, new DAO_Product.ListProductSearch() {
                     @Override
                     public void ListProduct(List<Product> product) {
-                        Log.d("Admin_Product", "Products found: " + product.size());  // Log số sản phẩm tìm thấy
-
                         productList.clear();
                         productList.addAll(product);
 

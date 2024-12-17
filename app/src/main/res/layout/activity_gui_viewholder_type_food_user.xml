@@ -7,16 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".GUI.GUI_Viewholder_TypeFood_User">
 
-    <ImageView
-        android:id="@+id/btn_backViewHolder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/arrow"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -24,10 +14,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="15dp"
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imageView3"
+                android:id="@+id/img_typeFood"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
                 android:layout_gravity="center"
@@ -36,7 +27,7 @@
                 android:src="@drawable/add_image" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/title_typeFood"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -51,6 +42,7 @@
                 android:layout_height="match_parent">
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/list_Product1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginTop="16dp"
