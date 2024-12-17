@@ -1,6 +1,8 @@
 package com.tungduong.orderfood.BLL;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.tungduong.orderfood.Entity.Product;
+import com.tungduong.orderfood.GUI.GUI_Detail_Activity;
 import com.tungduong.orderfood.R;
 
 import java.util.List;
@@ -41,6 +44,18 @@ public class PopularAdaptor_User extends RecyclerView.Adapter<Adaptor_Popular_Ad
         holder.product_name.setText(product.getTensp());
         holder.product_price.setText(product.getGiaTien()+" VND");
 
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, GUI_Detail_Activity.class);
+                intent.putExtra("Image_Product",productList.get(holder.getAdapterPosition()).getImage());
+                intent.putExtra("Name_Product",productList.get(holder.getAdapterPosition()).getTensp());
+                intent.putExtra("MoTa_Product",productList.get(holder.getAdapterPosition()).getMoTa());
+                intent.putExtra("GiaTien_Product",productList.get(holder.getAdapterPosition()).getGiaTien());
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -60,6 +75,7 @@ class Adaptor_Popular_Admin extends RecyclerView.ViewHolder{
         product_name = itemView.findViewById(R.id.txt_title);
         product_price = itemView.findViewById(R.id.txt_giaTien);
         click = itemView.findViewById(R.id.click);
+        cardView = itemView.findViewById(R.id.item_product);
 
     }
 }

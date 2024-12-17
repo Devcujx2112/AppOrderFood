@@ -102,16 +102,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/textView16"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="5 Rating"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/ratingBar"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
@@ -172,7 +162,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:gravity="center"
-                    android:text="10"
+                    android:text="1"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -180,7 +170,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/detal_plusBtn"
+                    android:id="@+id/detail_plusBtn"
                     android:layout_width="28dp"
                     android:layout_height="28dp"
                     android:layout_marginStart="8dp"
@@ -234,15 +224,15 @@
             app:layout_constraintTop_toTopOf="@+id/btn_addToCart"/>
 
         <TextView
-            android:id="@+id/textView18"
+            android:id="@+id/txt_tongTien"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
             android:text="$0"
             android:textColor="#455A64"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@id/btn_addToCart"
+            app:layout_constraintEnd_toEndOf="@+id/textView20"
             app:layout_constraintStart_toStartOf="@+id/textView20"
             app:layout_constraintTop_toBottomOf="@id/textView20" />
 
