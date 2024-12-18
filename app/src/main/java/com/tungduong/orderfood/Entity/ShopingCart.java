@@ -1,28 +1,20 @@
 package com.tungduong.orderfood.Entity;
 
 public class ShopingCart {
-    private String uid;
     private String tenSP;
+    private String uid;
     private String giaTien;
-    private String soLuong;
-    private String tongTien;
+    private int soLuong;
+    private String image;
 
     public ShopingCart(){}
 
-    public ShopingCart(String uid, String tenSP, String giaTien, String soLuong, String tongTien) {
-        this.uid = uid;
+    public ShopingCart(String tenSP, String uid, String giaTien, int soLuong, String image) {
         this.tenSP = tenSP;
+        this.uid = uid;
         this.giaTien = giaTien;
         this.soLuong = soLuong;
-        this.tongTien = tongTien;
-    }
-
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
+        this.image = image;
     }
 
     public String getTenSP() {
@@ -33,6 +25,14 @@ public class ShopingCart {
         this.tenSP = tenSP;
     }
 
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
     public String getGiaTien() {
         return giaTien;
     }
@@ -41,30 +41,30 @@ public class ShopingCart {
         this.giaTien = giaTien;
     }
 
-    public String getSoLuong() {
+    public int getSoLuong() {
         return soLuong;
     }
 
-    public void setSoLuong(String soLuong) {
+    public void setSoLuong(int soLuong) {
         this.soLuong = soLuong;
     }
 
-    public String getTongTien() {
-        return tongTien;
+    public String getImage() {
+        return image;
     }
 
-    public void setTongTien(String tongTien) {
-        this.tongTien = tongTien;
+    public void setImage(String image) {
+        this.image = image;
     }
 
     @Override
     public String toString() {
         return "ShopingCart{" +
-                "uid='" + uid + '\'' +
-                ", tenSP='" + tenSP + '\'' +
+                "tenSP='" + tenSP + '\'' +
+                ", uid='" + uid + '\'' +
                 ", giaTien='" + giaTien + '\'' +
-                ", soLuong='" + soLuong + '\'' +
-                ", tongTien='" + tongTien + '\'' +
+                ", soLuong=" + soLuong +
+                ", image='" + image + '\'' +
                 '}';
     }
 }

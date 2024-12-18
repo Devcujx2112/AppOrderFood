@@ -11,20 +11,23 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.tungduong.orderfood.DAO.DAO_Account;
 import com.tungduong.orderfood.Entity.Account;
 import com.tungduong.orderfood.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class GUI_Login extends AppCompatActivity {
 
-    EditText txt_email,txt_passWord;
+    EditText txt_email, txt_passWord;
     Button btn_login;
-    TextView tv_signin,tv_forgotPassWord;
+    TextView tv_signin, tv_forgotPassWord;
     List<Account> accountList;
     DAO_Account daoAccount;
 
@@ -38,7 +41,7 @@ public class GUI_Login extends AppCompatActivity {
         tv_signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(GUI_Login.this,GUI_SignUp.class);
+                Intent intent = new Intent(GUI_Login.this, GUI_SignUp.class);
                 startActivity(intent);
             }
         });
@@ -55,11 +58,11 @@ public class GUI_Login extends AppCompatActivity {
             public void onClick(View view) {
                 String email = txt_email.getText().toString().trim();
                 String passWord = txt_passWord.getText().toString().trim();
-                if (email.isEmpty() || passWord.isEmpty()){
-                    Toast.makeText(GUI_Login.this,"Vui lòng nhập đầy đủ thông tin",Toast.LENGTH_SHORT).show();
+                if (email.isEmpty() || passWord.isEmpty()) {
+                    Toast.makeText(GUI_Login.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                daoAccount.CheckLogin(email,passWord,GUI_Login.this);
+                daoAccount.CheckLogin(email, passWord, GUI_Login.this);
                 txt_email.setText("");
                 txt_passWord.setText("");
 
@@ -94,7 +97,7 @@ public class GUI_Login extends AppCompatActivity {
                             Toast.makeText(GUI_Login.this, "Email không hợp lệ", Toast.LENGTH_SHORT).show();
                             return;
                         } else {
-                            daoAccount.ForgotPassword(userEmail,GUI_Login.this,dialog);
+                            daoAccount.ForgotPassword(userEmail, GUI_Login.this, dialog);
                         }
                     }
                 });
@@ -113,7 +116,7 @@ public class GUI_Login extends AppCompatActivity {
         });
     }
 
-    public void AnhXa(){
+    public void AnhXa() {
         txt_email = findViewById(R.id.txt_emailLogin);
         txt_passWord = findViewById(R.id.txt_passWordLogin);
         btn_login = findViewById(R.id.btn_login);

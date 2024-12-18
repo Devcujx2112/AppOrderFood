@@ -1,7 +1,10 @@
 package com.tungduong.orderfood.GUI;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import com.bumptech.glide.Glide;
+import com.tungduong.orderfood.DAO.DAO_ShopingCart;
+import com.tungduong.orderfood.Entity.ShopingCart;
 import com.tungduong.orderfood.R;
 
 public class GUI_Detail_Activity extends AppCompatActivity {
@@ -19,6 +24,9 @@ public class GUI_Detail_Activity extends AppCompatActivity {
     AppCompatButton btn_add;
     String giaTien;
     int soLuong;
+    private String uid,imageURL;
+    DAO_ShopingCart daoShopingCart;
+    ShopingCart shopingCart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,13 +34,19 @@ public class GUI_Detail_Activity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_gui_detail);
         AnhXa();
+        daoShopingCart = new DAO_ShopingCart();
+        shopingCart = new ShopingCart();
 
         txt_soLuong.setText("1");
         soLuong = 1;
 
+        SharedPreferences sharedPreferences = GUI_Detail_Activity.this.getSharedPreferences("ShoppingCart", MODE_PRIVATE);
+        uid = sharedPreferences.getString("uid", "");
+
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            Glide.with(this).load(bundle.getString("Image_Product")).into(img_detail);
+            imageURL = bundle.getString("Image_Product");
+            Glide.with(this).load(imageURL).into(img_detail);
             txt_name.setText(bundle.getString("Name_Product"));
             txt_moTa.setText(bundle.getString("MoTa_Product"));
             giaTien = bundle.getString("GiaTien_Product");
@@ -53,7 +67,24 @@ public class GUI_Detail_Activity extends AppCompatActivity {
             updateTongTien();
         });
 
+        btn_add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddProductInShoppingCart();
+            }
+        });
+
         updateTongTien();
+    }
+
+    public void AddProductInShoppingCart(){
+        String tensp = txt_name.getText().toString().trim();
+        String giaTienVND = txt_price.getText().toString().trim();
+        String giaTien = giaTienVND.replace("VND","").trim();
+
+        shopingCart = new ShopingCart(tensp,uid,giaTien,soLuong,imageURL);
+        daoShopingCart.AddProductInShoppingCart(shopingCart,GUI_Detail_Activity.this);
+        finish();
     }
 
     private void updateTongTien() {

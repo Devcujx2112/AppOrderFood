@@ -1,5 +1,6 @@
 package com.tungduong.orderfood.GUI;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -90,8 +91,18 @@ public class GUI_HomePage extends AppCompatActivity {
         daoAccount.SearchAccountFormEmail(email, new DAO_Account.ListCallBackAccount() {
             @Override
             public void CallBack(String uiddb, String emaildb, String imagedb, String fullNamedb, String sdtdb, String roledb, String warningdb) {
+                String uid = uiddb.toString().trim();
                 txt_nameUser.setText(fullNamedb);
-                Glide.with(GUI_HomePage.this).load(imagedb).circleCrop().error(R.drawable.error_avatar).into(avatarUser);
+
+                if (GUI_HomePage.this != null && !GUI_HomePage.this.isFinishing()) {
+                    Glide.with(GUI_HomePage.this).load(imagedb).circleCrop().error(R.drawable.error_avatar).into(avatarUser);
+                }
+
+
+                SharedPreferences sharedPreferences = getSharedPreferences("ShoppingCart", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("uid", uid);
+                editor.apply();
             }
         });
 
