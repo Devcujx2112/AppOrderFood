@@ -133,5 +133,36 @@ public class DAO_ShopingCart {
         });
     }
 
+    public void GetMoney(String uid, final MoneyCallback callback){
+        databaseReference.child(uid).get().addOnCompleteListener(task -> {
+            double total = 0;
+            if (task.isSuccessful()) {
+                DataSnapshot snapshot = task.getResult();
+
+                // Duyệt qua tất cả sản phẩm trong giỏ hàng
+                for (DataSnapshot productSnapshot : snapshot.getChildren()) {
+                    // Lấy giá trị giaTien và soLuong
+                    Object giaTienObject = productSnapshot.child("giaTien").getValue();
+                    Object soLuongObject = productSnapshot.child("soLuong").getValue();
+
+                    String giaTien = giaTienObject.toString().trim();
+
+                    int soLuong = Integer.parseInt(soLuongObject.toString());
+                    double price = Double.parseDouble(giaTien);
+
+                    total += price * soLuong;
+                }
+
+                callback.onTotalCalculated(total);
+            } else {
+                Log.e("Errors","Lỗi khi lấy dữ liệu: " + task.getException().getMessage());
+            }
+        });
+    }
+
+    public interface MoneyCallback {
+        void onTotalCalculated(double total);
+    }
+
 
 }
