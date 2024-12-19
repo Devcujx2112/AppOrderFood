@@ -4,35 +4,22 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.tungduong.orderfood.BLL.CategoriesAdaptor_User;
 import com.tungduong.orderfood.BLL.ShoppingCart_Adaptor_User;
-import com.tungduong.orderfood.BLL.TypeFoodAdapter_Admin;
 import com.tungduong.orderfood.DAO.DAO_Account;
 import com.tungduong.orderfood.DAO.DAO_ShopingCart;
+import com.tungduong.orderfood.Entity.Bill;
 import com.tungduong.orderfood.Entity.ShopingCart;
 import com.tungduong.orderfood.R;
 
@@ -48,6 +35,7 @@ public class GUI_ShoppingCart extends AppCompatActivity {
     ShoppingCart_Adaptor_User adaptor_cart;
     private String uid;
     DAO_Account daoAccount;
+    String listSanPham;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +102,8 @@ public class GUI_ShoppingCart extends AppCompatActivity {
                 daoAccount = new DAO_Account();
                 daoAccount.SearchAccountFormEmail(email, new DAO_Account.ListCallBackAccount() {
                     @Override
-                    public void CallBack(String uid, String email, String image, String fullNamedb, String sdtdb, String role, String warning) {
+                    public void CallBack(String uiddb, String email, String image, String fullNamedb, String sdtdb, String role, String warning) {
+                        uid = uiddb.toString().trim();
                         fullName.setText(fullNamedb);
                         phone.setText(sdtdb);
                     }
@@ -122,9 +111,21 @@ public class GUI_ShoppingCart extends AppCompatActivity {
 
                 daoShopingCart.GetMoney(uid, new DAO_ShopingCart.MoneyCallback() {
                     @Override
-                    public void onTotalCalculated(double total) {
+                    public void TongTienDonHang(double total) {
                         tongTien.setText(total+" VND");
-                        Log.d("123123123",""+ total);
+                    }
+
+                    @Override
+                    public void ProductInShoppingCart(List<String> tensp) {
+                        StringBuilder result = new StringBuilder();
+                        for (String item : tensp) {
+                            result.append(item).append(", "); // Thêm dấu phẩy sau mỗi tên sản phẩm
+                        }
+                        // Loại bỏ dấu phẩy cuối cùng (nếu có)
+                        if (result.length() > 0) {
+                            result.setLength(result.length() - 2);
+                        }
+                        listSanPham = result.toString();
                     }
                 });
 
@@ -137,9 +138,12 @@ public class GUI_ShoppingCart extends AppCompatActivity {
                         } else {
                             String txt_fullName = fullName.getText().toString().trim();
                             String txt_phone = phone.getText().toString().trim();
-
-
+                            String txt_tongTien = tongTien.getText().toString().trim();
+                            String txt_trangThai = "Đang chờ";
+                            Bill hoaDon = new Bill(addressText,email,txt_fullName,listSanPham,txt_phone,txt_tongTien,txt_trangThai);
+                            daoShopingCart.AddHoaDon(hoaDon,GUI_ShoppingCart.this,uid);
                             dialog.dismiss();
+                            LoadAllProductInCart();
 
                             AlertDialog.Builder builder = new AlertDialog.Builder(GUI_ShoppingCart.this);
                             View dialogView = getLayoutInflater().inflate(R.layout.dialog_banking, null);
@@ -152,12 +156,10 @@ public class GUI_ShoppingCart extends AppCompatActivity {
                 });
                 dialogView.findViewById(R.id.btn_ttcancel).setOnClickListener(v -> dialog.dismiss());
 
-                // Xóa nền của dialog (làm nền trong suốt)
                 if (dialog.getWindow() != null) {
                     dialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
                 }
 
-                // Hiển thị dialog
                 dialog.show();
             }
         });

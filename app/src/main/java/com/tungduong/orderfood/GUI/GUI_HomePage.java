@@ -92,16 +92,18 @@ public class GUI_HomePage extends AppCompatActivity {
             @Override
             public void CallBack(String uiddb, String emaildb, String imagedb, String fullNamedb, String sdtdb, String roledb, String warningdb) {
                 String uid = uiddb.toString().trim();
+                String role = roledb.toString().trim();
+                String fullName = fullNamedb.toString().trim();
                 txt_nameUser.setText(fullNamedb);
 
                 if (GUI_HomePage.this != null && !GUI_HomePage.this.isFinishing()) {
                     Glide.with(GUI_HomePage.this).load(imagedb).circleCrop().error(R.drawable.error_avatar).into(avatarUser);
                 }
 
-
-                SharedPreferences sharedPreferences = getSharedPreferences("ShoppingCart", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
+                SharedPreferences sharedPreferences_uid = getSharedPreferences("ShoppingCart", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences_uid.edit();
                 editor.putString("uid", uid);
+                editor.putString("fullName",fullName);
                 editor.apply();
             }
         });

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="15dp"
+    android:layout_height="wrap_content">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/background_cart"
+        android:padding="10dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txt_titleHD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="#455A64"
+            android:layout_marginTop="8dp"
+            android:text="Title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_phoneHD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="#455A64"
+            android:textSize="16sp"
+            android:text="phone"
+            app:layout_constraintStart_toStartOf="@+id/txt_titleHD"
+            app:layout_constraintTop_toBottomOf="@+id/txt_titleHD" />
+
+        <TextView
+            android:id="@+id/txt_addressHD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="#455A64"
+            android:textSize="16sp"
+            android:text="Address"
+            app:layout_constraintStart_toStartOf="@+id/txt_phoneHD"
+            app:layout_constraintTop_toBottomOf="@+id/txt_phoneHD" />
+
+        <TextView
+            android:id="@+id/txt_listspHD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textColor="#455A64"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="List san pham"
+            app:layout_constraintStart_toStartOf="@+id/txt_addressHD"
+            app:layout_constraintTop_toBottomOf="@+id/txt_addressHD" />
+
+        <TextView
+            android:id="@+id/txt_priceHD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            android:textColor="@color/red"
+            android:layout_marginEnd="16dp"
+            android:text="$0"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txt_addressHD" />
+
+        <Spinner
+            android:id="@+id/ccb_trangThaiHD"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_listspHD"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/txt_listspHD"
+            android:visibility="visible"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

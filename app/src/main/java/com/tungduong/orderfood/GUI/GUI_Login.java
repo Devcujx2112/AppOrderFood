@@ -38,6 +38,8 @@ public class GUI_Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         AnhXa();
 
+        daoAccount = new DAO_Account();
+
         tv_signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,10 +68,17 @@ public class GUI_Login extends AppCompatActivity {
                 txt_email.setText("");
                 txt_passWord.setText("");
 
-                SharedPreferences sharedPreferences = getSharedPreferences("Profile", MODE_PRIVATE);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("email", email);
-                editor.apply();
+                daoAccount.SearchAccountFormEmail(email, new DAO_Account.ListCallBackAccount() {
+                    @Override
+                    public void CallBack(String uid, String emaildb, String image, String fullName, String sdt, String roledb, String warning) {
+                        SharedPreferences sharedPreferences = getSharedPreferences("Profile", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("email", email);
+                        editor.putString("role",roledb);
+                        editor.apply();
+                    }
+                });
+
             }
         });
 

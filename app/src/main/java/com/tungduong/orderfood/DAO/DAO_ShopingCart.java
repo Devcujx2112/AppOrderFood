@@ -5,20 +5,16 @@ import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.tungduong.orderfood.BLL.ShoppingCart_Adaptor_User;
+import com.tungduong.orderfood.Entity.Bill;
 import com.tungduong.orderfood.Entity.ShopingCart;
-import com.tungduong.orderfood.Entity.TypeFood;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +60,7 @@ public class DAO_ShopingCart {
         void CallBack(List<ShopingCart> list_cart);
     }
 
-    public void GetAllProductInShoppingCart(String uid,ListProductInShoppingCartCallBack callBack) {
+    public void GetAllProductInShoppingCart(String uid, ListProductInShoppingCartCallBack callBack) {
         databaseReference.child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -88,6 +84,7 @@ public class DAO_ShopingCart {
     public interface UpdateCallback {
         void onUpdate();
     }
+
     public void UpdateSoLuongCart(String uid, String tensp, UpdateCallback callback) {
         databaseReference.child(uid).child(tensp).child("soLuong").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -133,18 +130,19 @@ public class DAO_ShopingCart {
         });
     }
 
-    public void GetMoney(String uid, final MoneyCallback callback){
+    public void GetMoney(String uid, final MoneyCallback callback) {
         databaseReference.child(uid).get().addOnCompleteListener(task -> {
             double total = 0;
             if (task.isSuccessful()) {
                 DataSnapshot snapshot = task.getResult();
 
-                // Duyệt qua tất cả sản phẩm trong giỏ hàng
+                List<String> listProduct = new ArrayList<>();
+
                 for (DataSnapshot productSnapshot : snapshot.getChildren()) {
-                    // Lấy giá trị giaTien và soLuong
                     Object giaTienObject = productSnapshot.child("giaTien").getValue();
                     Object soLuongObject = productSnapshot.child("soLuong").getValue();
-
+                    String tensp = productSnapshot.child("tenSP").getValue(String.class);
+                    listProduct.add(tensp);
                     String giaTien = giaTienObject.toString().trim();
 
                     int soLuong = Integer.parseInt(soLuongObject.toString());
@@ -152,17 +150,46 @@ public class DAO_ShopingCart {
 
                     total += price * soLuong;
                 }
+                callback.TongTienDonHang(total);
+                callback.ProductInShoppingCart(listProduct);
 
-                callback.onTotalCalculated(total);
             } else {
-                Log.e("Errors","Lỗi khi lấy dữ liệu: " + task.getException().getMessage());
+                Log.e("Errors", "Lỗi khi lấy dữ liệu: " + task.getException().getMessage());
             }
         });
     }
 
     public interface MoneyCallback {
-        void onTotalCalculated(double total);
+        void TongTienDonHang(double total);
+
+        void ProductInShoppingCart(List<String> tensp);
     }
 
+    public void DeleteShoppingCart(String uid, Context context) {
+        databaseReference = firebaseDatabase.getReference("ShoppingCart");
+        databaseReference.child(uid).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Toast.makeText(context, "Xóa giỏ hàng thành công!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(context, "Xóa giỏ hàng thất bại: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    public void AddHoaDon(Bill hoaDon, Context context, String uid) {
+        databaseReference = firebaseDatabase.getReference("Bill").push();
+        String autoID = databaseReference.getKey();
+        hoaDon.setId(autoID);
+        databaseReference.setValue(hoaDon).addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                DeleteShoppingCart(uid,context);
+            } else {
+                Toast.makeText(context, "Thêm hóa đơn thất bại: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 
 }

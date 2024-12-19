@@ -21,23 +21,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:id="@+id/textView14"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Shoping Cart"
-                    android:textStyle="bold"
-                    android:textAlignment="center"
-                    android:textSize="24sp"
-                    android:textColor="#455A64"
-                    />
+                android:padding="10dp">
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/list_ProductCart"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:paddingTop="10dp"
                     android:paddingBottom="10dp"
                     android:clipToPadding="false"/>
 
