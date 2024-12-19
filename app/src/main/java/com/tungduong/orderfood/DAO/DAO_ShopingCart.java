@@ -135,7 +135,6 @@ public class DAO_ShopingCart {
             double total = 0;
             if (task.isSuccessful()) {
                 DataSnapshot snapshot = task.getResult();
-
                 List<String> listProduct = new ArrayList<>();
 
                 for (DataSnapshot productSnapshot : snapshot.getChildren()) {
@@ -161,7 +160,6 @@ public class DAO_ShopingCart {
 
     public interface MoneyCallback {
         void TongTienDonHang(double total);
-
         void ProductInShoppingCart(List<String> tensp);
     }
 
@@ -171,7 +169,6 @@ public class DAO_ShopingCart {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(context, "Xóa giỏ hàng thành công!", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(context, "Xóa giỏ hàng thất bại: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
                 }

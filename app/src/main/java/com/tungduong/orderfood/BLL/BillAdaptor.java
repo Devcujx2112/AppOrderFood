@@ -8,14 +8,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.tungduong.orderfood.DAO.DAO_Account;
+import com.tungduong.orderfood.DAO.DAO_Bill;
 import com.tungduong.orderfood.Entity.Bill;
 import com.tungduong.orderfood.GUI.GUI_HomePage;
 import com.tungduong.orderfood.R;
@@ -42,6 +45,7 @@ public class BillAdaptor extends RecyclerView.Adapter<Adaptor_Bill> {
     @Override
     public void onBindViewHolder(@NonNull Adaptor_Bill holder, int position) {
         Bill hoaDon = hoaDonList.get(position);
+        DAO_Bill daoBill = new DAO_Bill();
 
         SharedPreferences sharedPreferences_email = context.getSharedPreferences("Profile", MODE_PRIVATE);
         String role = sharedPreferences_email.getString("role", "");
@@ -58,7 +62,7 @@ public class BillAdaptor extends RecyclerView.Adapter<Adaptor_Bill> {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         holder.txt_trangThai.setAdapter(adapter);
 
-        holder.txt_fullName.setText(hoaDon.getFullName());
+        holder.txt_fullName.setText("Name: "+hoaDon.getFullName());
         holder.txt_phone.setText(hoaDon.getPhone());
         holder.txt_address.setText(hoaDon.getAddress());
         holder.txt_price.setText(hoaDon.getTotal());
@@ -67,6 +71,20 @@ public class BillAdaptor extends RecyclerView.Adapter<Adaptor_Bill> {
         String trangThai = hoaDon.getTrangThai();
         int positionspn = Arrays.asList(data_TrangThai).indexOf(trangThai);
         holder.txt_trangThai.setSelection(positionspn);
+
+        holder.txt_trangThai.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String selectedItem = adapterView.getItemAtPosition(i).toString();
+                String uid = hoaDon.getId();
+                daoBill.UpdateTrangThaiDonHang(uid,selectedItem,context);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
     }
 
     @Override

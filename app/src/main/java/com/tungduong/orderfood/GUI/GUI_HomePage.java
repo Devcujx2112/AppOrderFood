@@ -92,7 +92,6 @@ public class GUI_HomePage extends AppCompatActivity {
             @Override
             public void CallBack(String uiddb, String emaildb, String imagedb, String fullNamedb, String sdtdb, String roledb, String warningdb) {
                 String uid = uiddb.toString().trim();
-                String role = roledb.toString().trim();
                 String fullName = fullNamedb.toString().trim();
                 txt_nameUser.setText(fullNamedb);
 

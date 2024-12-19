@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -74,6 +75,9 @@ public class GUI_Login extends AppCompatActivity {
                         SharedPreferences sharedPreferences = getSharedPreferences("Profile", MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("email", email);
+                        editor.putString("fullName",fullName);
+                        editor.putString("sdt",sdt);
+                        editor.putString("image",image);
                         editor.putString("role",roledb);
                         editor.apply();
                     }

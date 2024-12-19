@@ -2,6 +2,7 @@
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_marginBottom="15dp"
     android:layout_height="wrap_content">
@@ -14,7 +15,7 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/txt_titleHD"
+            android:id="@+id/txt_fullNameTT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -27,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/txt_phoneHD"
+            android:id="@+id/txt_phoneTT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -35,11 +36,11 @@
             android:drawableStart="@drawable/phone"
             android:textSize="16sp"
             android:text="phone"
-            app:layout_constraintStart_toStartOf="@+id/txt_titleHD"
-            app:layout_constraintTop_toBottomOf="@+id/txt_titleHD" />
+            app:layout_constraintStart_toStartOf="@+id/txt_fullNameTT"
+            app:layout_constraintTop_toBottomOf="@+id/txt_fullNameTT" />
 
         <TextView
-            android:id="@+id/txt_addressHD"
+            android:id="@+id/txt_addressTT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -47,11 +48,11 @@
             android:drawableStart="@drawable/address"
             android:textSize="16sp"
             android:text="Address"
-            app:layout_constraintStart_toStartOf="@+id/txt_phoneHD"
-            app:layout_constraintTop_toBottomOf="@+id/txt_phoneHD" />
+            app:layout_constraintStart_toStartOf="@+id/txt_phoneTT"
+            app:layout_constraintTop_toBottomOf="@+id/txt_phoneTT" />
 
         <TextView
-            android:id="@+id/txt_listspHD"
+            android:id="@+id/txt_listspTT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -59,11 +60,11 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:text="List san pham"
-            app:layout_constraintStart_toStartOf="@+id/txt_addressHD"
-            app:layout_constraintTop_toBottomOf="@+id/txt_addressHD" />
+            app:layout_constraintStart_toStartOf="@+id/txt_addressTT"
+            app:layout_constraintTop_toBottomOf="@+id/txt_addressTT" />
 
         <TextView
-            android:id="@+id/txt_priceHD"
+            android:id="@+id/txt_priceTT"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"
@@ -72,15 +73,18 @@
             android:layout_marginEnd="16dp"
             android:text="$0"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/txt_addressHD" />
+            app:layout_constraintTop_toTopOf="@+id/txt_addressTT" />
 
-        <Spinner
-            android:id="@+id/ccb_trangThaiHD"
+        <TextView
+            android:id="@+id/txt_trangThai"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/txt_listspHD"
+            android:layout_marginTop="8dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="@+id/txt_listspTT"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/txt_listspHD"
-            android:visibility="visible"/>
+            app:layout_constraintTop_toBottomOf="@+id/txt_priceTT" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
