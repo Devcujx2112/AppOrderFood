@@ -141,7 +141,6 @@
                     android:layout_marginTop="24dp"
                     android:layout_marginEnd="32dp"
                     android:background="@drawable/search_background"
-                    android:drawableStart="@drawable/search_btn"
                     android:drawablePadding="10dp"
                     android:ems="10"
                     android:hint="Find Your Food"
@@ -152,6 +151,21 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/txt_nameUser" />
+
+                <ImageView
+                    android:id="@+id/icon_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="50dp"
+                    android:background="@drawable/lavender_border"
+                    android:scaleType="centerInside"
+                    android:backgroundTint="@color/orange"
+                    android:padding="6dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/txt_search"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/txt_search"
+                    app:layout_constraintVertical_bias="0.461"
+                    app:srcCompat="@drawable/search" />
 
                 <TextView
                     android:id="@+id/textView11"

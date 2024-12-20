@@ -67,7 +67,6 @@ public class Admin_Product extends Fragment {
             @Override
             public void onClick(View view) {
                 String tensp = searchProduct.getText().toString().trim();
-                Log.d("Admin_Product", "Searching for: " + tensp);  // Log tên sản phẩm
                 if (tensp.isEmpty()) {
                     Toast.makeText(getContext(), "Vui lòng nhập tên sản phẩm", Toast.LENGTH_SHORT).show();
                     return;

@@ -75,6 +75,7 @@ public class GUI_Login extends AppCompatActivity {
                         SharedPreferences sharedPreferences = getSharedPreferences("Profile", MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("email", email);
+                        editor.putString("uid",uid);
                         editor.putString("fullName",fullName);
                         editor.putString("sdt",sdt);
                         editor.putString("image",image);

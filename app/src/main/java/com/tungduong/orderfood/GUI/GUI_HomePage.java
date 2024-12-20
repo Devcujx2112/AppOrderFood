@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,7 +39,7 @@ import java.util.List;
 public class GUI_HomePage extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     TextView txt_nameUser;
-    ImageView avatarUser;
+    ImageView avatarUser,btn_search;
     EditText txt_search;
     RecyclerView list_categories, list_productUser;
     DAO_Account daoAccount;
@@ -60,6 +63,7 @@ public class GUI_HomePage extends AppCompatActivity {
         daoAccount = new DAO_Account();
         productList = new ArrayList<>();
         typeFoodList = new ArrayList<>();
+        daoProduct = new DAO_Product();
 
         bottomNavigationView.setSelectedItemId(R.id.home_user);
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -116,9 +120,37 @@ public class GUI_HomePage extends AppCompatActivity {
         GridLayoutManager gridLayoutManager2 = new GridLayoutManager(this, 1, GridLayoutManager.HORIZONTAL, false);
         list_productUser.setLayoutManager(gridLayoutManager2);
 
-
         adaptor_product = new PopularAdaptor_User(this,productList);
         list_productUser.setAdapter(adaptor_product);
+
+        btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String sanPham = txt_search.getText().toString().trim();
+                if (sanPham.isEmpty()) {
+                    Toast.makeText(GUI_HomePage.this, "Vui lòng nhập tên sản phẩm", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                daoProduct.SearchProductFormTenSP(sanPham, new DAO_Product.ListProductSearch() {
+                    @Override
+                    public void ListProduct(List<Product> product) {
+                        productList.clear();
+                        productList.addAll(product);
+
+                        if (adaptor_product != null){
+                            adaptor_product.notifyDataSetChanged();
+                        }
+                        else {
+                            adaptor_product = new PopularAdaptor_User(GUI_HomePage.this,productList);
+                            list_productUser.setAdapter(adaptor_product);
+                        }
+                        if (productList.isEmpty()){
+                            Toast.makeText(GUI_HomePage.this,"Không có sản phẩm nào phù hợp",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
     }
 
     public void LoadAllProduct(){
@@ -172,5 +204,6 @@ public class GUI_HomePage extends AppCompatActivity {
         txt_search = findViewById(R.id.txt_search);
         list_categories = findViewById(R.id.list_categories);
         list_productUser = findViewById(R.id.list_ProductUser);
+        btn_search = findViewById(R.id.icon_search);
     }
 }

@@ -1,10 +1,13 @@
 package com.tungduong.orderfood.GUI;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +21,7 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -77,6 +81,7 @@ public class GUI_Profile extends AppCompatActivity {
         String fullName = sharedPreferences.getString("fullName", "defaultName");
         String sdt = sharedPreferences.getString("sdt", "defaultPhone");
         String image = sharedPreferences.getString("image", "defaultImage");
+        String uid = sharedPreferences.getString("uid","uid");
 
         Glide.with(this).load(image).circleCrop().error(R.drawable.error_avatar).into(avatar);
 
@@ -84,6 +89,9 @@ public class GUI_Profile extends AppCompatActivity {
         txt_phone.setText(sdt);
         txt_email.setText(email);
 
+        String role = "user";
+        String warning = "active";
+        String encodedEmail = Base64.encodeToString(email.getBytes(), Base64.NO_WRAP);
 
         bottomNavigationView.setSelectedItemId(R.id.profile_user);
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -107,6 +115,44 @@ public class GUI_Profile extends AppCompatActivity {
                     return true;
             }
             return false;
+        });
+
+        btn_xacNhan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (email.isEmpty() || fullName.isEmpty() || sdt.isEmpty() || role.isEmpty() || warning.isEmpty()) {
+                    Toast.makeText(GUI_Profile.this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(GUI_Profile.this);
+                builder.setCancelable(false);
+                builder.setView(R.layout.progress_layout);
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
+                daoAccount.SelectAvatarAccount(uid,uri,image,fullName,encodedEmail,sdt,role,warning,GUI_Profile.this);
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        dialog.dismiss();
+                        AlertDialog.Builder builder = new AlertDialog.Builder(GUI_Profile.this);
+                        builder.setTitle("Đăng nhập");
+                        builder.setMessage("Vui lòng đăng nhập lại");
+
+                        builder.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(GUI_Profile.this, GUI_Login.class);
+                                startActivity(intent);
+                            }
+                        });
+
+                        builder.show();
+                    }
+                }, 5000);
+            }
         });
     }
     public void AnhXa(){
