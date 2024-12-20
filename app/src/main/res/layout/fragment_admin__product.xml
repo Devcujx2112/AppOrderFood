@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -23,10 +22,9 @@
         android:textColorHint="@color/gray"
         app:layout_constraintEnd_toStartOf="@id/search_icon"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <!-- ImageView cho biểu tượng tìm kiếm -->
-
     <ImageView
         android:id="@+id/search_icon"
         android:layout_width="wrap_content"
@@ -40,16 +38,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/list_Product"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="15dp"
         android:scrollbars="vertical"
-        app:layout_constraintBottom_toTopOf="@id/fab_reloadProduct"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/search_product"/>
+        app:layout_constraintTop_toBottomOf="@id/search_product" />
 
     <!-- Floating Action Button để thêm sản phẩm -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -57,11 +56,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:src="@drawable/add"
-        app:backgroundTint="@color/orange"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@color/white" />
+        android:elevation="6dp"
+    android:src="@drawable/add"
+    app:backgroundTint="@color/orange"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:tint="@color/white" />
 
     <!-- Floating Action Button để reload sản phẩm -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -69,11 +69,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:paddingBottom="20dp"
-        android:src="@drawable/reset"
-        app:backgroundTint="@color/orange"
-        app:layout_constraintBottom_toTopOf="@id/fab_addProduct"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@color/white" />
-
+        android:elevation="6dp"
+    android:src="@drawable/reset"
+    app:backgroundTint="@color/orange"
+    app:layout_constraintBottom_toTopOf="@id/fab_addProduct"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:tint="@color/white" />
 </androidx.constraintlayout.widget.ConstraintLayout>

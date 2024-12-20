@@ -40,6 +40,7 @@ public class GUI_Profile extends AppCompatActivity {
     TextView txt_forgot,txt_delete;
     DAO_Account daoAccount;
     Uri uri;
+    private String uid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +82,7 @@ public class GUI_Profile extends AppCompatActivity {
         String fullName = sharedPreferences.getString("fullName", "defaultName");
         String sdt = sharedPreferences.getString("sdt", "defaultPhone");
         String image = sharedPreferences.getString("image", "defaultImage");
-        String uid = sharedPreferences.getString("uid","uid");
+        uid = sharedPreferences.getString("uid","uid");
 
         Glide.with(this).load(image).circleCrop().error(R.drawable.error_avatar).into(avatar);
 
@@ -152,6 +153,41 @@ public class GUI_Profile extends AppCompatActivity {
                         builder.show();
                     }
                 }, 5000);
+            }
+        });
+
+        txt_forgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String forgot = txt_email.getText().toString().trim();
+                daoAccount.ForgotPassword(forgot,GUI_Profile.this);
+            }
+        });
+
+        txt_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(GUI_Profile.this);
+                builder.setTitle("Xác nhận xóa tài khoản");
+                builder.setMessage("Bạn có chắc chắn muốn xóa tài khoản này không? Hành động này không thể hoàn tác.");
+
+                builder.setPositiveButton("Xác nhận", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        daoAccount.DeleteAccount(uid, GUI_Profile.this);
+                        Intent intent = new Intent(GUI_Profile.this,GUI_Login.class);
+                        startActivity(intent);
+                    }
+                });
+
+                builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                builder.show();
             }
         });
     }

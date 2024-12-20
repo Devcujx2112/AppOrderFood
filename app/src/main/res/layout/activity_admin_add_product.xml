@@ -82,7 +82,6 @@
                     android:layout_weight="1"
                     android:hint="Nhập giá tiền"
                     android:gravity="start|center_vertical"
-                    android:inputType="number"
                     android:textColor="@color/lavender"
                     android:background="@android:color/transparent"
                     android:padding="10dp"/>

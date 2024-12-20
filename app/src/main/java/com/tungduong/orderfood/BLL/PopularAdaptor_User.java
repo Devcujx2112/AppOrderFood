@@ -42,6 +42,8 @@ public class PopularAdaptor_User extends RecyclerView.Adapter<Adaptor_Popular_Ad
         String imageURL = product.getImage();
         Glide.with(holder.itemView.getContext()).load(imageURL).into(holder.product_image);
         holder.product_name.setText(product.getTensp());
+        double price = Double.parseDouble(product.getGiaTien());
+        Log.d("123123123123",""+price);
         holder.product_price.setText(product.getGiaTien()+" VND");
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {

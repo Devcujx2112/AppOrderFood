@@ -134,15 +134,22 @@ public class DAO_Product {
 
     public void UpdateProduct(String masp, String tensp, int soLuong, String giaTien, String imageUri, String typeFood, String moTa, Context context) {
         Product product = new Product(masp, tensp, soLuong, giaTien, imageUri, typeFood, moTa);
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setCancelable(false);
+        builder.setView(R.layout.progress_layout);
+        AlertDialog dialog = builder.create();
+        dialog.show();
         databaseReference.child(masp).setValue(product).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(context, "Cập nhật thành công!", Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(context, "Cập nhật thất bại: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                dialog.dismiss();
             }
         });
     }

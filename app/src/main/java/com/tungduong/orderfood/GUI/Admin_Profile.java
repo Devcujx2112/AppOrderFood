@@ -48,7 +48,7 @@ public class Admin_Profile extends Fragment {
     Account account;
     Uri uri;
     Drawable errors_avt;
-    private String role, warning, fullName_acc, sdt_acc, uid_acc, imageUrl;
+    private String role, warning, fullName_acc, sdt_acc, uid_acc, imageUrl,email;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -85,7 +85,7 @@ public class Admin_Profile extends Fragment {
         });
 
         SharedPreferences sharedPreferences_email = getContext().getSharedPreferences("Profile", MODE_PRIVATE);
-        String email = sharedPreferences_email.getString("email", "Email chưa có");
+        email = sharedPreferences_email.getString("email", "Email chưa có");
 
         String encodedEmail = Base64.encodeToString(email.getBytes(), Base64.NO_WRAP);
 
@@ -142,6 +142,14 @@ public class Admin_Profile extends Fragment {
                         builder.show();
                     }
                 }, 5000);
+            }
+        });
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String txt_email = email.toString().trim();
+                daoAccount.ForgotPassword(txt_email,getContext());
             }
         });
 

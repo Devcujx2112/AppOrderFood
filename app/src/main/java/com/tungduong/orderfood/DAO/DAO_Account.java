@@ -140,17 +140,15 @@ public class DAO_Account {
 
     }
 
-    public void ForgotPassword(String email, Context context, AlertDialog dialog) {
+    public void ForgotPassword(String email, Context context) {
         auth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(context, "Vui lòng kiểm tra Email của bạn", Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
                 } else {
                     String errorMessage = task.getException() != null ? task.getException().getMessage() : "Không tìm thấy địa chỉ Email";
                     Toast.makeText(context, errorMessage, Toast.LENGTH_SHORT).show();
-                    dialog.dismiss();
                 }
             }
         });

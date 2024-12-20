@@ -111,7 +111,7 @@ public class GUI_Login extends AppCompatActivity {
                             Toast.makeText(GUI_Login.this, "Email không hợp lệ", Toast.LENGTH_SHORT).show();
                             return;
                         } else {
-                            daoAccount.ForgotPassword(userEmail, GUI_Login.this, dialog);
+                            daoAccount.ForgotPassword(userEmail, GUI_Login.this);
                         }
                     }
                 });
