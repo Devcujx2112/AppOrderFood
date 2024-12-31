@@ -37,7 +37,7 @@ import java.util.Set;
 public class Admin_ChiTiet_Product extends AppCompatActivity {
     private String selectedTypeFood;
     ImageView update_image;
-    EditText update_masp, update_tensp, update_soLuong, update_giaTien, update_mota;
+    EditText update_tensp, update_soLuong, update_giaTien, update_mota;
     Spinner update_typeFood;
     Button updatePD, deletePD;
     DAO_TypeFood daoTypeFood;
@@ -45,6 +45,8 @@ public class Admin_ChiTiet_Product extends AppCompatActivity {
     List<String> typeFoodList;
     Uri uri;
     Drawable brgImg;
+
+    private String update_idPD;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +117,7 @@ public class Admin_ChiTiet_Product extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            update_masp.setText(bundle.getString("Masp_Product"));
+            update_idPD = bundle.getString("Masp_Product");
             update_tensp.setText(bundle.getString("Tensp_Product"));
             update_soLuong.setText(String.valueOf(bundle.getInt("SoLuong_Product")));
             update_giaTien.setText(bundle.getString("GiaTien_Product"));
@@ -140,21 +142,19 @@ public class Admin_ChiTiet_Product extends AppCompatActivity {
     }
 
     public void DeleteProduct(){
-        String masp = update_masp.getText().toString();
         String image = getIntent().getStringExtra("Image_Product");
         daoProduct = new DAO_Product();
-        daoProduct.DeleteProduct(masp,image,this);
+        daoProduct.DeleteProduct(update_idPD,image,this);
         SetText();
     }
 
     public void UpdateProduct() {
-        String masp = update_masp.getText().toString();
         String tensp = update_tensp.getText().toString();
         String soLuongString = update_soLuong.getText().toString();
         String giaTien = update_giaTien.getText().toString();
         String moTa = update_mota.getText().toString();
 
-        if (masp.isEmpty() || tensp.isEmpty() || soLuongString.isEmpty() || giaTien.isEmpty() || moTa.isEmpty()) {
+        if (tensp.isEmpty() || soLuongString.isEmpty() || giaTien.isEmpty() || moTa.isEmpty()) {
             Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -162,13 +162,12 @@ public class Admin_ChiTiet_Product extends AppCompatActivity {
 
         String oldImageUrl = getIntent().getStringExtra("Image_Product");
         daoProduct = new DAO_Product();
-        daoProduct.SelectImage(masp, tensp, soLuong, giaTien, uri, oldImageUrl, selectedTypeFood, moTa, Admin_ChiTiet_Product.this);
+        daoProduct.SelectImage(update_idPD, tensp, soLuong, giaTien, uri, oldImageUrl, selectedTypeFood, moTa, Admin_ChiTiet_Product.this);
         SetText();
     }
 
     public void AnhXa() {
         update_image = findViewById(R.id.update_ImgPD);
-        update_masp = findViewById(R.id.update_maspPD);
         update_tensp = findViewById(R.id.update_namePD);
         update_soLuong = findViewById(R.id.update_soLuongPD);
         update_giaTien = findViewById(R.id.update_giaTienPD);
@@ -181,7 +180,6 @@ public class Admin_ChiTiet_Product extends AppCompatActivity {
 
     public void SetText() {
         update_image.setImageDrawable(brgImg);
-        update_masp.setText("");
         update_tensp.setText("");
         update_soLuong.setText("");
         update_giaTien.setText("");

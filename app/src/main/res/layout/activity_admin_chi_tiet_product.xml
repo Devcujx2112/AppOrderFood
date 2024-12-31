@@ -33,17 +33,6 @@
                 android:layout_gravity="center"
                 android:scaleType="fitXY" />
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:id="@+id/update_maspPD"
-                android:background="@drawable/lavender_border"
-                android:layout_marginTop="15dp"
-                android:padding="16dp"
-                android:enabled="false"
-                android:hint="Mã sản phẩm"
-                android:gravity="start|center_vertical"
-                android:textColor="@color/lavender" />
 
             <EditText
                 android:layout_width="match_parent"

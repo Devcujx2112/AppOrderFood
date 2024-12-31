@@ -5,31 +5,30 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
-
 import androidx.activity.EdgeToEdge;
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.bumptech.glide.Glide;
 import com.tungduong.orderfood.DAO.DAO_TypeFood;
 import com.tungduong.orderfood.R;
 
 public class Admin_ChiTiet_TypeFood extends AppCompatActivity {
     ImageView update_imgTF;
-    EditText update_idTF, update_nameTF, update_motaTF;
+    EditText update_nameTF, update_motaTF;
     Button update_TF, delete_TF;
     Uri uri;
     DAO_TypeFood daoTypeFood;
     Drawable add_image;
+
+    private String update_idTF;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +41,7 @@ public class Admin_ChiTiet_TypeFood extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            String id = bundle.getString("Id_TypeFood");
-            update_idTF.setText(id);
+            update_idTF = bundle.getString("Id_TypeFood");
             String name = bundle.getString("Name_TypeFood");
             update_nameTF.setText(name);
             String moTa = bundle.getString("MoTa_TypeFood");
@@ -94,7 +92,7 @@ public class Admin_ChiTiet_TypeFood extends AppCompatActivity {
     }
 
     public void UpdateTypeFood() {
-        String id = update_idTF.getText().toString();
+        String id = update_idTF.toString().trim();
         String name = update_nameTF.getText().toString();
         String mota = update_motaTF.getText().toString();
 
@@ -109,7 +107,7 @@ public class Admin_ChiTiet_TypeFood extends AppCompatActivity {
     }
 
     public void DeleteTypeFood(){
-        String id = update_idTF.getText().toString();
+        String id = update_idTF.toString().trim();
         String imageURL = getIntent().getStringExtra("Image_TypeFood");
         daoTypeFood.DeleteTypeFood(id,imageURL,this);
         SetText();
@@ -118,7 +116,6 @@ public class Admin_ChiTiet_TypeFood extends AppCompatActivity {
 
     public void AnhXa() {
         update_imgTF = findViewById(R.id.update_imageTF);
-        update_idTF = findViewById(R.id.update_idTF);
         update_nameTF = findViewById(R.id.update_nameTF);
         update_motaTF = findViewById(R.id.update_motaTF);
 
@@ -128,7 +125,6 @@ public class Admin_ChiTiet_TypeFood extends AppCompatActivity {
     }
 
     public void SetText() {
-        update_idTF.setText("");
         update_nameTF.setText("");
         update_motaTF.setText("");
         update_imgTF.setImageDrawable(add_image);

@@ -36,20 +36,6 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:id="@+id/update_idTF"
-                android:background="@drawable/lavender_border"
-                android:layout_marginTop="20dp"
-                android:padding="16dp"
-                android:hint="ID"
-                android:gravity="start|center_vertical"
-                android:textColor="@color/lavender"
-                android:focusable="false"
-                android:clickable="false"
-                android:enabled="false" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
                 android:id="@+id/update_nameTF"
                 android:background="@drawable/lavender_border"
                 android:layout_marginTop="20dp"

@@ -1,0 +1,390 @@
+{
+  "Account": {
+    "DzXKJT53vCM25dHA9dbwSyZzHJq2": {
+      "email": "dev.duongvu2112@gmail.com",
+      "fullName": "Vu Tung Duong",
+      "id": "DzXKJT53vCM25dHA9dbwSyZzHJq2",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Account%20Avatar%2F130?alt=media&token=f69f9465-8647-4794-a04d-4bfb4b573303",
+      "phone": "0364703365",
+      "role": "admin",
+      "warning": "active"
+    },
+    "RRnKpTeMueMaSjThHTTN8lfiWEz2": {
+      "email": "Vutungduongnight@gmail.com",
+      "fullName": "user01",
+      "id": "RRnKpTeMueMaSjThHTTN8lfiWEz2",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Account%20Avatar%2F92?alt=media&token=e3555bff-89c4-4c9d-a512-28c943103ae4",
+      "phone": "0364703365",
+      "role": "admin",
+      "warning": "active"
+    },
+    "YvZCIuWlCqWUtySpawuYLIFiUIg1": {
+      "email": "Vutungduongrolls@gmail.com",
+      "fullName": "user02",
+      "id": "YvZCIuWlCqWUtySpawuYLIFiUIg1",
+      "image": "default_image_url",
+      "phone": "01688695122",
+      "role": "user",
+      "warning": "active"
+    },
+    "n5wOra5kHUf6vd0n2g9T8RE2fCT2": {
+      "email": "test@gmail.com",
+      "fullName": "tesst",
+      "id": "n5wOra5kHUf6vd0n2g9T8RE2fCT2",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Account%20Avatar%2F132?alt=media&token=279b4f6b-0ed4-4692-b4e1-c31b8526d321",
+      "phone": "123123",
+      "role": "user",
+      "warning": "active"
+    },
+    "tKuahXslj0btVcYXycdX7lZslvk1": {
+      "email": "20213443@eaut.edu.vn",
+      "fullName": "user03",
+      "id": "tKuahXslj0btVcYXycdX7lZslvk1",
+      "image": "default_image_url",
+      "phone": "01123543112",
+      "role": "user",
+      "warning": "active"
+    },
+    "ush5SOb5oRUuGfNzg8ONBUKyaCJ3": {
+      "email": "test02@gmail.com",
+      "fullName": "test02",
+      "id": "ush5SOb5oRUuGfNzg8ONBUKyaCJ3",
+      "image": "default_image_url",
+      "phone": "123123123123",
+      "role": "user",
+      "warning": "ban"
+    }
+  },
+  "Product": {
+    "SP02": {
+      "giaTien": "20000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F91?alt=media&token=50dab4a9-4996-4356-8fa3-126692173171",
+      "loaiDoAn": "Đồ nướng",
+      "masp": "SP02",
+      "moTa": "Thịt lợn nướng là món ăn đậm đà với hương vị thơm ngon đặc trưng, được làm từ thịt lợn tươi ướp cùng các loại gia vị như nước mắm, mật ong, hành, tỏi và tiêu. Khi nướng, miếng thịt vàng ươm, dậy mùi thơm quyến rũ, vừa mềm vừa mọng nước, khiến bất kỳ ai cũng khó lòng cưỡng lại. Đây là lựa chọn hoàn hảo cho bữa cơm gia đình hoặc các buổi tiệc ngoài trời.",
+      "soLuong": 22,
+      "tensp": "Thịt lợn nướng"
+    },
+    "SP03": {
+      "giaTien": "12000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F92?alt=media&token=100f74e5-8fd9-4156-b737-fed437046141",
+      "loaiDoAn": "Trà sữa",
+      "masp": "SP03",
+      "moTa": "Trà sữa là thức uống yêu thích của nhiều người với sự kết hợp hoàn hảo giữa vị đậm đà của trà và độ béo ngậy của sữa. Thêm vào đó, trân châu dai mềm hoặc các loại topping như thạch, pudding càng làm tăng thêm sự hấp dẫn. Hương vị ngọt ngào, thơm mát của trà sữa không chỉ giải khát mà còn mang lại cảm giác thư giãn, phù hợp để thưởng thức cùng bạn bè hay trong những lúc nghỉ ngơi.",
+      "soLuong": 22,
+      "tensp": "Trà sữa"
+    },
+    "SP04": {
+      "giaTien": "499000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F163?alt=media&token=b23185bd-4e4c-4e96-9166-dfdb77130b65",
+      "loaiDoAn": "Đồ nướng",
+      "masp": "SP04",
+      "moTa": "Set nướng 499k là sự lựa chọn hoàn hảo cho những buổi tụ họp gia đình hoặc bạn bè. Với đa dạng các loại thịt như bò, gà, heo được tẩm ướp đậm đà cùng hải sản tươi ngon, set nướng mang đến hương vị thơm lừng, hấp dẫn. Đi kèm là các món ăn phụ như kim chi, rau sống, và nước chấm đặc trưng, tạo nên bữa ăn trọn vị. Set nướng 499k không chỉ đảm bảo chất lượng mà còn mang lại trải nghiệm ẩm thực khó quên.",
+      "soLuong": 22,
+      "tensp": "Set nướng 499k"
+    },
+    "SP05": {
+      "giaTien": "299.000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F162?alt=media&token=79bcf7fa-2b81-447e-97c6-4c0c82a9d2e5",
+      "loaiDoAn": "Đồ nướng",
+      "masp": "SP05",
+      "moTa": "Set nướng 499k là sự lựa chọn hoàn hảo cho những buổi tụ họp gia đình hoặc bạn bè. Với đa dạng các loại thịt như bò, gà, heo được tẩm ướp đậm đà cùng hải sản tươi ngon, set nướng mang đến hương vị thơm lừng, hấp dẫn. Đi kèm là các món ăn phụ như kim chi, rau sống, và nước chấm đặc trưng, tạo nên bữa ăn trọn vị. Set nướng 499k không chỉ đảm bảo chất lượng mà còn mang lại trải nghiệm ẩm thực khó quên.",
+      "soLuong": 20,
+      "tensp": "Set nướng 299k"
+    },
+    "SP06": {
+      "giaTien": "139000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F161?alt=media&token=bd6571f3-b381-479d-8f56-78c2d65e0ffd",
+      "loaiDoAn": "Đồ nướng",
+      "masp": "SP06",
+      "moTa": "Set nướng 499k là sự lựa chọn hoàn hảo cho những buổi tụ họp gia đình hoặc bạn bè. Với đa dạng các loại thịt như bò, gà, heo được tẩm ướp đậm đà cùng hải sản tươi ngon, set nướng mang đến hương vị thơm lừng, hấp dẫn. Đi kèm là các món ăn phụ như kim chi, rau sống, và nước chấm đặc trưng, tạo nên bữa ăn trọn vị. Set nướng 499k không chỉ đảm bảo chất lượng mà còn mang lại trải nghiệm ẩm thực khó quên.",
+      "soLuong": 20,
+      "tensp": "Set nướng 139k"
+    },
+    "SP07": {
+      "giaTien": "200000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F160?alt=media&token=bd533b98-9d4b-4c12-81d2-0adc35866217",
+      "loaiDoAn": "Đồ nướng",
+      "masp": "SP07",
+      "moTa": "Set nướng 499k là sự lựa chọn hoàn hảo cho những buổi tụ họp gia đình hoặc bạn bè. Với đa dạng các loại thịt như bò, gà, heo được tẩm ướp đậm đà cùng hải sản tươi ngon, set nướng mang đến hương vị thơm lừng, hấp dẫn. Đi kèm là các món ăn phụ như kim chi, rau sống, và nước chấm đặc trưng, tạo nên bữa ăn trọn vị. Set nướng 499k không chỉ đảm bảo chất lượng mà còn mang lại trải nghiệm ẩm thực khó quên.",
+      "soLuong": 209,
+      "tensp": "Buffet bò nướng"
+    },
+    "SP08": {
+      "giaTien": "20000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F158?alt=media&token=1c24f9fe-aa6e-43ba-9cae-f158cbdf1cd5",
+      "loaiDoAn": "Bánh mì",
+      "masp": "SP08",
+      "moTa": "Bánh mì xá xíu là món ăn đường phố quen thuộc, kết hợp hoàn hảo giữa bánh mì giòn tan và nhân thịt xá xíu mềm thơm, đậm vị. Thịt xá xíu được tẩm ướp cầu kỳ với hương liệu đặc trưng, nướng chín vàng, thêm chút dưa leo, đồ chua, rau thơm và nước sốt béo ngậy, tạo nên hương vị hòa quyện khó cưỡng. Đây là món ăn tiện lợi, giàu dinh dưỡng, thích hợp cho mọi bữa ăn trong ngày.",
+      "soLuong": 20,
+      "tensp": "Bánh mì xá xíu"
+    },
+    "SP09": {
+      "giaTien": "18000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F157?alt=media&token=3be61e5c-5f9e-4ccf-8e68-c2212bb3395b",
+      "loaiDoAn": "Bánh mì",
+      "masp": "SP09",
+      "moTa": "Bánh mì thịt nướng là món ăn nhanh phổ biến với lớp vỏ bánh mì giòn rụm, bên trong là những miếng thịt nướng thơm ngon, đậm đà. Thịt thường được tẩm ướp gia vị đặc biệt, nướng chín vàng, giữ được sự mềm mại và hương vị đậm đà. Món bánh mì này thường được kèm theo rau sống, dưa leo, đồ chua và một chút sốt, tạo nên sự hòa quyện giữa vị ngọt, mặn và chua, mang đến trải nghiệm ẩm thực đầy hấp dẫn và dễ dàng thưởng thức ở bất kỳ đâu.\n",
+      "soLuong": 20,
+      "tensp": "Bánh mì thịt nướng"
+    },
+    "SP10": {
+      "giaTien": "25000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F156?alt=media&token=b82f55eb-0c5c-4bf8-a4bd-6ac85989cfd9",
+      "loaiDoAn": "Bánh mì",
+      "masp": "SP10",
+      "moTa": "Bánh mì thập cẩm là món ăn kết hợp nhiều loại nguyên liệu phong phú, mang đến hương vị đa dạng và hấp dẫn. Bên trong chiếc bánh mì là sự kết hợp của thịt nguội, chả lụa, patê, thịt nướng, cùng các loại rau sống tươi mát như dưa leo, rau thơm và đồ chua. Tất cả được hòa quyện cùng một lớp sốt đặc biệt, tạo nên một món ăn đầy đủ chất dinh dưỡng, thơm ngon và giàu hương vị, thích hợp để ăn sáng hoặc trong những bữa ăn nhanh, tiện lợi.",
+      "soLuong": 22,
+      "tensp": "Bánh mì thập cẩm"
+    },
+    "SP11": {
+      "giaTien": "400000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F155?alt=media&token=c2d8383f-ffb9-4bbf-8be2-c9f71f57cbca",
+      "loaiDoAn": "Bánh kem",
+      "masp": "SP11",
+      "moTa": "Bánh kem là một món tráng miệng ngọt ngào và hấp dẫn, được làm từ lớp bánh mềm mịn kết hợp với lớp kem béo ngậy. Bánh kem có thể được trang trí với nhiều loại kem khác nhau, từ kem bơ, kem phô mai đến kem tươi, cùng với các loại trái cây, socola, hoặc hạt ngũ cốc. Mỗi miếng bánh mang đến sự hòa quyện giữa vị ngọt của kem và độ mềm mịn của bánh, tạo nên một trải nghiệm ăn uống tuyệt vời. Đây là lựa chọn hoàn hảo cho các dịp sinh nhật, lễ kỷ niệm hoặc các bữa tiệc.",
+      "soLuong": 22,
+      "tensp": "Bánh sinh nhật - mẫu 1"
+    },
+    "SP12": {
+      "giaTien": "450000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F154?alt=media&token=5383413f-88d1-4969-9d25-bba553ccaaf5",
+      "loaiDoAn": "Bánh kem",
+      "masp": "SP12",
+      "moTa": "Bánh kem là một món tráng miệng ngọt ngào và hấp dẫn, được làm từ lớp bánh mềm mịn kết hợp với lớp kem béo ngậy. Bánh kem có thể được trang trí với nhiều loại kem khác nhau, từ kem bơ, kem phô mai đến kem tươi, cùng với các loại trái cây, socola, hoặc hạt ngũ cốc. Mỗi miếng bánh mang đến sự hòa quyện giữa vị ngọt của kem và độ mềm mịn của bánh, tạo nên một trải nghiệm ăn uống tuyệt vời. Đây là lựa chọn hoàn hảo cho các dịp sinh nhật, lễ kỷ niệm hoặc các bữa tiệc.",
+      "soLuong": 212,
+      "tensp": "Bánh kem - mẫu 2"
+    },
+    "SP13": {
+      "giaTien": "10000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F153?alt=media&token=66de0c47-6b51-4a4c-b540-76388ba0a17f",
+      "loaiDoAn": "Cà phê",
+      "masp": "SP13",
+      "moTa": "\nBạc xỉu là một loại thức uống phổ biến ở miền Nam Việt Nam, đặc biệt là tại Sài Gòn. Đây là một sự kết hợp giữa cà phê và sữa đặc, tạo nên một hương vị ngọt ngào, đậm đà. Cà phê được pha từ cà phê phin, thường có vị mạnh, nhưng lại được cân bằng hoàn hảo với sữa đặc có vị ngọt béo. Đặc biệt, bạc xỉu có thể uống lạnh hoặc nóng, phù hợp với sở thích và thời tiết. Đây là một món đồ uống dễ uống, rất thích hợp cho những ai yêu thích cà phê nhưng lại không muốn quá đắng.",
+      "soLuong": 12,
+      "tensp": "Bạc xỉu"
+    },
+    "SP14": {
+      "giaTien": "30000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F152?alt=media&token=0c85f6f1-e006-4ab4-b1f4-660f7aba9775",
+      "loaiDoAn": "Cà phê",
+      "masp": "SP14",
+      "moTa": "Cappuccino là một loại cà phê gồm espresso, sữa nóng và bọt sữa, mang đến hương vị cà phê đậm đà, kết hợp với độ béo nhẹ từ sữa. Thường được thưởng thức vào buổi sáng, cappuccino là lựa chọn lý tưởng cho những ai yêu thích sự cân bằng giữa cà phê và sữa.",
+      "soLuong": 22,
+      "tensp": "Capuchino"
+    },
+    "SP15": {
+      "giaTien": "50000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F151?alt=media&token=ca968d99-2570-4330-af03-0a0dd27f4ebf",
+      "loaiDoAn": "Cà phê",
+      "masp": "SP15",
+      "moTa": "Cà phê chồn là một loại cà phê đặc biệt, được sản xuất từ những hạt cà phê mà chồn ăn và tiêu hóa. Sau khi ăn, hạt cà phê được thu hái từ phân chồn, rửa sạch và rang để tạo ra sản phẩm cuối cùng. Quá trình tiêu hóa trong cơ thể chồn giúp làm giảm độ chua và mang lại hương vị mềm mại, đậm đà, với chút ngọt tự nhiên và ít đắng. Cà phê chồn được biết đến với chất lượng cao, vị tinh tế và là một trong những loại cà phê đắt đỏ nhất trên thế giới.",
+      "soLuong": 22,
+      "tensp": "Cà phê chồn"
+    },
+    "SP16": {
+      "giaTien": "300000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F150?alt=media&token=18bad9b6-f84d-40f1-94df-3a5ecfa92b27",
+      "loaiDoAn": "Đồ chay",
+      "masp": "SP16",
+      "moTa": "Đồ chay gia đình là những món ăn được chế biến từ các nguyên liệu thực vật, không sử dụng thịt hoặc các sản phẩm từ động vật. Các món ăn chay gia đình thường đa dạng, từ cơm chay, rau xào, canh chay cho đến các món kho, nướng hoặc món ăn nhẹ như nem chay. Những món ăn này không chỉ ngon miệng mà còn bổ dưỡng, giàu vitamin và khoáng chất, phù hợp với nhu cầu dinh dưỡng của mọi thành viên trong gia đình. Đồ chay gia đình không chỉ mang lại hương vị thanh đạm mà còn là lựa chọn lành mạnh cho sức khỏe, đặc biệt là trong các dịp lễ Tết hay những ngày ăn chay.",
+      "soLuong": 20,
+      "tensp": "Set đồ chay gia đình"
+    },
+    "SP17": {
+      "giaTien": "200000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F149?alt=media&token=a521ccba-30a9-4eb4-a4d9-3a9d67424e9c",
+      "loaiDoAn": "Đồ chay",
+      "masp": "SP17",
+      "moTa": "Đồ chay gia đình là những món ăn được chế biến từ các nguyên liệu thực vật, không sử dụng thịt hoặc các sản phẩm từ động vật. Các món ăn chay gia đình thường đa dạng, từ cơm chay, rau xào, canh chay cho đến các món kho, nướng hoặc món ăn nhẹ như nem chay. Những món ăn này không chỉ ngon miệng mà còn bổ dưỡng, giàu vitamin và khoáng chất, phù hợp với nhu cầu dinh dưỡng của mọi thành viên trong gia đình. Đồ chay gia đình không chỉ mang lại hương vị thanh đạm mà còn là lựa chọn lành mạnh cho sức khỏe, đặc biệt là trong các dịp lễ Tết hay những ngày ăn chay.",
+      "soLuong": 22,
+      "tensp": "Set đồ chay Dương Vũ"
+    },
+    "SP18": {
+      "giaTien": "90000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F148?alt=media&token=062fd28e-f15b-4486-8dba-ef00e67aae2c",
+      "loaiDoAn": "Đồ chay",
+      "masp": "SP18",
+      "moTa": "Soup bò là món ăn ngon và bổ dưỡng, được chế biến từ thịt bò tươi, xương bò và các loại gia vị đặc trưng. Nước dùng của soup bò thường được hầm lâu để tạo nên vị ngọt tự nhiên từ xương và thịt bò, kết hợp với các loại rau củ như hành tây, cà rốt, cần tây và gia vị như tiêu, muối, và ngũ vị hương. Món soup bò có thể được thưởng thức với bánh mì hoặc bún, tạo nên một bữa ăn ấm áp, thơm ngon và đầy đủ chất dinh dưỡng.",
+      "soLuong": 22,
+      "tensp": "Soup bò "
+    },
+    "SP19": {
+      "giaTien": "70000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F147?alt=media&token=979b74aa-b024-46ce-9cba-e5b4f8729d5e",
+      "loaiDoAn": "Soup",
+      "masp": "SP19",
+      "moTa": "Soup khoai tây là món ăn nhẹ nhàng, bổ dưỡng và dễ ăn, được chế biến từ khoai tây, các loại rau củ và gia vị. Khoai tây được hầm mềm cùng với hành tây, cà rốt và cần tây, tạo nên một nước dùng ngọt tự nhiên. Món soup này thường được xay nhuyễn để có kết cấu mịn màng, thêm chút kem tươi để tăng độ béo ngậy. Soup khoai tây có thể ăn kèm với bánh mì hoặc dùng như một món khai vị trong bữa ăn.",
+      "soLuong": 22,
+      "tensp": "Soup khoai tây"
+    },
+    "SP20": {
+      "giaTien": "70000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F146?alt=media&token=4b1ddf63-5e6b-4353-a2bb-6859f3b48bbb",
+      "loaiDoAn": "Soup",
+      "masp": "SP20",
+      "moTa": "\nSoup cà chua là món ăn thanh mát, dễ ăn và giàu vitamin, được làm từ cà chua tươi, gia vị và các nguyên liệu bổ dưỡng như hành tây, tỏi, và các loại thảo mộc. Cà chua được nấu chín, xay nhuyễn và chế biến thành một nước dùng thơm ngon, chua nhẹ, phù hợp với khẩu vị của nhiều người. Món soup này có thể thêm một chút kem tươi hoặc phô mai để làm tăng sự béo ngậy và hương vị đặc biệt. Soup cà chua thường được thưởng thức nóng, đặc biệt là trong những ngày se lạnh.",
+      "soLuong": 2,
+      "tensp": "Soup cà chua"
+    },
+    "SP21": {
+      "giaTien": "25000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F144?alt=media&token=1b492101-d0b5-4680-8c2a-b4b1cda64554",
+      "loaiDoAn": "Trà sữa",
+      "masp": "SP21",
+      "moTa": "Trà sữa là một thức uống ngọt ngào, thơm ngon, được yêu thích rộng rãi bởi sự kết hợp hoàn hảo giữa trà và sữa. Được chế biến từ trà đen hoặc trà xanh, pha trộn với sữa đặc hoặc sữa tươi, trà sữa có vị thanh mát, béo ngậy và ngọt dịu. Thêm vào đó, trà sữa thường được kèm theo các topping như trân châu, thạch, hoặc pudding, tạo nên sự hấp dẫn và phong phú cho món thức uống này. Trà sữa là lựa chọn hoàn hảo cho những ai yêu thích sự tươi mới, mát lạnh và cảm giác thư giãn.",
+      "soLuong": 22,
+      "tensp": "Trà sữa GongCha"
+    },
+    "SP22": {
+      "giaTien": "300000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F140?alt=media&token=1fb57fa3-f4e1-4c90-8450-13c165ef4024",
+      "loaiDoAn": "Bánh kem",
+      "masp": "SP22",
+      "moTa": "Bánh kem là một món tráng miệng ngọt ngào và hấp dẫn, được làm từ lớp bánh mềm mịn kết hợp với lớp kem béo ngậy. Bánh kem có thể được trang trí với nhiều loại kem khác nhau, từ kem bơ, kem phô mai đến kem tươi, cùng với các loại trái cây, socola, hoặc hạt ngũ cốc. Mỗi miếng bánh mang đến sự hòa quyện giữa vị ngọt của kem và độ mềm mịn của bánh, tạo nên một trải nghiệm ăn uống tuyệt vời. Đây là lựa chọn hoàn hảo cho các dịp sinh nhật, lễ kỷ niệm hoặc các bữa tiệc.",
+      "soLuong": 2,
+      "tensp": "Bánh kem - mẫu 3"
+    },
+    "SP23": {
+      "giaTien": "550000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F139?alt=media&token=f02a4087-e65b-4b1a-aab9-62405064633b",
+      "loaiDoAn": "Bánh kem",
+      "masp": "SP23",
+      "moTa": "Bánh kem là một món tráng miệng ngọt ngào và hấp dẫn, được làm từ lớp bánh mềm mịn kết hợp với lớp kem béo ngậy. Bánh kem có thể được trang trí với nhiều loại kem khác nhau, từ kem bơ, kem phô mai đến kem tươi, cùng với các loại trái cây, socola, hoặc hạt ngũ cốc. Mỗi miếng bánh mang đến sự hòa quyện giữa vị ngọt của kem và độ mềm mịn của bánh, tạo nên một trải nghiệm ăn uống tuyệt vời. Đây là lựa chọn hoàn hảo cho các dịp sinh nhật, lễ kỷ niệm hoặc các bữa tiệc.",
+      "soLuong": 3,
+      "tensp": "Bánh kem - mẫu 4"
+    },
+    "SP24": {
+      "giaTien": "400000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F138?alt=media&token=666be818-fd5b-413f-820b-b67d33957c00",
+      "loaiDoAn": "Bánh kem",
+      "masp": "SP24",
+      "moTa": "Bánh kem là một món tráng miệng ngọt ngào và hấp dẫn, được làm từ lớp bánh mềm mịn kết hợp với lớp kem béo ngậy. Bánh kem có thể được trang trí với nhiều loại kem khác nhau, từ kem bơ, kem phô mai đến kem tươi, cùng với các loại trái cây, socola, hoặc hạt ngũ cốc. Mỗi miếng bánh mang đến sự hòa quyện giữa vị ngọt của kem và độ mềm mịn của bánh, tạo nên một trải nghiệm ăn uống tuyệt vời. Đây là lựa chọn hoàn hảo cho các dịp sinh nhật, lễ kỷ niệm hoặc các bữa tiệc.",
+      "soLuong": 3,
+      "tensp": "Bánh kem - mẫu 5"
+    },
+    "SP25": {
+      "giaTien": "10000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F137?alt=media&token=835238c9-eac2-4593-946c-6ef443d260a4",
+      "loaiDoAn": "Bánh mì",
+      "masp": "SP25",
+      "moTa": "Bánh mì xúc xích là một món ăn nhanh phổ biến, đơn giản nhưng rất hấp dẫn. Bánh mì được nướng giòn, bên trong là xúc xích được chế biến vừa chín tới, thấm vị. Món ăn này thường được ăn kèm với các loại rau sống như xà lách, dưa leo, cà chua, và thêm một chút sốt mayonnaise, ketchup hoặc tương ớt để tăng thêm hương vị. Bánh mì xúc xích thích hợp cho bữa sáng nhanh gọn hoặc những bữa ăn nhẹ trong ngày, mang đến sự kết hợp giữa vị đậm đà của xúc xích và vị giòn tan của bánh mì, tạo nên một món ăn ngon miệng và dễ thưởng thức.",
+      "soLuong": 2,
+      "tensp": "Bánh mì xúc xich"
+    },
+    "SP26": {
+      "giaTien": "20000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F136?alt=media&token=e6b49eb1-c4f3-4d5d-a487-7ff28f865333",
+      "loaiDoAn": "Bánh mì",
+      "masp": "SP26",
+      "moTa": "Pizza nấm là một món pizza đặc biệt, mang đến sự kết hợp hoàn hảo giữa vỏ bánh pizza giòn, lớp sốt cà chua đậm đà và những lát nấm tươi ngon. Nấm thường được sử dụng như một nguyên liệu chính, có thể là nấm mỡ, nấm hương hoặc nấm sò, giúp món ăn thêm phần thơm ngon và đầy đủ hương vị. Phần phô mai mozzarella tan chảy trên mặt pizza tạo nên một lớp phủ béo ngậy, hòa quyện với vị umami từ nấm, tạo nên một món pizza dễ ăn, thích hợp cho những ai yêu thích hương vị nhẹ nhàng, thanh mát. Pizza nấm có thể được ăn kèm với rau thơm hoặc các gia vị như tiêu đen, oregano để tăng thêm sự hấp dẫn.",
+      "soLuong": 2,
+      "tensp": "Bánh mì chả thịt"
+    },
+    "SP27": {
+      "giaTien": "40000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F135?alt=media&token=7a1ab945-140a-4ec9-a335-a2e1ce59d0d8",
+      "loaiDoAn": "Bánh mì",
+      "masp": "SP27",
+      "moTa": "Pizza nấm là một món pizza đặc biệt, mang đến sự kết hợp hoàn hảo giữa vỏ bánh pizza giòn, lớp sốt cà chua đậm đà và những lát nấm tươi ngon. Nấm thường được sử dụng như một nguyên liệu chính, có thể là nấm mỡ, nấm hương hoặc nấm sò, giúp món ăn thêm phần thơm ngon và đầy đủ hương vị. Phần phô mai mozzarella tan chảy trên mặt pizza tạo nên một lớp phủ béo ngậy, hòa quyện với vị umami từ nấm, tạo nên một món pizza dễ ăn, thích hợp cho những ai yêu thích hương vị nhẹ nhàng, thanh mát. Pizza nấm có thể được ăn kèm với rau thơm hoặc các gia vị như tiêu đen, oregano để tăng thêm sự hấp dẫn.",
+      "soLuong": 2,
+      "tensp": "Pizza nấm"
+    },
+    "SP28": {
+      "giaTien": "30000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F134?alt=media&token=fc6219ad-9572-4741-81ce-96e3f57ce0eb",
+      "loaiDoAn": "Soup",
+      "masp": "SP28",
+      "moTa": "\nPhở bò là món ăn truyền thống của Việt Nam với sợi phở mềm, nước dùng đậm đà từ xương bò và gia vị. Thịt bò thái lát mỏng, chín tái, kết hợp với rau thơm, chanh và ớt tạo nên hương vị đặc trưng. Món ăn này mang đến sự ấm áp và đủ dinh dưỡng cho bữa sáng hoặc trưa.",
+      "soLuong": 23,
+      "tensp": "Phở bò"
+    },
+    "SP29": {
+      "giaTien": "400000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F133?alt=media&token=ab46e7af-4048-4a6c-a253-0241fd0861bc",
+      "loaiDoAn": "Đồ chay",
+      "masp": "SP29",
+      "moTa": "Đồ chay gia đình là những món ăn được chế biến từ các nguyên liệu thực vật, không sử dụng thịt hoặc các sản phẩm từ động vật. Các món ăn chay gia đình thường đa dạng, từ cơm chay, rau xào, canh chay cho đến các món kho, nướng hoặc món ăn nhẹ như nem chay. Những món ăn này không chỉ ngon miệng mà còn bổ dưỡng, giàu vitamin và khoáng chất, phù hợp với nhu cầu dinh dưỡng của mọi thành viên trong gia đình. Đồ chay gia đình không chỉ mang lại hương vị thanh đạm mà còn là lựa chọn lành mạnh cho sức khỏe, đặc biệt là trong các dịp lễ Tết hay những ngày ăn chay.",
+      "soLuong": 2,
+      "tensp": "Set đồ chay cỡ lớn"
+    },
+    "SP30": {
+      "giaTien": "30000",
+      "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F159?alt=media&token=736b969d-9cb3-4722-abf4-b670cab9373f",
+      "loaiDoAn": "Đồ nướng",
+      "masp": "SP30",
+      "moTa": "Thịt nướng BBQ là món ăn thơm ngon với các miếng thịt được ướp gia vị đậm đà, sau đó nướng trên lửa than hồng, tạo ra lớp vỏ ngoài giòn và thịt bên trong mềm ngọt. Món ăn này thường được ăn kèm với rau sống, bánh mì và nước sốt BBQ đặc trưng, mang đến hương vị ngọt ngào và hấp dẫn.",
+      "soLuong": 2,
+      "tensp": "Thịt nướng BBQ"
+    }
+  },
+  "ShoppingCart": {
+    "n5wOra5kHUf6vd0n2g9T8RE2fCT2": {
+      "Bánh mì xá xíu": {
+        "giaTien": "20000",
+        "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F158?alt=media&token=1c24f9fe-aa6e-43ba-9cae-f158cbdf1cd5",
+        "soLuong": 2,
+        "tenSP": "Bánh mì xá xíu",
+        "uid": "n5wOra5kHUf6vd0n2g9T8RE2fCT2"
+      },
+      "Set đồ chay cỡ lớn": {
+        "giaTien": "400000",
+        "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F133?alt=media&token=ab46e7af-4048-4a6c-a253-0241fd0861bc",
+        "soLuong": 2,
+        "tenSP": "Set đồ chay cỡ lớn",
+        "uid": "n5wOra5kHUf6vd0n2g9T8RE2fCT2"
+      },
+      "Set đồ chay gia đình": {
+        "giaTien": "300000",
+        "image": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/Product%20Image%2F150?alt=media&token=18bad9b6-f84d-40f1-94df-3a5ecfa92b27",
+        "soLuong": 2,
+        "tenSP": "Set đồ chay gia đình",
+        "uid": "n5wOra5kHUf6vd0n2g9T8RE2fCT2"
+      }
+    }
+  },
+  "TypeFood": {
+    "TF01": {
+      "idTypeFood": "TF01",
+      "imageTypeFood": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/TypeFood%20Image%2F126?alt=media&token=572ce573-86af-4932-9c59-973ed2a564bd",
+      "moTa": "Ngon ngọt",
+      "nameTypeFood": "Trà sữa"
+    },
+    "TF02": {
+      "idTypeFood": "TF02",
+      "imageTypeFood": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/TypeFood%20Image%2F119?alt=media&token=08d80b40-f774-49fe-a221-44c69b46143d",
+      "moTa": "Tốt cho sức khỏe",
+      "nameTypeFood": "Đồ chay"
+    },
+    "TF03": {
+      "idTypeFood": "TF03",
+      "imageTypeFood": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/TypeFood%20Image%2F120?alt=media&token=67faba08-abb6-49c3-9f88-f0b6083548d7",
+      "moTa": "Súp",
+      "nameTypeFood": "Soup"
+    },
+    "TF04": {
+      "idTypeFood": "TF04",
+      "imageTypeFood": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/TypeFood%20Image%2F124?alt=media&token=714c0ddf-b971-4391-ab47-524776c389c6",
+      "moTa": "Ngon",
+      "nameTypeFood": "Bánh mì"
+    },
+    "TF05": {
+      "idTypeFood": "TF05",
+      "imageTypeFood": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/TypeFood%20Image%2F125?alt=media&token=35541479-bfc0-4468-a2b6-1fa3a4280c58",
+      "moTa": "ngon",
+      "nameTypeFood": "Cà phê"
+    },
+    "TF06": {
+      "idTypeFood": "TF06",
+      "imageTypeFood": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/TypeFood%20Image%2F118?alt=media&token=aaa43f47-9789-40fa-84ac-d07bd7f1155b",
+      "moTa": "Ngon",
+      "nameTypeFood": "Đồ nướng"
+    },
+    "TF07": {
+      "idTypeFood": "TF07",
+      "imageTypeFood": "https://firebasestorage.googleapis.com/v0/b/crud-firebase-7b852.appspot.com/o/TypeFood%20Image%2F117?alt=media&token=b17e5581-0d24-4652-9f10-caa4bf9049f9",
+      "moTa": "Ngon",
+      "nameTypeFood": "Bánh kem"
+    }
+  }
+}

@@ -98,7 +98,6 @@ public class DAO_ShopingCart {
                     }
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Log.e("UpdateSoLuongCart", "Lỗi khi cập nhật soLuong: " + error.getMessage());
